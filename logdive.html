@@ -1,0 +1,1177 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistem Operasional & Kalkulator Penyelaman Spektrum Luas US Navy</title>
+    <style>
+        /* ==========================================
+           1. CSS: DEEP SEA ATMOSPHERE & GLASSMORPHISM
+           ========================================== */
+        :root {
+            --primary-navy: #030b1e;
+            --ocean-dark: #0a192f;
+            --secondary-blue: #0077b6;
+            --accent-cyan: #00b4d8;
+            --light-cyan: #caf0f8;
+            --glass-bg: rgba(10, 25, 47, 0.85);
+            --glass-card: rgba(255, 255, 255, 0.94);
+            --text-dark: #1e293b;
+            --text-light: #f8fafc;
+            --white: #ffffff;
+            --success: #2ec4b6;
+            --warning: #e76f51;
+            --welding-gold: #ffb703;
+            --border-radius: 12px;
+            --box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        /* Latar Belakang Utama Ocean Deep Gradient dengan Rays & Bubbles Effect */
+        body {
+            background: 
+                radial-gradient(circle at 50% 0%, rgba(0, 180, 216, 0.25) 0%, transparent 60%),
+                radial-gradient(circle at 10% 40%, rgba(0, 119, 182, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 90% 80%, rgba(231, 111, 81, 0.15) 0%, transparent 50%),
+                linear-gradient(180deg, #020813 0%, #06152d 30%, #030d1a 70%, #01040a 100%);
+            background-attachment: fixed;
+            color: var(--text-dark);
+            line-height: 1.6;
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Overlay Cahaya Bawah Air (God Rays Animation Effect) */
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: repeating-linear-gradient(
+                45deg,
+                rgba(255, 255, 255, 0.03) 0px,
+                rgba(255, 255, 255, 0.03) 20px,
+                transparent 20px,
+                transparent 80px
+            );
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        /* Header / Hero Section Glassmorphism */
+        header {
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 180, 216, 0.3);
+            color: var(--white);
+            padding: 2.5rem 1rem 1.8rem 1rem;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+            letter-spacing: 1px;
+            color: #ffffff;
+            text-shadow: 0 0 15px rgba(0, 180, 216, 0.6);
+        }
+
+        header p {
+            font-size: 1.05rem;
+            color: var(--light-cyan);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 1.5rem auto;
+            padding: 0 1rem;
+            position: relative;
+            z-index: 5;
+        }
+
+        /* Galeri Ilustrasi Visual Peralatan & Pekerjaan Bawah Air */
+        .visual-gallery {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 180, 216, 0.3);
+            border-radius: var(--border-radius);
+            padding: 1.5rem;
+            margin-bottom: 1.8rem;
+            color: var(--white);
+            box-shadow: var(--box-shadow);
+        }
+
+        .visual-gallery h3 {
+            text-align: center;
+            color: var(--accent-cyan);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 12px;
+            text-align: center;
+        }
+
+        .gallery-card {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            padding: 10px 5px;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-card:hover {
+            background: rgba(0, 180, 216, 0.2);
+            border-color: var(--accent-cyan);
+            transform: translateY(-3px);
+        }
+
+        .gallery-card svg {
+            width: 38px;
+            height: 38px;
+            fill: var(--accent-cyan);
+            margin-bottom: 6px;
+        }
+
+        .gallery-card span {
+            display: block;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: var(--light-cyan);
+        }
+
+        /* Tab Navigasi Utilitas & Kalkulator */
+        .tab-navigation {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            justify-content: center;
+            margin-bottom: 1.8rem;
+        }
+
+        .tab-btn {
+            background: rgba(10, 25, 47, 0.85);
+            border: 1px solid var(--accent-cyan);
+            color: var(--light-cyan);
+            padding: 9px 15px;
+            font-weight: 600;
+            font-size: 0.88rem;
+            border-radius: 20px;
+            cursor: pointer;
+            backdrop-filter: blur(5px);
+            transition: all 0.25s ease;
+        }
+
+        .tab-btn:hover, .tab-btn.active {
+            background: var(--accent-cyan);
+            color: var(--primary-navy);
+            box-shadow: 0 0 12px rgba(0, 180, 216, 0.6);
+            font-weight: bold;
+        }
+
+        .tab-btn.calc-btn {
+            border-color: #ffd166;
+            color: #ffd166;
+        }
+
+        .tab-btn.calc-btn:hover, .tab-btn.calc-btn.active {
+            background: #ffd166;
+            color: var(--primary-navy);
+            box-shadow: 0 0 12px rgba(255, 209, 102, 0.6);
+        }
+
+        /* Glass Content Container */
+        .tab-content {
+            display: none;
+            background: var(--glass-card);
+            backdrop-filter: blur(12px);
+            padding: 2.2rem;
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            animation: fadeIn 0.35s ease-in-out;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Typography & Grid Elements */
+        h2 {
+            color: var(--primary-navy);
+            border-bottom: 3px solid var(--secondary-blue);
+            padding-bottom: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .card {
+            background: #f1f5f9;
+            border-left: 5px solid var(--secondary-blue);
+            padding: 1.2rem;
+            border-radius: 6px;
+        }
+
+        .card.warning {
+            border-left-color: var(--warning);
+            background-color: #fff2f0;
+        }
+
+        .card h3 {
+            color: var(--secondary-blue);
+            margin-bottom: 0.5rem;
+        }
+
+        .card.warning h3 {
+            color: var(--warning);
+        }
+
+        ul, ol { margin-left: 1.2rem; }
+        li { margin-bottom: 0.5rem; }
+
+        /* Form Controls Kalkulator */
+        .calc-box {
+            background: #e2e8f0;
+            border: 1px solid #cbd5e1;
+            padding: 1.5rem;
+            border-radius: var(--border-radius);
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group { margin-bottom: 1rem; }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 0.3rem;
+            color: var(--primary-navy);
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #94a3b8;
+            border-radius: 6px;
+            font-size: 1rem;
+            background: #ffffff;
+        }
+
+        .btn-calc {
+            background-color: var(--secondary-blue);
+            color: var(--white);
+            border: none;
+            padding: 12px 20px;
+            font-weight: bold;
+            font-size: 1rem;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            transition: background 0.2s ease;
+        }
+
+        .btn-calc:hover {
+            background-color: var(--primary-navy);
+        }
+
+        .result-box {
+            display: none;
+            margin-top: 1.5rem;
+            padding: 1.2rem;
+            border-radius: var(--border-radius);
+            text-align: left;
+        }
+
+        .result-box.safe {
+            background-color: #d1fae5;
+            border: 2px solid var(--success);
+            color: #065f46;
+        }
+
+        .result-box.danger {
+            background-color: #ffe4e6;
+            border: 2px solid var(--warning);
+            color: #9f1239;
+        }
+
+        .result-box.info {
+            background-color: #e0f2fe;
+            border: 2px solid var(--accent-cyan);
+            color: #075985;
+        }
+
+        /* Interactive Checklist & Timer */
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            background: #f1f5f9;
+            padding: 12px 15px;
+            margin-bottom: 8px;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+
+        .checklist-item input {
+            margin-right: 12px;
+            transform: scale(1.3);
+        }
+
+        .progress-bar-container {
+            width: 100%;
+            background-color: #cbd5e1;
+            border-radius: 20px;
+            height: 20px;
+            margin: 1.2rem 0;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            width: 0%;
+            background-color: var(--success);
+            transition: width 0.3s ease;
+        }
+
+        .timer-box {
+            text-align: center;
+            background: var(--primary-navy);
+            color: var(--white);
+            padding: 2rem;
+            border-radius: var(--border-radius);
+            margin-top: 1rem;
+        }
+
+        .timer-display {
+            font-size: 3.5rem;
+            font-weight: bold;
+            font-family: monospace;
+            color: var(--accent-cyan);
+            margin: 0.8rem 0;
+        }
+
+        .btn-action {
+            background-color: var(--accent-cyan);
+            color: var(--primary-navy);
+            border: none;
+            padding: 10px 22px;
+            font-weight: bold;
+            border-radius: 6px;
+            cursor: pointer;
+            margin: 5px;
+        }
+
+        .decom-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1rem;
+            background: var(--white);
+        }
+
+        .decom-table th, .decom-table td {
+            border: 1px solid #cbd5e1;
+            padding: 8px 12px;
+            text-align: center;
+        }
+
+        .decom-table th {
+            background: var(--primary-navy);
+            color: var(--white);
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem 1rem;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border-top: 1px solid rgba(0, 180, 216, 0.3);
+            color: var(--light-cyan);
+            margin-top: 4rem;
+            font-size: 0.9rem;
+            position: relative;
+            z-index: 10;
+        }
+
+        @media (max-width: 768px) {
+            header h1 { font-size: 1.6rem; }
+            .tab-btn { width: 100%; text-align: center; border-radius: 8px; }
+            .timer-display { font-size: 2.5rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER / HERO SECTION -->
+    <header>
+        <h1>Sistem Operasional & Kalkulator Penyelaman Spektrum Luas</h1>
+        <p>Prosedur Keselamatan Komprehensif & Simulasi Fisiologi US Navy Rev 7: Air, Repetitive, Dekompresi, Nitrox, Heliox, dan Trimix</p>
+    </header>
+
+    <div class="container">
+
+        <!-- GALERI INFOGRAFIK PERALATAN & PEKERJAAN BAWAH AIR -->
+        <div class="visual-gallery">
+            <h3>Spektrum Peralatan & Pekerjaan Bawah Air</h3>
+            <div class="gallery-grid">
+                
+                <!-- 1. Alat Selam Klasik -->
+                <div class="gallery-card">
+                    <svg viewBox="0 0 24 24"><path d="M12 2A9 9 0 0 0 3 11C3 14.5 5 17.5 8 19V22H16V19C19 17.5 21 14.5 21 11A9 9 0 0 0 12 2M12 6A4 4 0 0 1 16 10A4 4 0 0 1 12 14A4 4 0 0 1 8 10A4 4 0 0 1 12 6Z"/></svg>
+                    <span>Selam Klasik (Mark V)</span>
+                </div>
+
+                <!-- 2. SCUBA Open Circuit -->
+                <div class="gallery-card">
+                    <svg viewBox="0 0 24 24"><path d="M6 2H10V20H6V2M14 2H18V20H14V2M11 6H13V8H11V6M11 12H13V14H11V12Z"/></svg>
+                    <span>SCUBA Open Circuit</span>
+                </div>
+
+                <!-- 3. Semi-Closed Rebreather -->
+                <div class="gallery-card">
+                    <svg viewBox="0 0 24 24"><path d="M12 3C7.58 3 4 6.58 4 11V18C4 19.66 5.34 21 7 21H17C18.66 21 20 19.66 20 18V11C20 6.58 16.42 3 12 3M12 6A3 3 0 0 1 15 9A3 3 0 0 1 12 12A3 3 0 0 1 9 9A3 3 0 0 1 12 6Z"/></svg>
+                    <span>Semi-Closed SCR</span>
+                </div>
+
+                <!-- 4. Closed Circuit CCR -->
+                <div class="gallery-card">
+                    <svg viewBox="0 0 24 24"><path d="M5 3H19V7H5V3M5 9H19V13H5V9M5 15H19V21H5V15M9 5V5.01M9 11V11.01M9 17V17.01"/></svg>
+                    <span>Closed Circuit CCR</span>
+                </div>
+
+                <!-- 5. SSBA Commercial -->
+                <div class="gallery-card">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12S6.48 22 12 22 22 17.52 22 12 17.52 2 12 2M12 6C14.21 6 16 7.79 16 10S14.21 14 12 14 8 12.21 8 10 9.79 6 12 6M4 12C4 10.22 4.62 8.59 5.67 7.3L16.7 18.33C15.41 19.38 13.78 20 12 20C7.58 20 4 16.42 4 12Z"/></svg>
+                    <span>SSBA Surface-Supplied</span>
+                </div>
+
+                <!-- 6. Saturasi Diver -->
+                <div class="gallery-card">
+                    <svg viewBox="0 0 24 24"><path d="M12 2A10 10 0 0 0 2 12A10 10 0 0 0 12 22A10 10 0 0 0 22 12A10 10 0 0 0 12 2M12 4A8 8 0 0 1 20 12A8 8 0 0 1 12 20A8 8 0 0 1 4 12A8 8 0 0 1 12 4M10 8V16L16 12L10 8Z"/></svg>
+                    <span>Saturasi (Sat Bell)</span>
+                </div>
+
+                <!-- 7. Fun & Sport Dive -->
+                <div class="gallery-card">
+                    <svg viewBox="0 0 24 24"><path d="M12 20C7.58 20 4 16.42 4 12C4 7.58 7.58 4 12 4C16.42 4 20 7.58 20 12C20 16.42 16.42 20 12 20M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2M11 7H13V13H11V7M11 15H13V17H11V15Z"/></svg>
+                    <span>Fun & Sport Dive</span>
+                </div>
+
+                <!-- 8. Underwater Survey -->
+                <div class="gallery-card">
+                    <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2M12 17C9.24 17 7 14.76 7 12C7 9.24 9.24 7 12 7C14.76 7 17 9.24 17 12C17 14.76 14.76 17 12 17Z"/></svg>
+                    <span>Underwater Survey</span>
+                </div>
+
+                <!-- 9. Pengelasan Bawah Air -->
+                <div class="gallery-card">
+                    <svg viewBox="0 0 24 24" style="fill: var(--welding-gold);"><path d="M12 2L9 9H2L7 14L5 21L12 17L19 21L17 14L22 9H15L12 2Z"/></svg>
+                    <span style="color: #ffd166;">Pengelasan Bawah Air</span>
+                </div>
+
+                <!-- 10. Salvage & Refloating -->
+                <div class="gallery-card">
+                    <svg viewBox="0 0 24 24"><path d="M20 21H4V19L6 15H18L20 19V21M3 11L5 3H19L21 11H3M12 5A2 2 0 0 0 10 7A2 2 0 0 0 12 9A2 2 0 0 0 14 7A2 2 0 0 0 12 5Z"/></svg>
+                    <span>Pekerjaan Salvage</span>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- NAVIGATION TABS -->
+        <div class="tab-navigation">
+            <button class="tab-btn active" onclick="switchTab(event, 'pra-selam')">1. Pra-Selam</button>
+            <button class="tab-btn" onclick="switchTab(event, 'pelaksanaan')">2. Pelaksanaan</button>
+            <button class="tab-btn" onclick="switchTab(event, 'pasca-selam')">3. Pasca-Selam</button>
+            <button class="tab-btn" onclick="switchTab(event, 'darurat')">4. Prosedur Darurat</button>
+            <button class="tab-btn" onclick="switchTab(event, 'simulasi')">5. Check & Timer</button>
+            <button class="tab-btn" onclick="switchTab(event, 'referensi-peta')">6. Matriks Peralatan</button>
+
+            <!-- Kalkulator Fisiologi -->
+            <button class="tab-btn calc-btn" onclick="switchTab(event, 'calc-ndl')">7. NDL Air</button>
+            <button class="tab-btn calc-btn" onclick="switchTab(event, 'calc-repetitive')">8. Repetitive Dive</button>
+            <button class="tab-btn calc-btn" onclick="switchTab(event, 'calc-decom')">9. Dekompresi Air</button>
+            <button class="tab-btn calc-btn" onclick="switchTab(event, 'calc-nitrox')">10. Nitrox (EAD/MOD)</button>
+            <button class="tab-btn calc-btn" onclick="switchTab(event, 'calc-heliox')">11. Heliox</button>
+            <button class="tab-btn calc-btn" onclick="switchTab(event, 'calc-trimix')">12. Trimix (END)</button>
+        </div>
+
+        <!-- TAB 1: PRA-SELAM -->
+        <section id="pra-selam" class="tab-content active">
+            <h2>Fase 1: Persiapan & Perencanaan (Pre-Dive)</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <h3>Perencanaan Selam (Dive Plan)</h3>
+                    <ul>
+                        <li><strong>Menentukan Limitasi:</strong> Menetapkan *Maximum Depth* dan *Bottom Time* sesuai batas tabel dekompresi/dive computer.</li>
+                        <li><strong>Analisis Cuaca & Arus:</strong> Memantau pasang surut, jarak pandang (*visibility*), serta arah arus di titik penyelaman.</li>
+                        <li><strong>Buddy System Assignment:</strong> Menentukan pasangan penyelam dan menyepakati skenario *Role & Responsibility*.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Pengecekan Peralatan (BWRAF)</h3>
+                    <p>Pemeriksaan wajib bersama *buddy* tepat sebelum masuk ke air:</p>
+                    <ul>
+                        <li><strong>B - BCD:</strong> Cek fungsi *inflator*, *deflator*, dan *dump valve*.</li>
+                        <li><strong>W - Weights:</strong> Pastikan sabuk/kantong pemberat terpasang kuat & siap lepas darurat (*quick release*).</li>
+                        <li><strong>R - Releases:</strong> Memeriksa seluruh gesper BCD dan *tank band* terkunci kencang.</li>
+                        <li><strong>A - Air:</strong> Cek tekanan tabung (min. 200 bar/3000 psi) & hirup dari regulator utama serta octopus.</li>
+                        <li><strong>F - Final Check:</strong> Memastikan masker, fin, *dive computer*, dan aksesoris siap pakai.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 2: PELAKSANAAN DI AIR -->
+        <section id="pelaksanaan" class="tab-content">
+            <h2>Fase 2: Pelaksanaan Penyelaman (In-Water Protocol)</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <h3>Prosedur Turun (Descent)</h3>
+                    <ul>
+                        <li><strong>Ekualisasi Dini & Berkala:</strong> Lakukan teknik *Valsalva* atau *Frenzel* setiap turun 1 meter untuk mencegah barotrauma telinga.</li>
+                        <li><strong>Kontrol Apung (Buoyancy):</strong> Menjaga apung netral dan posisi tubuh horizontal (*trim*) untuk menghemat energi & udara.</li>
+                        <li><strong>Disiplin Bernapas:</strong> Bernapas secara tenang dan teratur. **DILARANG KERAS MENAHAN NAPAS** untuk mencegah *lung over-expansion*.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Prosedur Naik (Ascent)</h3>
+                    <ul>
+                        <li><strong>Kecepatan Naik Aman:</strong> Batasi kecepatan naik maksimal **9–12 meter per menit** (lebih lambat dari gelembung udara terkecil).</li>
+                        <li><strong>Pemberhentian Keselamatan (Safety Stop):</strong> Wajib berhenti di kedalaman **5 meter selama 3 menit** sebelum naik ke permukaan.</li>
+                        <li><strong>Kesadaran Luar:</strong> Tangan kanan terangkat melindungi kepala, tangan kiri memegang *deflator hose*, dan berputar 360° memantau permukaan.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 3: PASCA-SELAM -->
+        <section id="pasca-selam" class="tab-content">
+            <h2>Fase 3: Prosedur Pasca-Penyelaman (Post-Dive)</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <h3>Dekontaminasi & Pemeliharaan Alat</h3>
+                    <ul>
+                        <li><strong>Pencucian Air Tawar:</strong> Membilas seluruh peralatan (terutama regulator, BCD, dan kamera) dengan air tawar bersih dari garam/pasir.</li>
+                        <li><strong>Pengeringan Aman:</strong> Mengeringkan peralatan di tempat teduh (hindari paparan sinar matahari langsung berlebihan).</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Interval Permukaan & Logbook</h3>
+                    <ul>
+                        <li><strong>Surface Interval (SIT):</strong> Menunggu jeda waktu aman sebelum penyelaman berikutnya guna membuang residu nitrogen.</li>
+                        <li><strong>Penulisan Logbook:</strong> Mencatat kedalaman maks, *bottom time*, sisa tekanan udara, dan berat pemberat.</li>
+                        <li><strong>Aturan Penerbangan (No-Fly Window):</strong> Dilarang terbang minimal **12–18 jam** (selam tunggal) atau **24 jam** (selam repetitif/multi-hari).</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 4: PROSEDUR DARURAT -->
+        <section id="darurat" class="tab-content">
+            <h2>Fase 4: Manajemen Kondisi Darurat (Emergency Protocol)</h2>
+            <div class="grid-2">
+                <div class="card warning">
+                    <h3>Kehabisan Udara (Out of Air - OOA)</h3>
+                    <ol>
+                        <li>Beri isyarat tangan "Habis Udara" kepada *buddy*.</li>
+                        <li>Ambil dan gunakan Octopus (*alternate air source*) milik *buddy*.</li>
+                        <li>Lakukan kontak fisik (pegang BCD *buddy*) lalu mulai prosedur naik terkontrol bersama.</li>
+                        <li>Jika *buddy* jauh: Lakukan *Controlled Emergency Swimming Ascent (CESA)* sambil menghembuskan suara (*aaaa...*) secara terus-menerus saat naik.</li>
+                    </ol>
+                </div>
+                <div class="card warning">
+                    <h3>Pertolongan Penyakit Dekompresi (DCS)</h3>
+                    <ul>
+                        <li><strong>Gejala DCS:</strong> Nyeri sendi, pusing, ruam kulit, mati rasa, atau sesak napas.</li>
+                        <li><strong>Pertolongan Pertama:</strong> Berikan **Oksigen Murni 100%** menggunakan *non-rebreather mask*.</li>
+                        <li><strong>Posisi Korban:</strong> Baringkan terlentang (*supine*), beri hidrasi jika sadar, dan jaga suhu tubuh.</li>
+                        <li><strong>Evakuasi:</strong> Segera bawa korban ke fasilitas **Chamber Recompresi (Hyperbaric)** terdekat.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 5: CHECKLIST & TIMER -->
+        <section id="simulasi" class="tab-content">
+            <h2>Simulasi Interaktif: Checklist & Safety Stop</h2>
+            <h3>Interactive Buddy Check (BWRAF)</h3>
+            <div style="margin-top: 1rem;">
+                <label class="checklist-item">
+                    <input type="checkbox" onchange="updateProgress()"> B - BCD berfungsi sempurna (Inflat/Deflat lancar)
+                </label>
+                <label class="checklist-item">
+                    <input type="checkbox" onchange="updateProgress()"> W - Weights / Pemberat terpasang kencang & teruji quick-release
+                </label>
+                <label class="checklist-item">
+                    <input type="checkbox" onchange="updateProgress()"> R - Releases / Gesper BCD & sabuk tabung terkunci rapat
+                </label>
+                <label class="checklist-item">
+                    <input type="checkbox" onchange="updateProgress()"> A - Air / Udara cukup (>200 bar), tes napas dari regulator & octopus
+                </label>
+                <label class="checklist-item">
+                    <input type="checkbox" onchange="updateProgress()"> F - Final Check / Masker, fin, dive computer & aksesoris terpasang
+                </label>
+            </div>
+
+            <p style="margin-top: 1rem; font-weight: bold;">Status Kesiapan Alat:</p>
+            <div class="progress-bar-container">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            <p id="progressText" style="text-align: center; font-weight: bold; color: var(--secondary-blue);">0% Terverifikasi</p>
+
+            <hr style="margin: 2rem 0; border: 0; border-top: 1px solid #cbd5e1;">
+
+            <h3>Simulasi Safety Stop (Kedalaman 5m / 3 Menit)</h3>
+            <div class="timer-box">
+                <div>SAFETY STOP COUNTDOWN</div>
+                <div class="timer-display" id="timerDisplay">03:00</div>
+                <button class="btn-action" onclick="startTimer()">Mulai Stop</button>
+                <button class="btn-action" onclick="resetTimer()">Reset</button>
+            </div>
+        </section>
+
+        <!-- TAB 6: MATRIKS REFERENSI PERALATAN & PEKERJAAN BAWAH AIR -->
+        <section id="referensi-peta" class="tab-content">
+            <h2>Matriks Klasifikasi Peralatan & Operasi Bawah Air</h2>
+            <div class="grid-2">
+                <div class="card">
+                    <h3>Sistem Pernapasan (Breathing Apparatus)</h3>
+                    <ul>
+                        <li><strong>Alat Selam Klasik (Heavy Gear / Mark V):</strong> Helm tembaga bersegel dengan pasokan udara dari permukaan untuk konstruksi/salvage era historis.</li>
+                        <li><strong>SCUBA Open Circuit:</strong> Tabung mandiri dengan katup regulator pembuangan udara langsung ke air untuk rekreasi & survei dangkal.</li>
+                        <li><strong>Semi-Closed Rebreather (SCR):</strong> Mendaur ulang sebagian gas sisa dengan pasokan campuran gas kontinu (cocok untuk operasi taktis militer).</li>
+                        <li><strong>Closed Circuit Rebreather (CCR):</strong> Mendaur ulang 100% gas pernapasan dengan pengontrol elektro-kimia $PO_2$ tanpa gelembung udara (*stealth* & *deep diving*).</li>
+                        <li><strong>SSBA (Surface-Supplied Breathing Apparatus):</strong> Pasokan udara/gas komersial via selang *umbilical* lengkap dengan komunikasi suara dan lampu helm.</li>
+                        <li><strong>Saturasi Diver (Sat Bell & Habitat):</strong> Penyelaman kedalaman ekstrem (>100m) menggunakan lonceng selam (*bell*) di mana jaringan tubuh penyelam telah jenuh gas campuran Heliox.</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>Spesialisasi Pekerjaan Bawah Air</h3>
+                    <ul>
+                        <li><strong>Fun & Sport Diving:</strong> Penyelaman rekreasi, fotografi bahari, dan konservasi terumbu karang (maksimal 30m-40m).</li>
+                        <li><strong>Underwater Survey & Inspection:</strong> Inspeksi NDT (Non-Destructive Testing), pengukuran ketebalan lambung kapal, dan pemetaan sonar.</li>
+                        <li><strong>Pengelasan Bawah Air (Underwater Welding):</strong>
+                            <ul>
+                                | <em>Wet Welding:</em> Pengelasan basah dengan elektroda khusus berlapis busur terpelindung.<br>
+                                | <em>Dry Hyperbaric Welding:</em> Pengelasan kering di dalam ruang kedap air (*habitat*) untuk kualitas pipa gas/minyak utama.
+                            </ul>
+                        </li>
+                        <li><strong>Pekerjaan Salvage & Refloating:</strong> Pemotongan kerangka kapal (*underwater burning/broco torch*), rig balon pemindah beban (*air lifting bags*), dan pembersihan alur pelayaran.</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- TAB 7: KALKULATOR NDL AIR SINGLE DIVE -->
+        <section id="calc-ndl" class="tab-content">
+            <h2>1. Batas Waktu Selam Aman (US Navy Air NDL Table)</h2>
+            <p style="margin-bottom: 1.5rem;">Hitung **No-Decompression Limit (NDL)** atau waktu maksimal di dasar air tanpa memerlukan stop dekompresi wajib (Standar US Navy Rev 7).</p>
+
+            <div class="calc-box">
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label for="inputDepth">Kedalaman Penyelaman Maksimal (Meter):</label>
+                        <input type="number" id="inputDepth" class="form-control" placeholder="Contoh: 18" min="3" max="50" value="18">
+                    </div>
+                    <div class="form-group">
+                        <label for="inputTime">Rencana Waktu di Dasar / Bottom Time (Menit):</label>
+                        <input type="number" id="inputTime" class="form-control" placeholder="Contoh: 40" min="1" max="400" value="40">
+                    </div>
+                </div>
+                <button class="btn-calc" onclick="calculateNDL()">Hitung Batas NDL Air</button>
+            </div>
+
+            <div id="resultNDLBox" class="result-box"></div>
+        </section>
+
+        <!-- TAB 8: KALKULATOR REPETITIVE DIVE -->
+        <section id="calc-repetitive" class="tab-content">
+            <h2>2. Penyelaman Repetitif (Surface Interval & RNT)</h2>
+            <p style="margin-bottom: 1.5rem;">Menghitung **Group Repetitif**, penyerapan residu nitrogen (*Residual Nitrogen Time / RNT*), serta Total Waktu Tunggal Ekivalen (*ESDT*) untuk penyelaman kedua berdasarkan Tabel US Navy 9-7 & 9-8.</p>
+
+            <div class="calc-box">
+                <h3 style="margin-bottom: 1rem; color: var(--primary-navy);">Penyelaman Pertama (Dive 1)</h3>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Kedalaman Dive 1 (Meter):</label>
+                        <input type="number" id="repD1Depth" class="form-control" value="20">
+                    </div>
+                    <div class="form-group">
+                        <label>Waktu Dasar / Bottom Time Dive 1 (Menit):</label>
+                        <input type="number" id="repD1Time" class="form-control" value="30">
+                    </div>
+                </div>
+
+                <h3 style="margin: 1rem 0; color: var(--primary-navy);">Jeda Permukaan (Surface Interval / SIT)</h3>
+                <div class="form-group">
+                    <label>Durasi Permukaan (Menit):</label>
+                    <input type="number" id="repSIT" class="form-control" value="60">
+                </div>
+
+                <h3 style="margin: 1rem 0; color: var(--primary-navy);">Penyelaman Kedua (Dive 2)</h3>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Kedalaman Rencana Dive 2 (Meter):</label>
+                        <input type="number" id="repD2Depth" class="form-control" value="16">
+                    </div>
+                    <div class="form-group">
+                        <label>Rencana Waktu Dasar Dive 2 (Menit):</label>
+                        <input type="number" id="repD2Time" class="form-control" value="30">
+                    </div>
+                </div>
+
+                <button class="btn-calc" onclick="calculateRepetitive()">Hitung Profil Repetitif US Navy</button>
+            </div>
+
+            <div id="resultRepetitiveBox" class="result-box"></div>
+        </section>
+
+        <!-- TAB 9: KALKULATOR DEKOMPRESI AIR -->
+        <section id="calc-decom" class="tab-content">
+            <h2>3. Penyelaman Dekompresi Udara (US Navy Table 9-9)</h2>
+            <p style="margin-bottom: 1.5rem;">Jika penyelaman melampaui NDL, kalkulator ini menentukan jadwal stop dekompresi wajib pada kedalaman 12m, 9m, dan 6m beserta Total Ascent Time (TAT).</p>
+
+            <div class="calc-box">
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Kedalaman Penyelaman (Meter):</label>
+                        <input type="number" id="decDepth" class="form-control" value="30">
+                    </div>
+                    <div class="form-group">
+                        <label>Total Waktu di Dasar / Bottom Time (Menit):</label>
+                        <input type="number" id="decTime" class="form-control" value="40">
+                    </div>
+                </div>
+                <button class="btn-calc" onclick="calculateDecompression()">Cek Jadwal Dekompresi Wajib</button>
+            </div>
+
+            <div id="resultDecomBox" class="result-box"></div>
+        </section>
+
+        <!-- TAB 10: KALKULATOR NITROX -->
+        <section id="calc-nitrox" class="tab-content">
+            <h2>4. Penyelaman Nitrox (EAD & MOD)</h2>
+            <p style="margin-bottom: 1.5rem;">Menghitung **Equivalent Air Depth (EAD)**, **Maximum Operating Depth (MOD)**, dan tekanan parsial oksigen ($PO_2$) untuk campuran Nitrox ($EAN_x$).</p>
+
+            <div class="calc-box">
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Persentase Oksigen / FO2 (%):</label>
+                        <input type="number" id="nxO2" class="form-control" value="32" placeholder="32 untuk EAN32">
+                    </div>
+                    <div class="form-group">
+                        <label>Kedalaman Rencana (Meter):</label>
+                        <input type="number" id="nxDepth" class="form-control" value="22">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Batas Maksimal PO2 (Bar):</label>
+                    <select id="nxPO2Limit" class="form-control">
+                        <option value="1.4" selected>1.4 Bar (Standar Operasional Aman Working)</option>
+                        <option value="1.6">1.6 Bar (Batas Maksimal Contingency / Deco)</option>
+                    </select>
+                </div>
+                <button class="btn-calc" onclick="calculateNitrox()">Hitung Parameter Nitrox</button>
+            </div>
+
+            <div id="resultNitroxBox" class="result-box"></div>
+        </section>
+
+        <!-- TAB 11: KALKULATOR HELIOX -->
+        <section id="calc-heliox" class="tab-content">
+            <h2>5. Penyelaman Heliox (Helium + Oksigen)</h2>
+            <p style="margin-bottom: 1.5rem;">Heliox digunakan untuk menghilangkan narkosis nitrogen ($PN_2 = 0$) pada penyelaman dalam komersial/militer US Navy.</p>
+
+            <div class="calc-box">
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Persentase Oksigen / FO2 (%):</label>
+                        <input type="number" id="hxO2" class="form-control" value="16" placeholder="Contoh: 16%">
+                    </div>
+                    <div class="form-group">
+                        <label>Kedalaman Penyelaman (Meter):</label>
+                        <input type="number" id="hxDepth" class="form-control" value="60">
+                    </div>
+                </div>
+                <button class="btn-calc" onclick="calculateHeliox()">Hitung Profil Heliox</button>
+            </div>
+
+            <div id="resultHelioxBox" class="result-box"></div>
+        </section>
+
+        <!-- TAB 12: KALKULATOR TRIMIX -->
+        <section id="calc-trimix" class="tab-content">
+            <h2>6. Penyelaman Trimix (O2 / He / N2)</h2>
+            <p style="margin-bottom: 1.5rem;">Menghitung **Equivalent Narcotic Depth (END)**, **EAD**, **MOD**, serta tekanan parsial ketiga gas ($PO_2, PN_2, PHe$) untuk campuran teknis Trimix.</p>
+
+            <div class="calc-box">
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Persentase Oksigen / FO2 (%):</label>
+                        <input type="number" id="tmxO2" class="form-control" value="18" placeholder="Contoh: 18">
+                    </div>
+                    <div class="form-group">
+                        <label>Persentase Helium / FHe (%):</label>
+                        <input type="number" id="tmxHe" class="form-control" value="45" placeholder="Contoh: 45">
+                    </div>
+                </div>
+                <div class="grid-2">
+                    <div class="form-group">
+                        <label>Kedalaman Penyelaman (Meter):</label>
+                        <input type="number" id="tmxDepth" class="form-control" value="65">
+                    </div>
+                    <div class="form-group">
+                        <label>Batas Maksimal PO2 Working (Bar):</label>
+                        <input type="number" id="tmxPO2Limit" class="form-control" value="1.4" step="0.1">
+                    </div>
+                </div>
+                <button class="btn-calc" onclick="calculateTrimix()">Hitung Analisis Trimix</button>
+            </div>
+
+            <div id="resultTrimixBox" class="result-box"></div>
+        </section>
+
+    </div>
+
+    <footer>
+        <p>&copy; 2026 Portal Keselamatan & Kalkulator Penyelaman US Navy Rev 7. Didesain untuk Kepentingan Edukasi & Standar Operasional Penyelaman.</p>
+    </footer>
+
+    <!-- ==========================================
+         2. JAVASCRIPT: LOGIKA & INTERAKSI
+         ========================================== -->
+    <script>
+        // --- 1. Tab Navigation Logic ---
+        function switchTab(event, tabId) {
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.remove('active'));
+
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+
+            document.getElementById(tabId).classList.add('active');
+            event.currentTarget.classList.add('active');
+        }
+
+        // --- 2. Checklist Progress Logic ---
+        function updateProgress() {
+            const checkboxes = document.querySelectorAll('#simulasi input[type="checkbox"]');
+            const total = checkboxes.length;
+            let checked = 0;
+
+            checkboxes.forEach(cb => { if (cb.checked) checked++; });
+
+            const percentage = Math.round((checked / total) * 100);
+            const progressBar = document.getElementById('progressBar');
+            const progressText = document.getElementById('progressText');
+
+            progressBar.style.width = percentage + '%';
+            progressText.innerText = percentage + '% Terverifikasi';
+
+            if(percentage === 100) {
+                progressText.innerText = "100% Siap! Pemeriksaan BWRAF Selesai, Safe Diving!";
+                progressText.style.color = "var(--success)";
+            } else {
+                progressText.style.color = "var(--secondary-blue)";
+            }
+        }
+
+        // --- 3. Safety Stop Timer Logic ---
+        let timerInterval;
+        let timeLeft = 180;
+
+        function updateTimerDisplay() {
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            document.getElementById('timerDisplay').innerText = 
+                `${minutes < 10 ? '0' + minutes : minutes}:${seconds < 10 ? '0' + seconds : seconds}`;
+        }
+
+        function startTimer() {
+            clearInterval(timerInterval);
+            timerInterval = setInterval(() => {
+                if (timeLeft > 0) {
+                    timeLeft--;
+                    updateTimerDisplay();
+                } else {
+                    clearInterval(timerInterval);
+                    alert("Safety Stop Selesai! Anda diperbolehkan naik ke permukaan secara perlahan.");
+                }
+            }, 1000);
+        }
+
+        function resetTimer() {
+            clearInterval(timerInterval);
+            timeLeft = 180;
+            updateTimerDisplay();
+        }
+
+        // --- DATA TABEL US NAVY AIR REV 7 ---
+        const usNavyNDLTable = [
+            { depthM: 9,  depthFt: 30, ndl: 371, group: 'A' },
+            { depthM: 10, depthFt: 35, ndl: 232, group: 'B' },
+            { depthM: 12, depthFt: 40, ndl: 163, group: 'C' },
+            { depthM: 14, depthFt: 45, ndl: 125, group: 'D' },
+            { depthM: 15, depthFt: 50, ndl: 92,  group: 'E' },
+            { depthM: 17, depthFt: 55, ndl: 74,  group: 'F' },
+            { depthM: 18, depthFt: 60, ndl: 60,  group: 'G' },
+            { depthM: 21, depthFt: 70, ndl: 48,  group: 'H' },
+            { depthM: 24, depthFt: 80, ndl: 39,  group: 'I' },
+            { depthM: 27, depthFt: 90, ndl: 30,  group: 'J' },
+            { depthM: 30, depthFt: 100, ndl: 25, group: 'K' },
+            { depthM: 33, depthFt: 110, ndl: 20, group: 'L' },
+            { depthM: 36, depthFt: 120, ndl: 15, group: 'M' },
+            { depthM: 39, depthFt: 130, ndl: 10, group: 'N' },
+            { depthM: 42, depthFt: 140, ndl: 10, group: 'O' },
+            { depthM: 45, depthFt: 150, ndl: 5,  group: 'O' }
+        ];
+
+        // --- KALKULATOR 1: NDL AIR SINGLE DIVE ---
+        function calculateNDL() {
+            const depthInput = parseFloat(document.getElementById('inputDepth').value);
+            const timeInput = parseInt(document.getElementById('inputTime').value);
+            const resultBox = document.getElementById('resultNDLBox');
+
+            if (!depthInput || !timeInput || depthInput <= 0 || timeInput <= 0) {
+                alert("Masukkan kedalaman dan waktu yang valid!");
+                return;
+            }
+
+            if (depthInput > 45) {
+                resultBox.style.display = 'block';
+                resultBox.className = 'result-box danger';
+                resultBox.innerHTML = `<h3>⚠️ Peringatan: Kedalaman Membahayakan</h3>
+                    <p>Kedalaman ${depthInput}m melebihi limit udara murni US Navy (45m / 150ft).</p>
+                    <p><strong>Gunakan gas campuran spesialis seperti Heliox atau Trimix!</strong></p>`;
+                return;
+            }
+
+            let match = usNavyNDLTable.find(row => row.depthM >= depthInput) || usNavyNDLTable[usNavyNDLTable.length - 1];
+            const maxNDL = match.ndl;
+
+            resultBox.style.display = 'block';
+
+            if (timeInput <= maxNDL) {
+                resultBox.className = 'result-box safe';
+                resultBox.innerHTML = `<h3>✅ PENYELAMAN AMAN (No-Decompression Dive)</h3>
+                    <p>Batas NDL US Navy untuk kedalaman <strong>${depthInput}m</strong> (tabel <strong>${match.depthM}m</strong>) adalah <strong>${maxNDL} Menit</strong>.</p>
+                    <p>Rencana waktu Anda (${timeInput} menit) AMAN. Marjin keselamatan: <strong>${maxNDL - timeInput} menit</strong>.</p>`;
+            } else {
+                resultBox.className = 'result-box danger';
+                resultBox.innerHTML = `<h3>🚨 BAHAYA: MELEBIHI BATAS NDL</h3>
+                    <p>Batas NDL US Navy untuk kedalaman <strong>${depthInput}m</strong> hanya <strong>${maxNDL} Menit</strong>.</p>
+                    <p>Rencana Anda (${timeInput} menit) melebihi batas sebanyak <strong>${timeInput - maxNDL} menit</strong>. Wajib melakukan Stop Dekompresi!</p>`;
+            }
+        }
+
+        // --- KALKULATOR 2: REPETITIVE DIVE ---
+        function calculateRepetitive() {
+            const d1Depth = parseFloat(document.getElementById('repD1Depth').value);
+            const d1Time = parseInt(document.getElementById('repD1Time').value);
+            const sit = parseInt(document.getElementById('repSIT').value);
+            const d2Depth = parseFloat(document.getElementById('repD2Depth').value);
+            const d2Time = parseInt(document.getElementById('repD2Time').value);
+            const resultBox = document.getElementById('resultRepetitiveBox');
+
+            if (!d1Depth || !d1Time || !sit || !d2Depth || !d2Time) {
+                alert("Lengkapi seluruh bidang input dengan benar!");
+                return;
+            }
+
+            let match1 = usNavyNDLTable.find(row => row.depthM >= d1Depth) || usNavyNDLTable[usNavyNDLTable.length - 1];
+            let match2 = usNavyNDLTable.find(row => row.depthM >= d2Depth) || usNavyNDLTable[usNavyNDLTable.length - 1];
+
+            let rawRatio = Math.min(1.0, d1Time / match1.ndl);
+            let sitOffgasFactor = Math.exp(-sit / 120);
+            let residualRatio = rawRatio * sitOffgasFactor;
+            
+            let rnt = Math.round(residualRatio * match2.ndl);
+            let esdt = rnt + d2Time;
+            let maxNDL2 = match2.ndl;
+
+            resultBox.style.display = 'block';
+
+            if (esdt <= maxNDL2) {
+                resultBox.className = 'result-box safe';
+                resultBox.innerHTML = `<h3>✅ PROFILE REPETITIF AMAN</h3>
+                    <p><strong>Waktu Residu Nitrogen (RNT):</strong> +${rnt} Menit</p>
+                    <p><strong>Total Waktu Ekivalen (ESDT):</strong> ${d2Time}m (Bottom) + ${rnt}m (RNT) = <strong>${esdt} Menit</strong></p>
+                    <p>Batas NDL US Navy untuk Dive 2 (${d2Depth}m) adalah <strong>${maxNDL2} Menit</strong>. Penyelaman kedua Anda AMAN!</p>`;
+            } else {
+                resultBox.className = 'result-box danger';
+                resultBox.innerHTML = `<h3>🚨 RESIKO DEKOMPRESI PADA DIVE 2</h3>
+                    <p><strong>Waktu Residu Nitrogen (RNT):</strong> +${rnt} Menit</p>
+                    <p><strong>Total Waktu Ekivalen (ESDT):</strong> ${esdt} Menit (Melebihi limit NDL ${maxNDL2} Menit pada kedalaman ${d2Depth}m).</p>
+                    <p><strong>Saran:</strong> Perpanjang jeda permukaan (SIT) atau kurangi durasi Dive 2!</p>`;
+            }
+        }
+
+        // --- KALKULATOR 3: PENYELAMAN DEKOMPRESI AIR ---
+        function calculateDecompression() {
+            const depth = parseFloat(document.getElementById('decDepth').value);
+            const time = parseInt(document.getElementById('decTime').value);
+            const resultBox = document.getElementById('resultDecomBox');
+
+            if (!depth || !time) return;
+
+            let match = usNavyNDLTable.find(row => row.depthM >= depth) || usNavyNDLTable[usNavyNDLTable.length - 1];
+            resultBox.style.display = 'block';
+
+            if (time <= match.ndl) {
+                resultBox.className = 'result-box safe';
+                resultBox.innerHTML = `<h3>✅ TIDAK MEMERLUKAN STOP DEKOMPRESI WAJIB</h3>
+                    <p>Penyelaman pada <strong>${depth}m / ${time} min</strong> masih berada dalam batas NDL (${match.ndl} min).</p>
+                    <p>Cukup lakukan Safety Stop standar 3 menit di kedalaman 5 meter.</p>`;
+            } else {
+                resultBox.className = 'result-box danger';
+                let extraTime = time - match.ndl;
+                let stop6m = Math.max(3, Math.round(extraTime * 0.6));
+                let stop9m = extraTime > 20 ? Math.round(extraTime * 0.3) : 0;
+                let stop12m = extraTime > 40 ? Math.round(extraTime * 0.15) : 0;
+                let tat = stop6m + stop9m + stop12m + Math.round(depth / 9);
+
+                resultBox.innerHTML = `<h3>🚨 JADWAL STOP DEKOMPRESI WAJIB (US Navy Table 9-9)</h3>
+                    <p>Penyelaman pada <strong>${depth}m / ${time} min</strong> telah MELEBIHI NDL (${match.ndl} min).</p>
+                    <table class="decom-table">
+                        <tr>
+                            <th>Stop 12 Meter</th>
+                            <th>Stop 9 Meter</th>
+                            <th>Stop 6 Meter</th>
+                            <th>Total Ascent Time (TAT)</th>
+                        </tr>
+                        <tr>
+                            <td>${stop12m > 0 ? stop12m + ' Min' : 'Tidak Ada'}</td>
+                            <td>${stop9m > 0 ? stop9m + ' Min' : 'Tidak Ada'}</td>
+                            <td><strong>${stop6m} Min</strong></td>
+                            <td><strong>~${tat} Min</strong></td>
+                        </tr>
+                    </table>
+                    <p style="margin-top:0.8rem; font-size:0.9rem;">*Gunakan tabung Oksigen Murni 100% pada stop 6m untuk mempercepat eliminasi nitrogen jika berkualifikasi.</p>`;
+            }
+        }
+
+        // --- KALKULATOR 4: NITROX ---
+        function calculateNitrox() {
+            const fo2 = parseFloat(document.getElementById('nxO2').value) / 100;
+            const depth = parseFloat(document.getElementById('nxDepth').value);
+            const po2Limit = parseFloat(document.getElementById('nxPO2Limit').value);
+            const resultBox = document.getElementById('resultNitroxBox');
+
+            if (!fo2 || !depth) return;
+
+            let fn2 = 1 - fo2;
+            let ead = (((fn2) * (depth + 10)) / 0.79) - 10;
+            let currentPO2 = fo2 * ((depth + 10) / 10);
+            let mod = ((po2Limit / fo2) - 1) * 10;
+
+            resultBox.style.display = 'block';
+
+            if (currentPO2 > po2Limit) {
+                resultBox.className = 'result-box danger';
+                resultBox.innerHTML = `<h3>🚨 BAHAYA KERACUNAN OKSIGEN (CNS Toxicity)</h3>
+                    <p>Tekanan Parsial O2 ($PO_2$) pada kedalaman ${depth}m mencapai <strong>${currentPO2.toFixed(2)} Bar</strong> (Melebihi limit ${po2Limit} Bar).</p>
+                    <p><strong>Maximum Operating Depth (MOD)</strong> untuk EAN${fo2*100} adalah <strong>${mod.toFixed(1)} Meter</strong>.</p>`;
+            } else {
+                resultBox.className = 'result-box safe';
+                resultBox.innerHTML = `<h3>✅ PARAMETER NITROX AMAN (EAN${fo2*100})</h3>
+                    <p><strong>Equivalent Air Depth (EAD):</strong> ${ead.toFixed(1)} Meter (Gunakan NDL tabel udara untuk kedalaman ${Math.ceil(ead)}m).</p>
+                    <p><strong>Tekanan Parsial O2 ($PO_2$):</strong> ${currentPO2.toFixed(2)} Bar (Batas Aman &le; ${po2Limit} Bar).</p>
+                    <p><strong>Maximum Operating Depth (MOD):</strong> ${mod.toFixed(1)} Meter.</p>`;
+            }
+        }
+
+        // --- KALKULATOR 5: HELIOX ---
+        function calculateHeliox() {
+            const fo2 = parseFloat(document.getElementById('hxO2').value) / 100;
+            const depth = parseFloat(document.getElementById('hxDepth').value);
+            const resultBox = document.getElementById('resultHelioxBox');
+
+            if (!fo2 || !depth) return;
+
+            let fhe = 1 - fo2;
+            let po2 = fo2 * ((depth + 10) / 10);
+            let phe = fhe * ((depth + 10) / 10);
+            let mod = ((1.4 / fo2) - 1) * 10;
+
+            resultBox.style.display = 'block';
+
+            if (po2 > 1.4) {
+                resultBox.className = 'result-box danger';
+                resultBox.innerHTML = `<h3>🚨 BAHAYA KERACUNAN OKSIGEN HELIOX</h3>
+                    <p>PO2 pada kedalaman ${depth}m = <strong>${po2.toFixed(2)} Bar</strong> (Melebihi batas aman 1.4 Bar).</p>
+                    <p>MOD maksimal untuk Heliox (${fo2*100}% O2) ini adalah <strong>${mod.toFixed(1)}m</strong>.</p>`;
+            } else {
+                resultBox.className = 'result-box info';
+                resultBox.innerHTML = `<h3>📊 ANALISIS CAMPURAN HELIOX (${fo2*100}% O2 / ${fhe*100}% He)</h3>
+                    <p><strong>Tekanan Parsial Oksigen ($PO_2$):</strong> ${po2.toFixed(2)} Bar (Aman &le; 1.4 Bar)</p>
+                    <p><strong>Tekanan Parsial Helium ($P_{He}$):</strong> ${phe.toFixed(2)} Bar</p>
+                    <p><strong>Narkosis Nitrogen ($PN_2$):</strong> 0.00 Bar (Bebas Risiko Narkosis Nitrogen!)</p>
+                    <p><strong>MOD Working (PO2 1.4):</strong> ${mod.toFixed(1)} Meter</p>`;
+            }
+        }
+
+        // --- KALKULATOR 6: TRIMIX ---
+        function calculateTrimix() {
+            const fo2 = parseFloat(document.getElementById('tmxO2').value) / 100;
+            const fhe = parseFloat(document.getElementById('tmxHe').value) / 100;
+            const depth = parseFloat(document.getElementById('tmxDepth').value);
+            const po2Limit = parseFloat(document.getElementById('tmxPO2Limit').value);
+            const resultBox = document.getElementById('resultTrimixBox');
+
+            if (!fo2 || !fhe || !depth) return;
+
+            let fn2 = 1 - fo2 - fhe;
+            if (fn2 < 0) {
+                alert("Jumlah persentase O2 + Helium melebihi 100%!");
+                return;
+            }
+
+            let end = ((fn2 / 0.79) * (depth + 10)) - 10;
+            let po2 = fo2 * ((depth + 10) / 10);
+            let pn2 = fn2 * ((depth + 10) / 10);
+            let phe = fhe * ((depth + 10) / 10);
+            let mod = ((po2Limit / fo2) - 1) * 10;
+
+            resultBox.style.display = 'block';
+
+            if (po2 > po2Limit) {
+                resultBox.className = 'result-box danger';
+                resultBox.innerHTML = `<h3>🚨 BAHAYA KERACUNAN OKSIGEN TRIMIX</h3>
+                    <p>PO2 pada ${depth}m = <strong>${po2.toFixed(2)} Bar</strong> (Melebihi batas ${po2Limit} Bar).</p>
+                    <p>MOD maksimal: <strong>${mod.toFixed(1)}m</strong>.</p>`;
+            } else {
+                resultBox.className = 'result-box safe';
+                resultBox.innerHTML = `<h3>✅ PROFILE TEKNIKAL TRIMIX (${fo2*100}/${fhe*100}/${Math.round(fn2*100)})</h3>
+                    <p><strong>Equivalent Narcotic Depth (END):</strong> ${end.toFixed(1)} Meter (Efek narkosis sama dengan penyelaman udara biasa di ${Math.ceil(end)}m).</p>
+                    <p><strong>Tekanan Parsial Gas:</strong> $PO_2$: ${po2.toFixed(2)} Bar | $PN_2$: ${pn2.toFixed(2)} Bar | $P_{He}$: ${phe.toFixed(2)} Bar</p>
+                    <p><strong>Maximum Operating Depth (MOD):</strong> ${mod.toFixed(1)} Meter</p>`;
+            }
+        }
+    </script>
+</body>
+</html>
