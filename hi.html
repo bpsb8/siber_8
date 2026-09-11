@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Taman Langit Pangalengan - Eksplorasi Wisata Alam Bandung | JelajahNusantara</title>
+  
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+    }
+    .glass-nav {
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(12px);
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 antialiased selection:bg-emerald-500 selection:text-white">
+
+  <!-- NAVBAR -->
+  <header class="sticky top-0 z-50 glass-nav border-b border-slate-200/80 transition-all">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+      <!-- Logo -->
+      <a href="#" class="flex items-center gap-2 font-extrabold text-xl tracking-tight text-slate-900">
+        <div class="w-10 h-10 rounded-xl bg-emerald-600 text-white flex items-center justify-center shadow-lg shadow-emerald-600/30">
+          <i data-lucide="compass" class="w-6 h-6"></i>
+        </div>
+        <span>Jelajah<span class="text-emerald-600">Nusantara</span></span>
+      </a>
+
+      <!-- Navigation Links -->
+      <nav class="hidden md:flex items-center gap-8 font-medium text-sm text-slate-600">
+        <a href="#" class="text-emerald-600 font-semibold">Beranda</a>
+        <a href="#destinasi" class="hover:text-emerald-600 transition">Destinasi Populer</a>
+        <a href="#panduan" class="hover:text-emerald-600 transition">Panduan Tiket</a>
+        <a href="#galeri" class="hover:text-emerald-600 transition">Galeri Foto</a>
+        <a href="#tips" class="hover:text-emerald-600 transition">Tips Wisata</a>
+      </nav>
+
+      <!-- Right Action -->
+      <div class="flex items-center gap-4">
+        <button onclick="toggleBookmark()" id="btn-bookmark" class="p-2.5 rounded-full border border-slate-200 hover:border-emerald-500 hover:text-emerald-600 transition text-slate-500">
+          <i data-lucide="bookmark" class="w-5 h-5"></i>
+        </button>
+        <a href="#tiket-widget" class="hidden sm:inline-flex items-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white px-5 py-2.5 rounded-xl text-sm font-semibold transition shadow-md shadow-emerald-600/20">
+          <i data-lucide="ticket" class="w-4 h-4"></i>
+          <span>Cek Tiket</span>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER LAYOUT (DESKTOP 2-COLUMN) -->
+  <div class="max-w-7xl mx-auto px-6 py-8">
+    
+    <!-- BREADCRUMB -->
+    <nav class="flex items-center gap-2 text-xs text-slate-500 mb-6 font-medium">
+      <a href="#" class="hover:text-emerald-600">Beranda</a>
+      <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-400"></i>
+      <a href="#" class="hover:text-emerald-600">Jawa Barat</a>
+      <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-400"></i>
+      <a href="#" class="hover:text-emerald-600">Bandung</a>
+      <i data-lucide="chevron-right" class="w-3.5 h-3.5 text-slate-400"></i>
+      <span class="text-slate-900 font-semibold">Taman Langit Pangalengan</span>
+    </nav>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+      
+      <!-- LEFT CONTENT AREA (8 COLS) -->
+      <main class="lg:col-span-8 space-y-8">
+        
+        <!-- ARTICLE HEADER -->
+        <article class="space-y-4">
+          <div class="flex items-center gap-3">
+            <span class="px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold uppercase tracking-wider">
+              Wisata Alam
+            </span>
+            <span class="flex items-center gap-1 text-xs text-slate-500">
+              <i data-lucide="clock" class="w-3.5 h-3.5"></i> 5 Menit Baca
+            </span>
+            <span class="flex items-center gap-1 text-xs text-amber-500 font-bold">
+              <i data-lucide="star" class="w-3.5 h-3.5 fill-amber-400"></i> 4.8 (1,240 Ulasan)
+            </span>
+          </div>
+
+          <h1 class="text-3xl md:text-5xl font-extrabold text-slate-900 leading-tight">
+            Pesona Taman Langit Pangalengan: Samudra Awan & Camping Ground di Atas Perkebunan Teh
+          </h1>
+
+          <div class="flex items-center justify-between border-y border-slate-200 py-4 my-4 text-xs text-slate-500">
+            <div class="flex items-center gap-3">
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&q=80&w=150" alt="Penulis" class="w-10 h-10 rounded-full object-cover">
+              <div>
+                <p class="font-bold text-slate-900 text-sm">Tim Redaksi JelajahNusantara</p>
+                <p>Diperbarui: 10 September 2026</p>
+              </div>
+            </div>
+            <div class="flex items-center gap-2">
+              <button onclick="sharePage()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-100 transition text-slate-700 font-medium">
+                <i data-lucide="share-2" class="w-4 h-4"></i> Bagikan
+              </button>
+            </div>
+          </div>
+        </article>
+
+        <!-- HERO FEATURED IMAGE -->
+        <div class="relative rounded-3xl overflow-hidden shadow-2xl group">
+          <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&q=80&w=1200" alt="Taman Langit Pangalengan" class="w-full h-[450px] object-cover group-hover:scale-105 transition duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent flex items-end p-6">
+            <p class="text-white/90 text-sm italic font-light">
+              Pemandangan jembatan kayu ikonik yang membelah lautan awan di Taman Langit Pangalengan, Bandung.
+            </p>
+          </div>
+        </div>
+
+        <!-- INTRO CONTENT -->
+        <section class="prose max-w-none text-slate-600 leading-relaxed space-y-4">
+          <p class="text-lg text-slate-700 font-medium leading-normal">
+            Bosan dengan hiruk-pikuk perkotaan? <strong>Taman Langit Pangalengan (TLP 360)</strong> hadir sebagai salah satu destinasi wisata alam terpopuler di Kabupaten Bandung yang menawarkan pemandangan panorama 360 derajat hamparan kebun teh dan lautan awan yang memukau dari ketinggian 1.670 meter di atas permukaan laut.
+          </p>
+          <p>
+            Terletak di kawasan Sukalaksana, Pangalengan, tempat wisata ini terkenal dengan daya tarik jembatan kayu sepanjang lebih dari 200 meter yang tampak menembus kabut pagi. Tidak heran jika lokasi ini menjadi favorit para pecinta fotografi, pemburu *sunrise*, hingga pengunjung yang ingin merasakan sensasi *camping* di atas awan.
+          </p>
+        </section>
+
+        <!-- DAYA TARIK UTAMA (CARDS GRID) -->
+        <section id="destinasi" class="space-y-4 pt-4">
+          <h2 class="text-2xl font-bold text-slate-900 flex items-center gap-2">
+            <i data-lucide="sparkles" class="text-emerald-600 w-6 h-6"></i>
+            Daya Tarik Utama Taman Langit Pangalengan
+          </h2>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md transition space-y-2">
+              <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold">1</div>
+              <h3 class="font-bold text-slate-900 text-base">Jembatan Kayu Tengah Kebun Teh</h3>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                Jembatan kayu ikonik yang membentang luas di tengah hamparan teh, memberikan spot foto *aesthetic* berlatar langit panorama.
+              </p>
+            </div>
+
+            <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md transition space-y-2">
+              <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold">2</div>
+              <h3 class="font-bold text-slate-900 text-base">Camping Ground 24 Jam</h3>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                Fasilitas area berkemah lengkap dengan penyewaan tenda, toilet bersih, mushola, serta warung yang buka 24 jam penuh.
+              </p>
+            </div>
+
+            <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md transition space-y-2">
+              <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold">3</div>
+              <h3 class="font-bold text-slate-900 text-base">Sunrise & Lautan Awan</h3>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                Menikmati matahari terbit di pagi hari yang diselimuti gumpalan kabut tebal menyerupai lautan awan putih.
+              </p>
+            </div>
+
+            <div class="bg-white p-5 rounded-2xl border border-slate-200/80 shadow-sm hover:shadow-md transition space-y-2">
+              <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center font-bold">4</div>
+              <h3 class="font-bold text-slate-900 text-base">Udara Sejuk Khas Pegunungan</h3>
+              <p class="text-xs text-slate-600 leading-relaxed">
+                Suhu udara berkisar antara 15°C hingga 20°C yang sangat ampuh menyegarkan pikiran dari rutinitas harian.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <!-- INFORMASI HARGA TIKET & OPERASIONAL (TABLE) -->
+        <section id="panduan" class="bg-white p-6 rounded-3xl border border-slate-200 shadow-sm space-y-4">
+          <div class="flex items-center justify-between">
+            <h2 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+              <i data-lucide="badge-dollar-sign" class="text-emerald-600 w-5 h-5"></i>
+              Harga Tiket Masuk & Operasional
+            </h2>
+            <span class="text-xs text-emerald-700 bg-emerald-50 px-3 py-1 rounded-full font-semibold">Update Terbaru</span>
+          </div>
+
+          <div class="overflow-x-auto">
+            <table class="w-full text-left text-xs text-slate-600">
+              <thead class="bg-slate-100 text-slate-800 uppercase font-semibold">
+                <tr>
+                  <th class="p-3.5 rounded-l-xl">Kategori / Layanan</th>
+                  <th class="p-3.5">Harga Tiket</th>
+                  <th class="p-3.5 rounded-r-xl">Keterangan</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-slate-100 font-medium">
+                <tr class="hover:bg-slate-50/80 transition">
+                  <td class="p-3.5 font-bold text-slate-800">Tiket Masuk Dewasa (Reguler)</td>
+                  <td class="p-3.5 text-emerald-700 font-bold">Rp 15.000 / orang</td>
+                  <td class="p-3.5">Akses ke seluruh area jembatan kayu</td>
+                </tr>
+                <tr class="hover:bg-slate-50/80 transition">
+                  <td class="p-3.5 font-bold text-slate-800">Tiket Masuk Anak (3-10 thn)</td>
+                  <td class="p-3.5 text-emerald-700 font-bold">Rp 10.000 / anak</td>
+                  <td class="p-3.5">Termasuk tiket area bermain</td>
+                </tr>
+                <tr class="hover:bg-slate-50/80 transition">
+                  <td class="p-3.5 font-bold text-slate-800">Tiket Camping Non-Paket</td>
+                  <td class="p-3.5 text-emerald-700 font-bold">Rp 35.000 / orang</td>
+                  <td class="p-3.5">Membawa tenda & perlengkapan sendiri</td>
+                </tr>
+                <tr class="hover:bg-slate-50/80 transition">
+                  <td class="p-3.5 font-bold text-slate-800">Sewa Paket Tenda Standar</td>
+                  <td class="p-3.5 text-emerald-700 font-bold">Rp 150.000 / malam</td>
+                  <td class="p-3.5">Kapasitas 4 orang + matras</td>
+                </tr>
+                <tr class="hover:bg-slate-50/80 transition">
+                  <td class="p-3.5 font-bold text-slate-800">Parkir Motor / Mobil</td>
+                  <td class="p-3.5 text-emerald-700 font-bold">Rp 5.000 / Rp 10.000</td>
+                  <td class="p-3.5">Tarif menginap menyesuaikan</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="bg-amber-50 border border-amber-200 p-4 rounded-2xl flex items-start gap-3 text-xs text-amber-900">
+            <i data-lucide="info" class="w-5 h-5 text-amber-600 shrink-0 mt-0.5"></i>
+            <div>
+              <p class="font-bold">Jam Operasional:</p>
+              <p>Kawasan Taman Langit Pangalengan buka <strong>24 Jam Setiap Hari (Senin - Minggu)</strong>. Waktu terbaik berkunjung adalah pukul 05.00 - 07.00 WIB untuk menyaksikan matahari terbit.</p>
+            </div>
+          </div>
+        </section>
+
+        <!-- PHOTO GALLERY -->
+        <section id="galeri" class="space-y-4">
+          <h2 class="text-xl font-bold text-slate-900 flex items-center gap-2">
+            <i data-lucide="camera" class="text-emerald-600 w-5 h-5"></i>
+            Galeri Keindahan Taman Langit
+          </h2>
+          
+          <div class="grid grid-cols-3 gap-3">
+            <div class="group relative overflow-hidden rounded-2xl h-40">
+              <img src="https://images.unsplash.com/photo-1511497584788-8767611136f6?auto=format&fit=crop&q=80&w=600" alt="Hutan & Awan" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+            </div>
+            <div class="group relative overflow-hidden rounded-2xl h-40">
+              <img src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&q=80&w=600" alt="Kebun Teh" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+            </div>
+            <div class="group relative overflow-hidden rounded-2xl h-40">
+              <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&q=80&w=600" alt="Sunrise" class="w-full h-full object-cover group-hover:scale-110 transition duration-500">
+            </div>
+          </div>
+        </section>
+
+        <!-- TIPS PERJALANAN -->
+        <section id="tips" class="bg-slate-900 text-white p-6 rounded-3xl space-y-4">
+          <h2 class="text-xl font-bold flex items-center gap-2 text-emerald-400">
+            <i data-lucide="compass" class="w-5 h-5"></i>
+            Tips Penting Sebelum Berkunjung
+          </h2>
+          <ul class="space-y-2 text-xs text-slate-300 leading-relaxed list-disc list-inside">
+            <li>Gunakan pakaian tebal / jaket penahan angin karena suhu dapat mencapai di bawah 15°C pada malam dan pagi hari.</li>
+            <li>Pastikan kendaraan dalam kondisi prima karena jalur menuju lokasi memiliki beberapa tanjakan cukup terjal.</li>
+            <li>Bawa kamera atau pastikan daya baterai HP terisi penuh untuk mengabadikan momen *sunrise*.</li>
+            <li>Selalu jaga kebersihan kawasan dengan tidak membuang sampah sembarangan di area kebun teh.</li>
+          </ul>
+        </section>
+
+      </main>
+
+      <!-- RIGHT SIDEBAR AREA (4 COLS) -->
+      <aside class="lg:col-span-4 space-y-8">
+        
+        <!-- WIDGET 1: SIMULASI & CEK ESTIMASI BIAYA -->
+        <div id="tiket-widget" class="bg-white p-6 rounded-3xl border border-slate-200 shadow-xl space-y-4 sticky top-28">
+          <div class="flex items-center justify-between">
+            <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+              <i data-lucide="calculator" class="text-emerald-600 w-5 h-5"></i>
+              Kalkulator Biaya Wisata
+            </h3>
+            <span class="text-[10px] uppercase font-bold text-emerald-700 bg-emerald-100 px-2 py-0.5 rounded">Simulasi</span>
+          </div>
+
+          <p class="text-xs text-slate-500">Hitung estimasi total tiket masuk untuk rombongan atau keluarga Anda:</p>
+
+          <div class="space-y-3 text-xs">
+            <div>
+              <label class="font-semibold text-slate-700 block mb-1">Jumlah Dewasa (Rp 15k)</label>
+              <input type="number" id="input-dewasa" value="2" min="1" oninput="hitungEstimasi()" class="w-full px-3 py-2 rounded-xl border border-slate-200 focus:outline-none focus:border-emerald-500 font-semibold text-slate-800">
+            </div>
+
+            <div>
+              <label class="font-semibold text-slate-700 block mb-1">Jumlah Anak (Rp 10k)</label>
+              <input type="number" id="input-anak" value="0" min="0" oninput="hitungEstimasi()" class="w-full px-3 py-2 rounded-xl border border-slate-200 focus:outline-none focus:border-emerald-500 font-semibold text-slate-800">
+            </div>
+
+            <div>
+              <label class="font-semibold text-slate-700 block mb-1">Opsi Camping (+Rp 35k/orang)</label>
+              <select id="input-camping" onchange="hitungEstimasi()" class="w-full px-3 py-2 rounded-xl border border-slate-200 focus:outline-none focus:border-emerald-500 font-semibold text-slate-800">
+                <option value="0">Tidak Camping (Wisata Reguler)</option>
+                <option value="35000">Ya, Termasuk Tiket Camping</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="pt-3 border-t border-slate-100 flex items-center justify-between">
+            <div>
+              <span class="text-[10px] text-slate-400 font-semibold uppercase block">Total Estimasi Tiket</span>
+              <span class="text-xl font-extrabold text-emerald-600" id="total-biaya">Rp 30.000</span>
+            </div>
+            <button onclick="bookingAlert()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2.5 rounded-xl text-xs font-bold transition shadow-md shadow-emerald-600/20">
+              Pesan Sekarang
+            </button>
+          </div>
+        </div>
+
+        <!-- WIDGET 2: DESTINASI POPULER LAINNYA -->
+        <div class="bg-white p-6 rounded-3xl border border-slate-200/80 space-y-4">
+          <h3 class="font-bold text-slate-900 text-base flex items-center gap-2">
+            <i data-lucide="trending-up" class="text-emerald-600 w-5 h-5"></i>
+            Rekomendasi Wisata Hits
+          </h3>
+
+          <div class="space-y-3">
+            <a href="#" class="flex items-center gap-3 group">
+              <img src="https://images.unsplash.com/photo-1596402184320-417e7178b2cd?auto=format&fit=crop&q=80&w=200" alt="Labuan Bajo" class="w-16 h-16 rounded-xl object-cover shrink-0 group-hover:scale-105 transition">
+              <div>
+                <h4 class="text-xs font-bold text-slate-800 group-hover:text-emerald-600 transition">Labuan Bajo & TN Komodo</h4>
+                <p class="text-[10px] text-slate-500">Nusa Tenggara Timur</p>
+                <span class="text-[10px] text-amber-500 font-bold flex items-center gap-1 mt-0.5">
+                  <i data-lucide="star" class="w-3 h-3 fill-amber-400"></i> 4.9
+                </span>
+              </div>
+            </a>
+
+            <a href="#" class="flex items-center gap-3 group">
+              <img src="https://images.unsplash.com/photo-1588668214407-6ea9a6d8c272?auto=format&fit=crop&q=80&w=200" alt="Gunung Bromo" class="w-16 h-16 rounded-xl object-cover shrink-0 group-hover:scale-105 transition">
+              <div>
+                <h4 class="text-xs font-bold text-slate-800 group-hover:text-emerald-600 transition">Gunung Bromo & Lautan Pasir</h4>
+                <p class="text-[10px] text-slate-500">Jawa Timur</p>
+                <span class="text-[10px] text-amber-500 font-bold flex items-center gap-1 mt-0.5">
+                  <i data-lucide="star" class="w-3 h-3 fill-amber-400"></i> 4.9
+                </span>
+              </div>
+            </a>
+
+            <a href="#" class="flex items-center gap-3 group">
+              <img src="https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&q=80&w=200" alt="Bali" class="w-16 h-16 rounded-xl object-cover shrink-0 group-hover:scale-105 transition">
+              <div>
+                <h4 class="text-xs font-bold text-slate-800 group-hover:text-emerald-600 transition">Ubud & Sawah Terasering</h4>
+                <p class="text-[10px] text-slate-500">Bali</p>
+                <span class="text-[10px] text-amber-500 font-bold flex items-center gap-1 mt-0.5">
+                  <i data-lucide="star" class="w-3 h-3 fill-amber-400"></i> 4.8
+                </span>
+              </div>
+            </a>
+          </div>
+        </div>
+
+      </aside>
+
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer class="bg-slate-900 text-slate-400 py-12 border-t border-slate-800 mt-16">
+    <div class="max-w-7xl mx-auto px-6 grid grid-cols-1 md:grid-cols-4 gap-8 text-xs">
+      <div class="space-y-3">
+        <div class="flex items-center gap-2 text-white font-extrabold text-lg">
+          <i data-lucide="compass" class="text-emerald-500"></i> JelajahNusantara
+        </div>
+        <p class="leading-relaxed">Portal informasi dan panduan destinasi wisata terbaik di seluruh penjuru Indonesia.</p>
+      </div>
+
+      <div>
+        <h4 class="text-white font-bold mb-3 uppercase tracking-wider text-[11px]">Destinasi</h4>
+        <ul class="space-y-2">
+          <li><a href="#" class="hover:text-white transition">Wisata Bandung</a></li>
+          <li><a href="#" class="hover:text-white transition">Wisata Bali</a></li>
+          <li><a href="#" class="hover:text-white transition">Wisata Bromo</a></li>
+          <li><a href="#" class="hover:text-white transition">Wisata Labuan Bajo</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-white font-bold mb-3 uppercase tracking-wider text-[11px]">Kategori</h4>
+        <ul class="space-y-2">
+          <li><a href="#" class="hover:text-white transition">Wisata Alam & Pegunungan</a></li>
+          <li><a href="#" class="hover:text-white transition">Pantai & Bahari</a></li>
+          <li><a href="#" class="hover:text-white transition">Kuliner Nusantara</a></li>
+          <li><a href="#" class="hover:text-white transition">Budaya & Sejarah</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-white font-bold mb-3 uppercase tracking-wider text-[11px]">Langganan Newsletter</h4>
+        <p class="mb-3">Dapatkan promo tiket dan inspirasi liburan langsung ke email Anda.</p>
+        <div class="flex gap-2">
+          <input type="email" placeholder="Email Anda..." class="bg-slate-800 border border-slate-700 px-3 py-2 rounded-xl w-full text-white text-xs focus:outline-none focus:border-emerald-500">
+          <button class="bg-emerald-600 hover:bg-emerald-700 text-white px-4 py-2 rounded-xl font-bold transition">Kirim</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="max-w-7xl mx-auto px-6 mt-10 pt-6 border-t border-slate-800 text-center text-[11px] text-slate-500">
+      &copy; 2026 JelajahNusantara. Seluruh Hak Cipta Dilindungi Undang-Undang.
+    </div>
+  </footer>
+
+  <!-- JAVASCRIPT LOGIC -->
+  <script>
+    lucide.createIcons();
+
+    // Kalkulator Biaya Tiket Dinamis
+    function hitungEstimasi() {
+      const dewasa = parseInt(document.getElementById('input-dewasa').value) || 0;
+      const anak = parseInt(document.getElementById('input-anak').value) || 0;
+      const campingExtra = parseInt(document.getElementById('input-camping').value) || 0;
+
+      const totalDewasa = dewasa * 15000;
+      const totalAnak = anak * 10000;
+      const totalCamping = (dewasa + anak) * campingExtra;
+
+      const grandTotal = totalDewasa + totalAnak + totalCamping;
+
+      document.getElementById('total-biaya').innerText = "Rp " + grandTotal.toLocaleString('id-ID');
+    }
+
+    // Bookmark Toggle
+    let isBookmarked = false;
+    function toggleBookmark() {
+      const btn = document.getElementById('btn-bookmark');
+      isBookmarked = !isBookmarked;
+      if (isBookmarked) {
+        btn.classList.add('bg-emerald-50', 'text-emerald-600', 'border-emerald-500');
+        alert("Artikel berhasil disimpan ke daftar bookmark Anda!");
+      } else {
+        btn.classList.remove('bg-emerald-50', 'text-emerald-600', 'border-emerald-500');
+      }
+    }
+
+    // Share Button Alert
+    function sharePage() {
+      if (navigator.share) {
+        navigator.share({
+          title: 'Taman Langit Pangalengan - JelajahNusantara',
+          url: window.location.href
+        });
+      } else {
+        alert("Tautan artikel berhasil disalin ke clipboard!");
+      }
+    }
+
+    // Booking Action Simulation
+    function bookingAlert() {
+      const total = document.getElementById('total-biaya').innerText;
+      alert(`Mengarahkan ke mitra pemesanan tiket resmi. Total estimasi: ${total}`);
+    }
+  </script>
+</body>
+</html>

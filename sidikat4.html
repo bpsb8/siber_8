@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Biografi interaktif Sindikat 4 dan pembelajaran dasar web development.">
+<title>Sindikat 4 — Six Minds, One Team</title>
+
+<style>
+:root{
+  --bg:#050914; --bg2:#091426; --card:rgba(13,25,45,.72);
+  --text:#edf6ff; --muted:#9db0c8; --cyan:#45d9ff; --red:#ff5364;
+  --line:rgba(69,217,255,.22); --shadow:0 20px 60px rgba(0,0,0,.45);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  color:var(--text); background:
+  radial-gradient(circle at 15% 10%,rgba(69,217,255,.12),transparent 30%),
+  radial-gradient(circle at 85% 30%,rgba(255,83,100,.08),transparent 25%),var(--bg);
+  line-height:1.7; overflow-x:hidden;
+}
+body:before{
+  content:""; position:fixed; inset:0; pointer-events:none; opacity:.12;
+  background-image:linear-gradient(rgba(255,255,255,.04) 1px,transparent 1px),
+  linear-gradient(90deg,rgba(255,255,255,.04) 1px,transparent 1px);
+  background-size:45px 45px; mask-image:linear-gradient(to bottom,#000,transparent);
+}
+a{color:inherit;text-decoration:none}
+button{font:inherit}
+.progress{position:fixed;top:0;left:0;width:0;height:3px;background:var(--cyan);z-index:9999;box-shadow:0 0 15px var(--cyan)}
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;justify-content:space-between;
+  align-items:center;padding:16px 5%;background:rgba(5,9,20,.72);backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--line)
+}
+.logo{font-weight:900;letter-spacing:3px}.logo span{color:var(--cyan)}
+.navlinks{display:flex;gap:22px;font-size:.82rem;color:var(--muted)}
+.navlinks a:hover{color:var(--cyan)}
+.menu{display:none;background:none;border:0;color:white;font-size:1.5rem}
+.hero{
+  min-height:100vh;display:grid;place-items:center;text-align:center;padding:120px 6% 80px;
+  position:relative;overflow:hidden
+}
+.hero-grid{position:absolute;inset:0;background:radial-gradient(circle,rgba(69,217,255,.12) 1px,transparent 1px);background-size:32px 32px;animation:drift 18s linear infinite}
+.hero-content{position:relative;z-index:2;max-width:1000px}
+.kicker{color:var(--cyan);letter-spacing:6px;font-size:.8rem;font-weight:800}
+h1{font-size:clamp(3.4rem,10vw,8rem);line-height:.9;margin:20px 0;text-shadow:0 0 35px rgba(69,217,255,.2)}
+.glow{color:var(--cyan)}
+.subtitle{font-size:clamp(1rem,2vw,1.35rem);color:var(--muted);max-width:700px;margin:0 auto 32px}
+.btn{
+  display:inline-flex;align-items:center;gap:10px;padding:13px 22px;border:1px solid var(--cyan);
+  background:rgba(69,217,255,.08);color:white;border-radius:999px;cursor:pointer;
+  transition:.25s;box-shadow:0 0 0 rgba(69,217,255,0)
+}
+.btn:hover{transform:translateY(-3px);background:rgba(69,217,255,.16);box-shadow:0 0 25px rgba(69,217,255,.18)}
+section{padding:100px 6%;max-width:1250px;margin:auto}
+.section-head{margin-bottom:45px}.eyebrow{color:var(--cyan);font-weight:800;letter-spacing:3px;font-size:.75rem}
+.section-head h2{font-size:clamp(2rem,5vw,4rem);line-height:1.1;margin:8px 0 12px}
+.section-head p{color:var(--muted);max-width:780px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+.card{
+  background:var(--card);border:1px solid var(--line);border-radius:24px;padding:18px;
+  box-shadow:var(--shadow);backdrop-filter:blur(12px);transition:.35s;overflow:hidden
+}
+.card:hover{transform:translateY(-8px) scale(1.01);border-color:rgba(69,217,255,.55)}
+.photo{
+  width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:18px;display:block;
+  background:#0d1728;filter:saturate(.9);transition:.5s
+}
+.card:hover .photo{transform:scale(1.035);filter:saturate(1.1)}
+.rank{color:var(--cyan);font-size:.75rem;letter-spacing:2px;margin-top:18px}
+.card h3{font-size:1.45rem;margin:4px 0}.card p{color:var(--muted);font-size:.92rem}
+.quote{margin-top:12px;padding-top:12px;border-top:1px solid var(--line);font-style:italic;color:#d6e5f3}
+.network{min-height:480px;position:relative;display:grid;place-items:center}
+.core{
+  width:170px;height:170px;border-radius:50%;display:grid;place-items:center;text-align:center;
+  border:1px solid var(--cyan);background:rgba(69,217,255,.08);box-shadow:0 0 55px rgba(69,217,255,.18);
+  z-index:2;font-weight:900;letter-spacing:2px
+}
+.node{position:absolute;padding:12px 17px;border:1px solid var(--line);border-radius:999px;background:rgba(9,20,38,.9);font-weight:700}
+.n1{top:5%;left:42%}.n2{top:25%;right:4%}.n3{bottom:12%;right:12%}
+.n4{bottom:5%;left:42%}.n5{bottom:25%;left:4%}.n6{top:25%;left:4%}
+.connector{position:absolute;width:2px;height:35%;background:linear-gradient(var(--cyan),transparent);opacity:.45;transform-origin:top}
+.c1{top:23%;left:50%;transform:rotate(20deg)}.c2{top:30%;left:57%;transform:rotate(72deg)}
+.c3{top:45%;left:55%;transform:rotate(130deg)}.c4{top:48%;left:50%;transform:rotate(180deg)}
+.c5{top:45%;left:45%;transform:rotate(230deg)}.c6{top:30%;left:43%;transform:rotate(288deg)}
+.timeline{border-left:2px solid var(--line);padding-left:30px;display:grid;gap:25px}
+.time{position:relative}.time:before{content:"";position:absolute;left:-39px;top:8px;width:15px;height:15px;border-radius:50%;background:var(--cyan);box-shadow:0 0 15px var(--cyan)}
+.time h3{color:white}.time p{color:var(--muted)}
+.learn{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+.code,.preview{border:1px solid var(--line);border-radius:20px;overflow:hidden;background:#030711}
+.codebar{padding:11px 15px;background:#0b1424;color:var(--muted);font-size:.8rem}
+pre{padding:20px;overflow:auto;min-height:270px;color:#d8f6ff;font-size:.88rem}
+.preview{min-height:320px;padding:25px;display:grid;place-items:center}
+.demo-box{width:100%;border:1px dashed var(--line);border-radius:16px;padding:30px;text-align:center}
+.steps{display:grid;gap:18px}.step{display:grid;grid-template-columns:70px 1fr;gap:18px;align-items:start}
+.num{width:55px;height:55px;border-radius:16px;display:grid;place-items:center;border:1px solid var(--cyan);color:var(--cyan);font-weight:900}
+.folder{font-family:ui-monospace,SFMono-Regular,Consolas,monospace;background:#030711;border:1px solid var(--line);padding:25px;border-radius:20px;color:#cfefff;overflow:auto}
+.tabs{display:flex;gap:8px;margin-bottom:10px}.tab{border:1px solid var(--line);background:transparent;color:var(--muted);padding:9px 15px;border-radius:9px;cursor:pointer}.tab.active{color:white;border-color:var(--cyan)}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.8);backdrop-filter:blur(12px);display:none;place-items:center;padding:25px;z-index:3000}
+.modal.show{display:grid}.modal-box{max-width:850px;width:100%;max-height:90vh;overflow:auto;background:#091426;border:1px solid var(--line);border-radius:25px;padding:25px;position:relative}
+.close{position:absolute;right:18px;top:14px;background:none;border:0;color:white;font-size:1.8rem;cursor:pointer}
+.modal-grid{display:grid;grid-template-columns:260px 1fr;gap:25px}.modal-grid img{width:100%;border-radius:18px}
+footer{text-align:center;padding:70px 6%;border-top:1px solid var(--line);color:var(--muted)}
+.reveal{opacity:0;transform:translateY(25px);transition:.7s}.reveal.visible{opacity:1;transform:none}
+.toast{position:fixed;right:20px;bottom:20px;background:#102238;border:1px solid var(--cyan);padding:12px 18px;border-radius:12px;transform:translateY(100px);transition:.3s;z-index:5000}.toast.show{transform:none}
+@keyframes drift{to{background-position:450px 450px}}
+@media(max-width:850px){
+  .grid{grid-template-columns:repeat(2,1fr)}.learn{grid-template-columns:1fr}
+  .navlinks{display:none}.menu{display:block}.navlinks.open{display:flex;position:absolute;top:65px;left:0;right:0;padding:20px;flex-direction:column;background:#071020}
+}
+@media(max-width:600px){
+  section{padding:75px 5%}.grid{grid-template-columns:1fr}.modal-grid{grid-template-columns:1fr}
+  .network{min-height:560px}.node{font-size:.75rem}.n1{top:2%}.n2{top:22%;right:0}.n3{bottom:15%;right:0}.n4{bottom:2%}.n5{bottom:22%;left:0}.n6{top:22%;left:0}
+}
+</style>
+</head>
+
+<body>
+<div class="progress" id="progress"></div>
+
+<nav>
+  <a href="#home" class="logo">SINDIKAT <span>4</span></a>
+  <button class="menu" id="menu" aria-label="Buka menu">☰</button>
+  <div class="navlinks" id="navlinks">
+    <a href="#about">ABOUT</a><a href="#six">THE SIX</a><a href="#journey">JOURNEY</a>
+    <a href="#learn">HOW IT'S BUILT</a><a href="#source">SOURCE</a>
+  </div>
+</nav>
+
+<header class="hero" id="home">
+  <div class="hero-grid"></div>
+  <div class="hero-content reveal">
+    <div class="kicker">THE DIGITAL STORY</div>
+    <h1>SINDIKAT <span class="glow">4</span></h1>
+    <p class="subtitle">Six minds. One team. One story.<br>Biografi interaktif sekaligus perjalanan membangun sebuah website dari nol.</p>
+    <a class="btn" href="#about">EXPLORE THE STORY →</a>
+  </div>
+</header>
+
+<section id="about" class="reveal">
+  <div class="section-head">
+    <div class="eyebrow">01 / INTRODUCTION</div>
+    <h2>Who is Sindikat 4?</h2>
+    <p>Sindikat 4 bukan sekadar sebuah nama. Ia adalah representasi enam individu dengan karakter, pengalaman, cara berpikir, dan perspektif berbeda. Ketika disatukan, perbedaan tersebut menjadi kekuatan.</p>
+  </div>
+</section>
+
+<section id="six" class="reveal">
+  <div class="section-head">
+    <div class="eyebrow">02 / THE SIX</div>
+    <h2>Six minds, one team.</h2>
+    <p>Klik kartu untuk membuka profil lengkap. <strong>Ganti nama file pada atribut src sesuai foto yang kamu lampirkan.</strong></p>
+  </div>
+
+  <div class="grid" id="profiles"></div>
+</section>
+
+<section class="reveal">
+  <div class="section-head">
+    <div class="eyebrow">03 / CONNECTION</div>
+    <h2>One team.</h2>
+    <p>Enam node, satu pusat koordinasi.</p>
+  </div>
+  <div class="network">
+    <div class="core">SINDIKAT<br>4</div>
+    <div class="node n1">Kapten Aufa</div><div class="node n2">Lettu Faugi</div>
+    <div class="node n3">Lettu Rumi</div><div class="node n4">Letda Fahreza</div>
+    <div class="node n5">Letda Hanafi</div><div class="node n6">Letda Jery</div>
+    <i class="connector c1"></i><i class="connector c2"></i><i class="connector c3"></i>
+    <i class="connector c4"></i><i class="connector c5"></i><i class="connector c6"></i>
+  </div>
+</section>
+
+<section id="journey" class="reveal">
+  <div class="section-head">
+    <div class="eyebrow">04 / THE JOURNEY</div>
+    <h2>From idea to experience.</h2>
+  </div>
+  <div class="timeline">
+    <div class="time"><h3>BEGINNING</h3><p>Sebuah ide dimulai dari halaman kosong.</p></div>
+    <div class="time"><h3>FORMATION</h3><p>Struktur HTML menjadi kerangka utama.</p></div>
+    <div class="time"><h3>DESIGN</h3><p>CSS mengubah struktur menjadi antarmuka visual.</p></div>
+    <div class="time"><h3>INTERACTION</h3><p>JavaScript membuat halaman merespons tindakan pengguna.</p></div>
+    <div class="time"><h3>FINAL</h3><p>Semua komponen menyatu menjadi Sindikat 4 Interactive Story.</p></div>
+  </div>
+</section>
+
+<section id="learn" class="reveal">
+  <div class="section-head">
+    <div class="eyebrow">05 / HOW IT'S BUILT</div>
+    <h2>Belajar membangun website.</h2>
+    <p>Setiap tahap memiliki CODE → EXPLANATION → LIVE DEMO → VISUAL RESULT.</p>
+  </div>
+
+  <div class="steps">
+    <article class="card step"><div class="num">01</div><div><h3>HTML — Struktur</h3><p>HTML adalah kerangka halaman.</p></div></article>
+    <article class="card step"><div class="num">02</div><div><h3>TEXT & IMAGE</h3><p>Heading, paragraph, dan gambar membentuk konten.</p></div></article>
+    <article class="card step"><div class="num">03</div><div><h3>CSS — Design</h3><p>Warna, layout, spacing, responsive design, dan animasi.</p></div></article>
+    <article class="card step"><div class="num">04</div><div><h3>JavaScript — Interaction</h3><p>Modal, tombol, tab source code, dan interaksi pengguna.</p></div></article>
+  </div>
+
+  <br><br>
+  <div class="learn">
+    <div class="code">
+      <div class="codebar">index.html — BASIC STRUCTURE</div>
+      <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="id"&gt;
+&lt;head&gt;
+  &lt;title&gt;Sindikat 4&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;SINDIKAT 4&lt;/h1&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+    </div>
+    <div class="preview">
+      <div class="demo-box" id="htmlDemo">
+        <h2>LIVE PREVIEW</h2>
+        <p>Klik tombol untuk menjalankan demo.</p>
+        <br><button class="btn" id="runDemo">RUN DEMO</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="reveal">
+  <div class="section-head">
+    <div class="eyebrow">06 / PROJECT STRUCTURE</div>
+    <h2>Folder website.</h2>
+  </div>
+  <div class="folder">
+SINDIKAT-4/<br>
+├── index.html<br>
+├── style.css<br>
+├── script.js<br>
+└── images/<br>
+&nbsp;&nbsp;&nbsp;&nbsp;├── [FOTO AUFA]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;├── [FOTO FAUGI]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;├── [FOTO RUMI]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;├── [FOTO FAHREZA]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;├── [FOTO HANAFI]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;└── [FOTO JERY]
+  </div>
+</section>
+
+<section id="source" class="reveal">
+  <div class="section-head">
+    <div class="eyebrow">07 / SOURCE CODE</div>
+    <h2>Final source code.</h2>
+    <p>Contoh tab source code. Tombol copy bekerja menggunakan Clipboard API.</p>
+  </div>
+  <div class="tabs">
+    <button class="tab active" data-code="html">HTML</button>
+    <button class="tab" data-code="css">CSS</button>
+    <button class="tab" data-code="js">JAVASCRIPT</button>
+  </div>
+  <div class="code">
+    <div class="codebar"><span id="codeTitle">index.html</span></div>
+    <pre><code id="sourceCode"></code></pre>
+  </div>
+  <br>
+  <button class="btn" id="copyCode">COPY CODE</button>
+</section>
+
+<section class="reveal">
+  <div class="section-head">
+    <div class="eyebrow">08 / FINAL</div>
+    <h2>The story continues.</h2>
+    <p>HTML memberikan struktur. CSS memberikan karakter. JavaScript memberikan kehidupan.</p>
+  </div>
+</section>
+
+<footer>
+  <h2>SINDIKAT <span class="glow">4</span></h2>
+  <p>Six Minds — One Team — One Story</p>
+</footer>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true">
+  <div class="modal-box">
+    <button class="close" id="closeModal" aria-label="Tutup">×</button>
+    <div class="modal-grid">
+      <img id="modalPhoto" src="" alt="">
+      <div>
+        <div class="rank" id="modalRank"></div>
+        <h2 id="modalName"></h2>
+        <p id="modalBio"></p>
+        <p class="quote" id="modalQuote"></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast">Code copied!</div>
+
+<script>
+/*
+  ==========================================================
+  DATA ANGGOTA
+  ==========================================================
+  PENTING:
+  Ganti nilai "photo" dengan NAMA FILE FOTO ASLI kamu.
+  Contoh:
+  photo: "images/Kapten_Aufa.jpg"
+*/
+const members = [
+  {
+    name:"Kapten Aufa", rank:"KAPTEN",
+    photo:"images/Aufa.jpg",
+    bio:"Tambahkan biografi Kapten Aufa di bagian ini.",
+    quote:"“Satu tim dibangun dari banyak perspektif.”"
+  },
+  {
+    name:"Lettu Faugi", rank:"LETTU",
+    photo:"images/Faugi.jpg",
+    bio:"Tambahkan biografi Lettu Faugi di bagian ini.",
+    quote:"“Perbedaan menjadi kekuatan ketika diarahkan pada tujuan yang sama.”"
+  },
+  {
+    name:"Lettu Rumi", rank:"LETTU",
+    photo:"images/Rumi.jpg",
+    bio:"Tambahkan biografi Lettu Rumi di bagian ini.",
+    quote:"“Belajar adalah perjalanan yang tidak berhenti.”"
+  },
+  {
+    name:"Letda Fahreza", rank:"LETDA",
+    photo:"images/Fahreza.jpg",
+    bio:"Tambahkan biografi Letda Fahreza di bagian ini.",
+    quote:"“Ide yang baik menjadi berarti ketika diwujudkan.”"
+  },
+  {
+    name:"Letda Hanafi", rank:"LETDA",
+    photo:"images/Hanafi.jpg",
+    bio:"Tambahkan biografi Letda Hanafi di bagian ini.",
+    quote:"“Teknologi adalah alat; manusia menentukan arahnya.”"
+  },
+  {
+    name:"Letda Jery", rank:"LETDA",
+    photo:"images/Jery.jpg",
+    bio:"Tambahkan biografi Letda Jery di bagian ini.",
+    quote:"“The story continues.”"
+  }
+];
+
+const profiles = document.getElementById("profiles");
+members.forEach((m,i)=>{
+  const card=document.createElement("article");
+  card.className="card reveal";
+  card.innerHTML=`
+    <img class="photo" src="${m.photo}" alt="Foto ${m.name}" loading="lazy">
+    <div class="rank">${m.rank}</div>
+    <h3>${m.name}</h3>
+    <p>Anggota Sindikat 4</p>
+    <p class="quote">${m.quote}</p>
+  `;
+  card.addEventListener("click",()=>openProfile(m));
+  profiles.appendChild(card);
+});
+
+const modal=document.getElementById("modal");
+function openProfile(m){
+  document.getElementById("modalPhoto").src=m.photo;
+  document.getElementById("modalPhoto").alt="Foto "+m.name;
+  document.getElementById("modalRank").textContent=m.rank;
+  document.getElementById("modalName").textContent=m.name;
+  document.getElementById("modalBio").textContent=m.bio;
+  document.getElementById("modalQuote").textContent=m.quote;
+  modal.classList.add("show");
+}
+function closeModal(){modal.classList.remove("show")}
+document.getElementById("closeModal").onclick=closeModal;
+modal.addEventListener("click",e=>{if(e.target===modal)closeModal()});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal()});
+
+document.getElementById("runDemo").onclick=()=>{
+  const d=document.getElementById("htmlDemo");
+  d.innerHTML='<h1 class="glow">SINDIKAT 4</h1><p>HTML berhasil dijalankan!</p>';
+  showToast("Demo HTML berhasil dijalankan");
+};
+
+const codeSamples={
+  html:`<!DOCTYPE html>
+<html lang="id">
+<head>
+  <title>Sindikat 4</title>
+</head>
+<body>
+  <h1>SINDIKAT 4</h1>
+</body>
+</html>`,
+  css:`.profile-card {
+  background: #111827;
+  padding: 20px;
+  border-radius: 20px;
+  text-align: center;
+}
+
+.profile-card:hover {
+  transform: translateY(-8px);
+}`,
+  js:`function showMessage() {
+  alert("Welcome to Sindikat 4");
+}
+
+document.querySelector(".profile-card")
+  .addEventListener("click", showMessage);`
+};
+const sourceCode=document.getElementById("sourceCode");
+const codeTitle=document.getElementById("codeTitle");
+function showCode(type){
+  sourceCode.textContent=codeSamples[type];
+  codeTitle.textContent=type==="html"?"index.html":type==="css"?"style.css":"script.js";
+  document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("active",t.dataset.code===type));
+}
+document.querySelectorAll(".tab").forEach(t=>t.onclick=()=>showCode(t.dataset.code));
+showCode("html");
+
+document.getElementById("copyCode").onclick=async()=>{
+  try{
+    await navigator.clipboard.writeText(sourceCode.textContent);
+    showToast("Code copied!");
+  }catch(e){showToast("Clipboard tidak tersedia di browser ini");}
+};
+
+function showToast(text){
+  const toast=document.getElementById("toast");
+  toast.textContent=text;toast.classList.add("show");
+  setTimeout(()=>toast.classList.remove("show"),1800);
+}
+
+const observer=new IntersectionObserver(entries=>{
+  entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add("visible")});
+},{threshold:.12});
+document.querySelectorAll(".reveal").forEach(el=>observer.observe(el));
+
+window.addEventListener("scroll",()=>{
+  const max=document.documentElement.scrollHeight-innerHeight;
+  document.getElementById("progress").style.width=(scrollY/max*100)+"%";
+});
+
+document.getElementById("menu").onclick=()=>{
+  document.getElementById("navlinks").classList.toggle("open");
+};
+document.querySelectorAll(".navlinks a").forEach(a=>{
+  a.onclick=()=>document.getElementById("navlinks").classList.remove("open");
+});
+</script>
+</body>
+</html>
