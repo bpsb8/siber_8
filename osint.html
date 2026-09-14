@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OSINT Data Bank & Threat Intelligence Dashboard</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Chart.js -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!-- Lucide Icons -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    body { background-color: #0b0f19; color: #e2e8f0; font-family: 'Inter', sans-serif; }
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #0b0f19; }
+    ::-webkit-scrollbar-thumb { background: #1e293b; border-radius: 3px; }
+  </style>
+</head>
+<body class="h-screen flex flex-col overflow-hidden">
+
+  <!-- TOP BAR -->
+  <header class="h-14 border-b border-slate-800 bg-slate-900/80 backdrop-blur px-6 flex items-center justify-between shrink-0">
+    <div class="flex items-center space-x-3">
+      <i data-lucide="shield-alert" class="text-cyan-400 w-6 h-6"></i>
+      <h1 class="text-lg font-bold tracking-wider text-slate-100">OSINT BANK DATA <span class="text-xs px-2 py-0.5 bg-cyan-950 text-cyan-400 rounded border border-cyan-800 ml-2">INTELLIGENCE V2.4</span></h1>
+    </div>
+    <div class="flex items-center space-x-4">
+      <div class="relative">
+        <i data-lucide="search" class="w-4 h-4 absolute left-3 top-2.5 text-slate-400"></i>
+        <input type="text" placeholder="Cari entitas, isu, atau kata kunci..." class="bg-slate-950 border border-slate-700 rounded-md pl-9 pr-4 py-1 text-sm text-slate-200 focus:outline-none focus:border-cyan-500 w-64">
+      </div>
+      <div class="flex items-center space-x-2 text-xs text-emerald-400 bg-emerald-950/50 px-3 py-1 rounded border border-emerald-800">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        <span>STREAM LIVE</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN CONTAINER -->
+  <div class="flex flex-1 overflow-hidden">
+
+    <!-- LEFT SIDEBAR: INTEGRATED DATA SOURCES -->
+    <aside class="w-80 border-r border-slate-800 bg-slate-900/50 flex flex-col shrink-0">
+      <div class="p-4 border-b border-slate-800 flex justify-between items-center">
+        <h2 class="text-sm font-semibold text-slate-300 flex items-center gap-2">
+          <i data-lucide="rss" class="w-4 h-4 text-cyan-400"></i> Feed Informasi Terintegrasi
+        </h2>
+        <span class="text-xs text-slate-500">Real-time</span>
+      </div>
+      <div class="flex-1 overflow-y-auto p-3 space-y-2" id="news-feed">
+        <!-- Item Feed Dynamic Insertion via JS -->
+      </div>
+    </aside>
+
+    <!-- CENTER PANEL: ANALYTICS & ISSUES -->
+    <main class="flex-1 overflow-y-auto p-6 space-y-6 bg-slate-950/40">
+      
+      <!-- TOP METRICS -->
+      <div class="grid grid-cols-3 gap-4">
+        <div class="bg-slate-900/60 border border-slate-800 p-4 rounded-lg">
+          <p class="text-xs text-slate-400 uppercase tracking-wider">Total Entitas/Isu Terdeteksi</p>
+          <h3 class="text-2xl font-bold text-cyan-400 mt-1">1,428</h3>
+          <p class="text-xs text-emerald-400 mt-2">↑ +14% dari jam sebelumnya</p>
+        </div>
+        <div class="bg-slate-900/60 border border-slate-800 p-4 rounded-lg">
+          <p class="text-xs text-slate-400 uppercase tracking-wider">Tingkat Sentimen Negatif</p>
+          <h3 class="text-2xl font-bold text-rose-500 mt-1">62.4%</h3>
+          <p class="text-xs text-rose-400 mt-2">⚠ Potensi eskalasi tinggi</p>
+        </div>
+        <div class="bg-slate-900/60 border border-slate-800 p-4 rounded-lg">
+          <p class="text-xs text-slate-400 uppercase tracking-wider">Sumber Dominan</p>
+          <h3 class="text-2xl font-bold text-amber-400 mt-1">Social & News</h3>
+          <p class="text-xs text-slate-400 mt-2">Twitter/X, Telegram, Online Media</p>
+        </div>
+      </div>
+
+      <!-- CHARTS SECTION -->
+      <div class="grid grid-cols-2 gap-6">
+        <!-- DIAGRAM ISU VIRAL -->
+        <div class="bg-slate-900/60 border border-slate-800 p-5 rounded-lg flex flex-col">
+          <h3 class="text-sm font-semibold text-slate-200 mb-4 flex items-center gap-2">
+            <i data-lucide="pie-chart" class="w-4 h-4 text-cyan-400"></i> Distribusi Persentase Isu Viral (24 Jam)
+          </h3>
+          <div class="flex-1 flex justify-center items-center h-64">
+            <canvas id="viralChart"></canvas>
+          </div>
+        </div>
+
+        <!-- SENTIMEN & TREN ISU -->
+        <div class="bg-slate-900/60 border border-slate-800 p-5 rounded-lg flex flex-col">
+          <h3 class="text-sm font-semibold text-slate-200 mb-4 flex items-center gap-2">
+            <i data-lucide="bar-chart-3" class="w-4 h-4 text-cyan-400"></i> Intensitas & Sentimen Publik
+          </h3>
+          <div class="flex-1 flex justify-center items-center h-64">
+            <canvas id="sentimentChart"></canvas>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- RIGHT PANEL: DETAILED ANALYSIS REPORT -->
+    <aside class="w-96 border-l border-slate-800 bg-slate-900/50 flex flex-col shrink-0 p-5 overflow-y-auto">
+      <div class="border-b border-slate-800 pb-3 mb-4">
+        <span class="text-xs font-semibold px-2 py-1 bg-rose-950 text-rose-400 rounded border border-rose-800">ANALYSIS REPORT</span>
+        <h2 class="text-base font-bold text-slate-100 mt-2" id="report-title">Pilih Sumber Informasi untuk Melihat Analisis</h2>
+        <p class="text-xs text-slate-400 mt-1" id="report-timestamp">-</p>
+      </div>
+
+      <!-- COMPREHENSIVE ANALYTICS CONTENT -->
+      <div class="space-y-4 text-xs text-slate-300" id="report-content">
+        <p class="text-slate-500 italic">Silakan klik salah satu item berita/feed di panel sebelah kiri untuk menampilkan analisis mendalam (OSINT Assessment) dari isu yang dipilih.</p>
+      </div>
+    </aside>
+
+  </div>
+
+  <!-- JAVASCRIPT FOR DYNAMIC DATA & CHARTS -->
+  <script>
+    lucide.createIcons();
+
+    // DATA DUMMY FEED OSINT
+    const feeds = [
+      {
+        id: 1,
+        title: "Dugaan Kebocoran Data Sektor Finansial di Forum Darkweb",
+        source: "BreachForums Monitor",
+        time: "10 menit yang lalu",
+        tag: "Cybersecurity",
+        color: "rose",
+        summary: "Postingan terbaru di forum underground mengklaim memiliki 500rb data nasabah lengkap dengan NIK dan nomor telepon.",
+        analysis: {
+          threatLevel: "Tinggi (Critical)",
+          actor: "Unknown Threat Group (Anonymized)",
+          vectors: "Eksploitasi API endpoint terbuka / Credential Stuffing",
+          impact: "Risiko penipuan phishing tinggi, manipulasi psikologis nasabah, penurunan reputasi institusi.",
+          recommendations: [
+            "Lakukan verifikasi integritas checksum database.",
+            "Rotasi kredensial akses API publik.",
+            "Keluarkan imbauan kewaspadaan anti-phishing ke nasabah."
+          ]
+        }
+      },
+      {
+        id: 2,
+        title: "Lonjakan Kampanye Botnet Terkoordinasi di Media Sosial X",
+        source: "Social Network Crawler",
+        time: "25 menit yang lalu",
+        tag: "Disinformasi",
+        color: "amber",
+        summary: "Ditemukan 1.200 akun bot baru menyebarkan narasi manipulatif terkait kebijakan tarif impor nasional.",
+        analysis: {
+          threatLevel: "Sedang (Moderate)",
+          actor: "AstroTurfing Network",
+          vectors: "Mass Automated Bot Accounts with AI generated Text",
+          impact: "Distorsi persepsi publik terhadap isu ekonomi nasional dalam skala makro.",
+          recommendations: [
+            "Flagging massal kelompok akun bot ke platform.",
+            "Lakukan mapping klaster tagar dan aktor utama penyebar."
+          ]
+        }
+      },
+      {
+        id: 3,
+        title: "Gangguan Server Infrastruktur Utama Penyedia ISP Regional",
+        source: "Network Telemetry",
+        time: "1 jam yang lalu",
+        tag: "Infrastruktur",
+        color: "cyan",
+        summary: "Terjadi lonjakan latency hingga 300ms di beberapa simpul backbone Jawa Barat.",
+        analysis: {
+          threatLevel: "Rendah (Low)",
+          actor: "Teknis / Kerusakan Fisik Subsea Cable",
+          vectors: "Fiber Optic Degradation",
+          impact: "Penurunan kecepatan akses layanan web lokal.",
+          recommendations: [
+            "Pengalihan trafik (Rerouting) ke jalur cadangan."
+          ]
+        }
+      }
+    ];
+
+    // INJECT FEEDS TO LEFT SIDEBAR
+    const newsContainer = document.getElementById('news-feed');
+    feeds.forEach(item => {
+      const card = document.createElement('div');
+      card.className = "p-3 bg-slate-900 border border-slate-800 rounded-lg cursor-pointer hover:border-cyan-500/50 transition duration-150";
+      card.onclick = () => loadAnalysis(item);
+      card.innerHTML = `
+        <div class="flex items-center justify-between mb-1">
+          <span class="text-[10px] font-bold px-1.5 py-0.5 rounded bg-${item.color}-950 text-${item.color}-400 border border-${item.color}-800">${item.tag}</span>
+          <span class="text-[10px] text-slate-500">${item.time}</span>
+        </div>
+        <h4 class="text-xs font-semibold text-slate-200 hover:text-cyan-400 line-clamp-2">${item.title}</h4>
+        <p class="text-[11px] text-slate-400 mt-1 line-clamp-1">${item.source}</p>
+      `;
+      newsContainer.appendChild(card);
+    });
+
+    // LOAD ANALYSIS FUNCTION
+    function loadAnalysis(data) {
+      document.getElementById('report-title').innerText = data.title;
+      document.getElementById('report-timestamp').innerText = `Sumber: ${data.source} | ${data.time}`;
+      
+      const recs = data.analysis.recommendations.map(r => `<li class="ml-4 list-disc">${r}</li>`).join('');
+
+      document.getElementById('report-content').innerHTML = `
+        <div class="bg-slate-950 p-3 rounded border border-slate-800 space-y-2">
+          <div>
+            <span class="text-slate-500">Ringkasan Isu:</span>
+            <p class="text-slate-300 font-medium">${data.summary}</p>
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <h4 class="font-bold text-cyan-400 uppercase tracking-wider text-[11px]">Penilaian Intelijen (OSINT Assessment)</h4>
+          <div class="bg-slate-900/80 p-3 rounded border border-slate-800 space-y-1.5">
+            <p><strong class="text-slate-400">Tingkat Ancaman:</strong> <span class="text-rose-400">${data.analysis.threatLevel}</span></p>
+            <p><strong class="text-slate-400">Aktor Terduga:</strong> ${data.analysis.actor}</p>
+            <p><strong class="text-slate-400">Vektor / Modus:</strong> ${data.analysis.vectors}</p>
+          </div>
+        </div>
+
+        <div class="space-y-2">
+          <h4 class="font-bold text-amber-400 uppercase tracking-wider text-[11px]">Dampak Terhadap Stabilitas</h4>
+          <p class="bg-slate-900/80 p-3 rounded border border-slate-800 text-slate-300">${data.analysis.impact}</p>
+        </div>
+
+        <div class="space-y-2">
+          <h4 class="font-bold text-emerald-400 uppercase tracking-wider text-[11px]">Rekomendasi / Mitigasi</h4>
+          <ul class="bg-slate-900/80 p-3 rounded border border-slate-800 text-slate-300 space-y-1">
+            ${recs}
+          </ul>
+        </div>
+      `;
+    }
+
+    // INITIALIZE CHARTS
+    const ctx1 = document.getElementById('viralChart').getContext('2d');
+    new Chart(ctx1, {
+      type: 'doughnut',
+      data: {
+        labels: ['Kebocoran Data', 'Kampanye Disinformasi', 'Isu Regulasi/Ekonomi', 'Infrastruktur IT', 'Lainnya'],
+        datasets: [{
+          data: [42, 28, 15, 10, 5],
+          backgroundColor: ['#f43f5e', '#f59e0b', '#06b6d4', '#10b981', '#64748b'],
+          borderWidth: 1,
+          borderColor: '#0f172a'
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { position: 'bottom', labels: { color: '#94a3b8', font: { size: 10 } } }
+        }
+      }
+    });
+
+    const ctx2 = document.getElementById('sentimentChart').getContext('2d');
+    new Chart(ctx2, {
+      type: 'bar',
+      data: {
+        labels: ['Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab', 'Ming'],
+        datasets: [
+          { label: 'Negatif / Threat', data: [65, 59, 80, 81, 56, 55, 70], backgroundColor: '#f43f5e' },
+          { label: 'Netral / Informasi', data: [28, 48, 40, 19, 86, 27, 90], backgroundColor: '#06b6d4' }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        scales: {
+          x: { ticks: { color: '#64748b' }, grid: { display: false } },
+          y: { ticks: { color: '#64748b' }, grid: { color: '#1e293b' } }
+        },
+        plugins: {
+          legend: { position: 'bottom', labels: { color: '#94a3b8', font: { size: 10 } } }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

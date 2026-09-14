@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head><meta charset="utf-8"/><meta content="width=device-width, initial-scale=1.0" name="viewport"/><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Space+Grotesk:wght@600;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/><style>@layer base{html,body{margin:0;padding:0;}body{overscroll-behavior:none;}main>:first-child{margin-top:0!important;}main>:last-child{margin-bottom:0!important;}}::-webkit-scrollbar{display:none;}</style><script src="https://cdn.tailwindcss.com"></script><script id="tailwind-config">tailwind.config = {
+    darkMode: "class",
+    theme: {
+      extend: {
+        "colors": {
+          "surface-container-highest": "#303542",
+          "on-surface-variant": "#bac9cc",
+          "surface-container-lowest": "#090e1a",
+          "surface-container-high": "#252a37",
+          "primary-fixed-dim": "#00daf3",
+          "on-error": "#690005",
+          "surface-bright": "#343946",
+          "tertiary-fixed": "#ffddb4",
+          "secondary-fixed-dim": "#30dfb5",
+          "tertiary": "#ffe9d0",
+          "outline": "#849396",
+          "secondary-fixed": "#59fcd0",
+          "on-surface": "#dee2f3",
+          "on-tertiary-container": "#7b5000",
+          "outline-variant": "#3b494c",
+          "on-secondary-fixed-variant": "#00513f",
+          "surface-dim": "#0e131f",
+          "on-tertiary-fixed": "#291800",
+          "on-secondary-container": "#005140",
+          "primary-fixed": "#9cf0ff",
+          "tertiary-fixed-dim": "#ffb952",
+          "inverse-surface": "#dee2f3",
+          "on-primary-fixed": "#001f24",
+          "on-error-container": "#ffdad6",
+          "error-container": "#93000a",
+          "primary-container": "#00e5ff",
+          "on-primary": "#00363d",
+          "surface-variant": "#303542",
+          "surface-container": "#1a1f2c",
+          "background": "#0e131f",
+          "on-primary-container": "#00626e",
+          "on-secondary": "#00382b",
+          "tertiary-container": "#ffc678",
+          "secondary-container": "#00cea5",
+          "on-tertiary-fixed-variant": "#633f00",
+          "on-secondary-fixed": "#002118",
+          "inverse-primary": "#006875",
+          "primary": "#c3f5ff",
+          "on-primary-fixed-variant": "#004f58",
+          "surface": "#0e131f",
+          "on-background": "#dee2f3",
+          "inverse-on-surface": "#2b303d",
+          "secondary": "#42eac0",
+          "surface-tint": "#00daf3",
+          "error": "#ffb4ab",
+          "on-tertiary": "#452b00",
+          "surface-container-low": "#161b28"
+        },
+        "borderRadius": {
+          "DEFAULT": "0.25rem",
+          "lg": "0.5rem",
+          "xl": "0.75rem",
+          "full": "9999px"
+        },
+        "spacing": {
+          "unit-xs": "0.25rem",
+          "gutter-panel": "0.5rem",
+          "unit-2xs": "0.125rem",
+          "unit-md": "0.75rem",
+          "unit-2xl": "3rem",
+          "unit-base": "1rem",
+          "unit-xl": "2rem",
+          "gutter-hud": "1px",
+          "margin-screen": "1rem",
+          "unit-lg": "1.5rem",
+          "unit-sm": "0.5rem"
+        },
+        "fontFamily": {
+          "body-lg": [
+            "Inter"
+          ],
+          "body-sm": [
+            "Inter"
+          ],
+          "title-md": [
+            "Space Grotesk"
+          ],
+          "headline-sm": [
+            "Space Grotesk"
+          ],
+          "telemetry-md": [
+            "JetBrains Mono"
+          ],
+          "telemetry-sm": [
+            "JetBrains Mono"
+          ],
+          "classification-tag": [
+            "JetBrains Mono"
+          ],
+          "headline-xl": [
+            "Space Grotesk"
+          ],
+          "display-sm": [
+            "Space Grotesk"
+          ],
+          "headline-lg": [
+            "Space Grotesk"
+          ],
+          "body-md": [
+            "Inter"
+          ],
+          "display-lg": [
+            "Space Grotesk"
+          ],
+          "telemetry-lg": [
+            "JetBrains Mono"
+          ]
+        },
+        "fontSize": {
+          "body-lg": [
+            "16px",
+            {
+              "lineHeight": "24px",
+              "letterSpacing": "0.01em",
+              "fontWeight": "400"
+            }
+          ],
+          "body-sm": [
+            "12px",
+            {
+              "lineHeight": "18px",
+              "letterSpacing": "0.02em",
+              "fontWeight": "400"
+            }
+          ],
+          "title-md": [
+            "15px",
+            {
+              "lineHeight": "20px",
+              "letterSpacing": "0.04em",
+              "fontWeight": "600"
+            }
+          ],
+          "headline-sm": [
+            "18px",
+            {
+              "lineHeight": "24px",
+              "letterSpacing": "0.03em",
+              "fontWeight": "600"
+            }
+          ],
+          "telemetry-md": [
+            "13px",
+            {
+              "lineHeight": "18px",
+              "letterSpacing": "0.06em",
+              "fontWeight": "500"
+            }
+          ],
+          "telemetry-sm": [
+            "11px",
+            {
+              "lineHeight": "14px",
+              "letterSpacing": "0.08em",
+              "fontWeight": "500"
+            }
+          ],
+          "classification-tag": [
+            "10px",
+            {
+              "lineHeight": "12px",
+              "letterSpacing": "0.12em",
+              "fontWeight": "700"
+            }
+          ],
+          "headline-xl": [
+            "28px",
+            {
+              "lineHeight": "36px",
+              "letterSpacing": "0em",
+              "fontWeight": "600"
+            }
+          ],
+          "display-sm": [
+            "36px",
+            {
+              "lineHeight": "44px",
+              "letterSpacing": "-0.01em",
+              "fontWeight": "700"
+            }
+          ],
+          "headline-lg": [
+            "22px",
+            {
+              "lineHeight": "28px",
+              "letterSpacing": "0.02em",
+              "fontWeight": "600"
+            }
+          ],
+          "body-md": [
+            "14px",
+            {
+              "lineHeight": "20px",
+              "letterSpacing": "0.01em",
+              "fontWeight": "400"
+            }
+          ],
+          "display-lg": [
+            "48px",
+            {
+              "lineHeight": "56px",
+              "letterSpacing": "-0.02em",
+              "fontWeight": "700"
+            }
+          ],
+          "telemetry-lg": [
+            "18px",
+            {
+              "lineHeight": "24px",
+              "letterSpacing": "0.05em",
+              "fontWeight": "500"
+            }
+          ]
+        }
+      },
+    },
+  }</script></head><body class="bg-surface font-body-md text-body-md text-on-surface relative min-h-screen"><div class="pointer-events-none fixed inset-0 z-0 bg-[radial-gradient(#1a1f2c_1px,transparent_1px)] [background-size:16px_16px] opacity-20"></div><div class="pointer-events-none fixed top-2 left-2 z-50 font-telemetry-sm text-telemetry-sm text-outline-variant">+ [00.00.00 N]</div><div class="pointer-events-none fixed top-2 right-2 z-50 font-telemetry-sm text-telemetry-sm text-outline-variant">+ [99.54.12 E]</div><div class="pointer-events-none fixed bottom-2 left-2 z-50 font-telemetry-sm text-telemetry-sm text-outline-variant">+ [SEC-GRID 01]</div><div class="pointer-events-none fixed bottom-2 right-2 z-50 font-telemetry-sm text-telemetry-sm text-outline-variant">+ [NODE 09-AEGIS]</div><header class="fixed top-0 left-0 right-0 z-40 bg-surface-container-lowest/90 backdrop-blur-md"><div class="h-24 w-full px-margin-screen flex flex-col justify-between pt-unit-xs pb-unit-xs"><div class="flex items-center justify-between font-telemetry-sm text-telemetry-sm tracking-widest text-outline-variant"><div class="flex items-center gap-unit-md"><span class="bg-surface-container-high px-unit-xs py-unit-2xs text-tertiary-container font-classification-tag text-classification-tag uppercase">LEVEL-5 TOP SECRET // TACTICAL SECURE GATEWAY</span><span class="text-outline">|</span><span class="text-on-surface-variant font-telemetry-sm text-telemetry-sm">ZULU: 14:42:09.882 UTC</span><span class="text-outline">|</span><span class="text-secondary font-telemetry-sm text-telemetry-sm">PING: 0.04ms (ENC: SHA-512)</span></div><div class="flex items-center gap-unit-md"><span class="flex items-center gap-unit-xs text-error font-classification-tag text-classification-tag uppercase"><span class="inline-block w-2 h-2 rounded-full bg-error animate-pulse"></span>DEFCON 2 // ELEVATED READY</span><span class="text-outline">|</span><span class="text-on-surface font-classification-tag text-classification-tag tracking-wider">GRID LOC: LAT 34.0522° LON -118.2437°</span></div></div><div class="flex items-center justify-between"><div class="flex items-center gap-unit-lg"><div class="flex items-center gap-unit-sm"><img alt="Profile" class="w-8 h-8 rounded-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD6T4fo0cW0uvjnJplTRVRQm_qW3vWoqqCRIhLN1zSn6nFYM-NN3x9ukw6PTyu_vA5WRqzm22u2zHxYOHUxRSyrdo5dSsa001xmtNxmCBcVx5ItYCe3mEvEvrVEwm4ReTGZ-Tc1nGsrr-sBrcv5dYXZhufGlLXGP682hqSTRjva7msCzWO7_cQR_K7Rcc8WpmOKoTp3WMyClE_2UwQrGgYLLAk6HpnbrIzW4h1tvpP9KWsVU539M_X-"/><div class="flex flex-col"><span class="font-title-md text-title-md text-primary tracking-wider uppercase leading-none">AEGIS DEFENSE</span><span class="font-classification-tag text-classification-tag text-outline tracking-widest uppercase">TACTICAL COMMAND NET</span></div></div><nav class="flex items-center gap-unit-xs" data-active-classes="bg-surface-container text-primary font-headline-sm text-headline-sm"><a aria-current="page" class="px-unit-md py-unit-xs transition-colors uppercase bg-surface-container text-primary font-headline-sm text-headline-sm" data-path="tactical-overview" href="#">TACTICAL OVERVIEW</a><a class="px-unit-md py-unit-xs text-on-surface-variant font-headline-sm text-headline-sm hover:text-on-surface transition-colors uppercase" data-path="orbital-surveillance" href="#">ORBITAL SURVEILLANCE</a><a class="px-unit-md py-unit-xs text-on-surface-variant font-headline-sm text-headline-sm hover:text-on-surface transition-colors uppercase" data-path="cyber-warfare" href="#">CYBER WARFARE</a><a class="px-unit-md py-unit-xs text-on-surface-variant font-headline-sm text-headline-sm hover:text-on-surface transition-colors uppercase" data-path="autonomous-fleet" href="#">AUTONOMOUS FLEET</a><a class="px-unit-md py-unit-xs text-on-surface-variant font-headline-sm text-headline-sm hover:text-on-surface transition-colors uppercase" data-path="intelligence-vault" href="#">INTELLIGENCE VAULT</a></nav></div><div class="flex items-center gap-unit-md"><div class="flex items-center gap-unit-xs px-unit-sm py-unit-2xs bg-surface-container text-on-surface-variant font-telemetry-sm text-telemetry-sm"><span class="material-symbols-outlined text-secondary text-sm">headset_mic</span><span>COMMS: CH-04 [ACT]</span></div><button class="px-unit-md py-unit-xs bg-error-container text-on-error-container font-classification-tag text-classification-tag tracking-widest uppercase hover:bg-error hover:text-on-error transition-all shadow-[0_0_12px_rgba(255,180,171,0.2)]" type="button">[ EMERGENCY SCRAMBLE ]</button><div class="flex items-center gap-unit-xs font-telemetry-sm text-telemetry-sm text-outline"><span class="text-primary font-classification-tag text-classification-tag uppercase">CMDR. VANCE</span><span class="text-outline-variant">// UNIT 09</span></div></div></div></div></header><main class="w-full pt-24 px-margin-screen relative z-10 min-h-screen"><div class="flex flex-col w-full pb-unit-2xl gap-unit-lg">
+<!-- Mission Overview & Top Threat Bar -->
+<div class="flex flex-col md:flex-row items-start md:items-end justify-between gap-unit-md pt-unit-xs">
+<div class="flex flex-col gap-unit-2xs">
+<div class="flex items-center gap-unit-sm">
+<span class="px-unit-xs py-unit-2xs bg-surface-container-high text-primary font-classification-tag text-classification-tag uppercase tracking-widest">CMD-SEC // TACTICAL NODE 09</span>
+<span class="text-outline-variant font-telemetry-sm text-telemetry-sm">//</span>
+<span class="text-secondary font-telemetry-sm text-telemetry-sm flex items-center gap-unit-xs">
+<span class="inline-block w-1.5 h-1.5 rounded-full bg-secondary animate-pulse"></span>
+          REAL-TIME SENSOR FUSION ACTIVE
+        </span>
+</div>
+<h2 class="font-display-sm text-display-sm text-primary tracking-tight uppercase">
+        GLOBAL CYBER WARFARE &amp; AUTONOMOUS DEFENSE NETWORK
+      </h2>
+<p class="font-body-md text-body-md text-on-surface-variant max-w-4xl">
+        Next-generation tactical command framework integrating multi-domain sensor fusion, quantum-resistant electronic countermeasures, and autonomous intercept systems across terrestrial, atmospheric, and low-earth orbital operational vectors.
+      </p>
+</div>
+<div class="flex items-center gap-unit-sm shrink-0 self-stretch md:self-auto justify-end">
+<div class="flex flex-col items-end px-unit-md py-unit-xs bg-surface-container-low shadow-sm">
+<span class="font-classification-tag text-classification-tag text-outline-variant uppercase">ELEVATION LEVEL</span>
+<span class="font-telemetry-md text-telemetry-md text-error tracking-wider font-bold">ALPHA-1 ENGAGED</span>
+</div>
+<button class="px-unit-lg py-unit-md bg-primary-container text-on-primary-container font-classification-tag text-classification-tag uppercase tracking-widest hover:bg-primary-fixed-dim transition-all shadow-md active:scale-95" type="button">
+        DEPLOY FULL COUNTERMEASURES
+      </button>
+</div>
+</div>
+<!-- Centerpiece / Visual Screen Projection -->
+<div class="relative w-full overflow-hidden bg-surface-container-lowest shadow-xl group">
+<!-- Tactical Corner Reticle Accents -->
+<div class="absolute top-2 left-2 z-20 pointer-events-none flex flex-col gap-unit-2xs">
+<div class="flex items-center gap-unit-xs">
+<span class="font-telemetry-sm text-telemetry-sm text-primary-container">[SEC_CAM // FEED_088]</span>
+<span class="h-2 w-2 rounded-full bg-secondary animate-ping"></span>
+</div>
+<span class="font-classification-tag text-classification-tag text-outline">LAT 34.0522° N | LON -118.2437° W | EL 12,400M</span>
+</div>
+<div class="absolute top-2 right-2 z-20 pointer-events-none flex flex-col items-end gap-unit-2xs">
+<div class="flex items-center gap-unit-xs">
+<span class="px-unit-xs py-unit-2xs bg-surface-container-highest/80 backdrop-blur-sm text-secondary font-classification-tag text-classification-tag uppercase">SATELLITE DOWNLINK: 99.8% INTEGRITY</span>
+<span class="text-primary-container font-telemetry-sm text-telemetry-sm">[BAND-X HIGH]</span>
+</div>
+<span class="font-classification-tag text-classification-tag text-tertiary-container">DEFENSE INTERCEPT RADAR // LOCK</span>
+</div>
+<!-- Centerpiece Image with Tactical Frame -->
+<div class="relative w-full aspect-[21/9] min-h-[380px] max-h-[560px] overflow-hidden">
+<img alt="Military Tactical Command Center displaying live autonomous drone trajectory on massive curved holographic HUD display" class="w-full h-full object-cover object-center filter contrast-110 brightness-95" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCCvIPUsLZhTddBfXhDWtEMj9oBo3LyRRCyus4E90ujdBTiXEI_6MIfrR1_V67Wl7V59eXz1kLAvkMmB1gtegs5wnfKIk1dwNtzmlyQaW4-Zt8YQSs6bYPoqxQUOpB-Xm031TlwWfZRBnyGdjPRAoF65ZSldB8InEsEx3Sg42gSghuAjMV80h_Hz_HMgScDekj0FPwA7lWDukLB6ckfbeI5t5dQR4OdQoJc1pU2oycBFoIdBLzkWPiF"/>
+<!-- HUD Vignette and Gradient Scrims -->
+<div class="absolute inset-0 bg-gradient-to-t from-surface-container-lowest via-transparent to-surface-container-lowest/60 pointer-events-none"></div>
+<div class="absolute inset-0 bg-gradient-to-r from-surface-container-lowest/80 via-transparent to-surface-container-lowest/80 pointer-events-none"></div>
+<!-- Live Floating Reticles Over Drone Geometry -->
+<div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-10 pointer-events-none flex flex-col items-center">
+<div class="w-48 h-48 rounded-full border border-primary-container/40 flex items-center justify-center animate-[spin_24s_linear_infinite]">
+<div class="w-36 h-36 rounded-full border border-dashed border-secondary/30"></div>
+</div>
+<div class="absolute -bottom-6 px-unit-sm py-unit-2xs bg-surface-container-lowest/90 backdrop-blur-md text-primary font-telemetry-sm text-telemetry-sm uppercase tracking-widest shadow-md">
+          TARGET LOCK: SECTOR 7-G [ASV-412 ACTIVE]
+        </div>
+</div>
+<!-- Left Lower Badge inside display -->
+<div class="absolute bottom-4 left-4 z-20 flex items-center gap-unit-md">
+<div class="px-unit-md py-unit-xs bg-surface-container-lowest/90 backdrop-blur-md shadow-md">
+<div class="font-classification-tag text-classification-tag text-outline uppercase tracking-wider">VEHICLE ID</div>
+<div class="font-headline-sm text-headline-sm text-primary">ASV-412 [SPECTRE-IX]</div>
+<div class="font-telemetry-sm text-telemetry-sm text-secondary">AIRSPEED: MACH 4.2 // STEALTH PROFILE: 99.4%</div>
+</div>
+<div class="hidden lg:flex flex-col gap-unit-2xs px-unit-md py-unit-xs bg-surface-container-lowest/90 backdrop-blur-md shadow-md">
+<div class="font-classification-tag text-classification-tag text-outline uppercase">MISSION CLOCK</div>
+<div class="font-telemetry-lg text-telemetry-lg text-tertiary-container">T+ 02:48:19.44</div>
+</div>
+</div>
+<!-- Right Lower Action / Mode Toggle inside display -->
+<div class="absolute bottom-4 right-4 z-20 flex items-center gap-unit-xs">
+<button class="px-unit-md py-unit-xs bg-surface-container-high/90 backdrop-blur-md text-primary font-classification-tag text-classification-tag uppercase tracking-wider hover:bg-surface-bright transition-colors shadow-sm" type="button">
+          [ FLIGHT CORRIDOR 3D ]
+        </button>
+<button class="px-unit-md py-unit-xs bg-surface-container-high/90 backdrop-blur-md text-on-surface-variant font-classification-tag text-classification-tag uppercase tracking-wider hover:text-on-surface transition-colors shadow-sm" type="button">
+          [ SPECTRUM ANALYSIS ]
+        </button>
+<button class="px-unit-md py-unit-xs bg-surface-container-high/90 backdrop-blur-md text-on-surface-variant font-classification-tag text-classification-tag uppercase tracking-wider hover:text-on-surface transition-colors shadow-sm" type="button">
+          [ EW JAMMING MESH ]
+        </button>
+</div>
+</div>
+</div>
+<!-- Tactical Quick Stats Bar (4 columns) -->
+<div class="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-unit-md">
+<!-- Stat 1 -->
+<div class="p-unit-md bg-surface-container-low flex flex-col justify-between shadow-sm relative overflow-hidden group hover:bg-surface-container transition-colors">
+<div class="absolute top-0 right-0 w-16 h-16 bg-primary-container/5 rounded-bl-full pointer-events-none"></div>
+<div class="flex items-center justify-between font-classification-tag text-classification-tag text-on-surface-variant mb-unit-xs">
+<span>METRIC 01 // HEALTH</span>
+<span class="material-symbols-outlined text-sm text-secondary">verified_user</span>
+</div>
+<div class="flex items-baseline justify-between">
+<div class="font-display-sm text-display-sm text-primary tracking-tight">99.94%</div>
+<span class="font-classification-tag text-classification-tag text-secondary uppercase bg-surface-container-high px-unit-xs py-unit-2xs">GRADE A // NOM</span>
+</div>
+<div class="mt-unit-xs font-telemetry-sm text-telemetry-sm text-outline">
+        SYSTEM READINESS • ALL SUBSYSTEMS SYNCED
+      </div>
+<!-- Micro segmented bar -->
+<div class="grid grid-cols-10 gap-0.5 mt-unit-sm">
+<div class="h-1 bg-secondary"></div>
+<div class="h-1 bg-secondary"></div>
+<div class="h-1 bg-secondary"></div>
+<div class="h-1 bg-secondary"></div>
+<div class="h-1 bg-secondary"></div>
+<div class="h-1 bg-secondary"></div>
+<div class="h-1 bg-secondary"></div>
+<div class="h-1 bg-secondary"></div>
+<div class="h-1 bg-secondary"></div>
+<div class="h-1 bg-secondary/30"></div>
+</div>
+</div>
+<!-- Stat 2 -->
+<div class="p-unit-md bg-surface-container-low flex flex-col justify-between shadow-sm relative overflow-hidden group hover:bg-surface-container transition-colors">
+<div class="absolute top-0 right-0 w-16 h-16 bg-error/5 rounded-bl-full pointer-events-none"></div>
+<div class="flex items-center justify-between font-classification-tag text-classification-tag text-on-surface-variant mb-unit-xs">
+<span>METRIC 02 // MITIGATION</span>
+<span class="material-symbols-outlined text-sm text-error">shield</span>
+</div>
+<div class="flex items-baseline justify-between">
+<div class="font-display-sm text-display-sm text-on-surface tracking-tight">14,892</div>
+<span class="font-classification-tag text-classification-tag text-error-container uppercase bg-surface-container-high px-unit-xs py-unit-2xs">+142 / HR</span>
+</div>
+<div class="mt-unit-xs font-telemetry-sm text-telemetry-sm text-outline">
+        ACTIVE THREAT VECTORS NEUTRALIZED
+      </div>
+<div class="grid grid-cols-10 gap-0.5 mt-unit-sm">
+<div class="h-1 bg-error-container"></div>
+<div class="h-1 bg-error-container"></div>
+<div class="h-1 bg-error-container"></div>
+<div class="h-1 bg-error-container"></div>
+<div class="h-1 bg-error-container"></div>
+<div class="h-1 bg-error-container"></div>
+<div class="h-1 bg-error-container"></div>
+<div class="h-1 bg-error-container"></div>
+<div class="h-1 bg-error-container"></div>
+<div class="h-1 bg-error-container"></div>
+</div>
+</div>
+<!-- Stat 3 -->
+<div class="p-unit-md bg-surface-container-low flex flex-col justify-between shadow-sm relative overflow-hidden group hover:bg-surface-container transition-colors">
+<div class="absolute top-0 right-0 w-16 h-16 bg-primary/5 rounded-bl-full pointer-events-none"></div>
+<div class="flex items-center justify-between font-classification-tag text-classification-tag text-on-surface-variant mb-unit-xs">
+<span>METRIC 03 // CONSTELLATION</span>
+<span class="material-symbols-outlined text-sm text-primary-container">satellite_alt</span>
+</div>
+<div class="flex items-baseline justify-between">
+<div class="font-display-sm text-display-sm text-primary tracking-tight">48 / 48</div>
+<span class="font-classification-tag text-classification-tag text-primary uppercase bg-surface-container-high px-unit-xs py-unit-2xs">ONLINE</span>
+</div>
+<div class="mt-unit-xs font-telemetry-sm text-telemetry-sm text-outline">
+        ORBITAL SATELLITES IN HARDWARE SYNC
+      </div>
+<div class="grid grid-cols-10 gap-0.5 mt-unit-sm">
+<div class="h-1 bg-primary-container"></div>
+<div class="h-1 bg-primary-container"></div>
+<div class="h-1 bg-primary-container"></div>
+<div class="h-1 bg-primary-container"></div>
+<div class="h-1 bg-primary-container"></div>
+<div class="h-1 bg-primary-container"></div>
+<div class="h-1 bg-primary-container"></div>
+<div class="h-1 bg-primary-container"></div>
+<div class="h-1 bg-primary-container"></div>
+<div class="h-1 bg-primary-container"></div>
+</div>
+</div>
+<!-- Stat 4 -->
+<div class="p-unit-md bg-surface-container-low flex flex-col justify-between shadow-sm relative overflow-hidden group hover:bg-surface-container transition-colors">
+<div class="absolute top-0 right-0 w-16 h-16 bg-tertiary-container/5 rounded-bl-full pointer-events-none"></div>
+<div class="flex items-center justify-between font-classification-tag text-classification-tag text-on-surface-variant mb-unit-xs">
+<span>METRIC 04 // FIREWALL STRESS</span>
+<span class="material-symbols-outlined text-sm text-tertiary-container">lock_reset</span>
+</div>
+<div class="flex items-baseline justify-between">
+<div class="font-display-sm text-display-sm text-tertiary-container tracking-tight">34%</div>
+<span class="font-classification-tag text-classification-tag text-tertiary uppercase bg-surface-container-high px-unit-xs py-unit-2xs">SUB-THRESH</span>
+</div>
+<div class="mt-unit-xs font-telemetry-sm text-telemetry-sm text-outline">
+        QUANTUM FIREWALL CAPACITY OCCUPANCY
+      </div>
+<div class="grid grid-cols-10 gap-0.5 mt-unit-sm">
+<div class="h-1 bg-tertiary-container"></div>
+<div class="h-1 bg-tertiary-container"></div>
+<div class="h-1 bg-tertiary-container"></div>
+<div class="h-1 bg-surface-container-highest"></div>
+<div class="h-1 bg-surface-container-highest"></div>
+<div class="h-1 bg-surface-container-highest"></div>
+<div class="h-1 bg-surface-container-highest"></div>
+<div class="h-1 bg-surface-container-highest"></div>
+<div class="h-1 bg-surface-container-highest"></div>
+<div class="h-1 bg-surface-container-highest"></div>
+</div>
+</div>
+</div>
+<!-- Operational Control Grids (3-Column Workspace) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-unit-md">
+<!-- LEFT COLUMN: Sector Radar & Surveillance (3 cols) -->
+<div class="lg:col-span-3 flex flex-col gap-unit-md">
+<!-- Radar Card -->
+<div class="bg-surface-container-low p-unit-md flex flex-col gap-unit-sm shadow-sm">
+<div class="flex items-center justify-between pb-unit-xs">
+<div class="flex items-center gap-unit-xs">
+<span class="w-2 h-2 rounded-full bg-secondary"></span>
+<span class="font-headline-sm text-headline-sm text-on-surface uppercase">SECTOR RADAR</span>
+</div>
+<span class="font-classification-tag text-classification-tag text-outline-variant">SEC-09 // ACTIVE</span>
+</div>
+<!-- Inline SVG Radar Sweep Visual -->
+<div class="relative w-full aspect-square bg-surface-container-lowest flex items-center justify-center overflow-hidden">
+<svg class="w-full h-full text-outline-variant/30" viewbox="0 0 200 200">
+<!-- Concentric rings -->
+<circle cx="100" cy="100" fill="none" r="85" stroke="currentColor" stroke-dasharray="2 2" stroke-width="1"></circle>
+<circle cx="100" cy="100" fill="none" r="60" stroke="currentColor" stroke-width="1"></circle>
+<circle cx="100" cy="100" fill="none" r="35" stroke="currentColor" stroke-dasharray="4 2" stroke-width="1"></circle>
+<circle cx="100" cy="100" fill="none" r="10" stroke="currentColor" stroke-width="1"></circle>
+<!-- Axis lines -->
+<line stroke="currentColor" stroke-width="1" x1="100" x2="100" y1="10" y2="190"></line>
+<line stroke="currentColor" stroke-width="1" x1="10" x2="190" y1="100" y2="100"></line>
+<!-- Angle cross marks -->
+<line stroke="currentColor" stroke-dasharray="2 4" stroke-width="0.5" x1="40" x2="160" y1="40" y2="160"></line>
+<line stroke="currentColor" stroke-dasharray="2 4" stroke-width="0.5" x1="40" x2="160" y1="160" y2="40"></line>
+<!-- Radar Blips -->
+<circle class="animate-ping" cx="130" cy="65" fill="#00daf3" r="3"></circle>
+<circle cx="130" cy="65" fill="#00daf3" r="3"></circle>
+<circle cx="75" cy="140" fill="#42eac0" r="2.5"></circle>
+<circle cx="145" cy="120" fill="#ffb4ab" r="3"></circle>
+<!-- Rotating Sweep Sector Line -->
+<g class="origin-center animate-[spin_6s_linear_infinite]">
+<line stroke="#00e5ff" stroke-width="1.5" x1="100" x2="100" y1="100" y2="15"></line>
+<polygon fill="#00e5ff" opacity="0.15" points="100,100 120,15 100,15"></polygon>
+</g>
+</svg>
+<div class="absolute bottom-2 left-2 font-telemetry-sm text-telemetry-sm text-primary">RANGE: 450 KM</div>
+<div class="absolute bottom-2 right-2 font-telemetry-sm text-telemetry-sm text-secondary">BEARING: 042°</div>
+</div>
+<!-- Telemetry Data Pairs -->
+<div class="flex flex-col gap-unit-2xs font-telemetry-sm text-telemetry-sm pt-unit-xs">
+<div class="flex justify-between text-on-surface-variant">
+<span class="text-outline">GRID LOC</span>
+<span class="text-on-surface">34.0522° N, 118.2437° W</span>
+</div>
+<div class="flex justify-between text-on-surface-variant">
+<span class="text-outline">RADAR FREQ</span>
+<span class="text-primary">14.24 GHz [HOPPING]</span>
+</div>
+<div class="flex justify-between text-on-surface-variant">
+<span class="text-outline">SWEEP CADENCE</span>
+<span class="text-on-surface">1.24 SEC</span>
+</div>
+<div class="flex justify-between text-on-surface-variant">
+<span class="text-outline">IFF SIGNATURES</span>
+<span class="text-secondary">4 FRIENDLY / 1 HOSTILE</span>
+</div>
+</div>
+<!-- Jammer Toggle Controls -->
+<div class="pt-unit-xs flex flex-col gap-unit-xs">
+<div class="font-classification-tag text-classification-tag text-outline uppercase tracking-wider">ELECTRONIC WARFARE CONTROLS</div>
+<div class="flex items-center justify-between p-unit-xs bg-surface-container">
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface">RF JAMMER ARRAY</span>
+<button class="px-unit-sm py-unit-2xs bg-secondary-container text-on-secondary-container font-classification-tag text-classification-tag uppercase" type="button">
+              ACTIVE
+            </button>
+</div>
+<div class="flex items-center justify-between p-unit-xs bg-surface-container">
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface">GPS SPOOF DEFENSE</span>
+<button class="px-unit-sm py-unit-2xs bg-surface-container-high text-primary font-classification-tag text-classification-tag uppercase" type="button">
+              STANDBY
+            </button>
+</div>
+</div>
+</div>
+<!-- Tactical Signal Spectrum -->
+<div class="bg-surface-container-low p-unit-md flex flex-col gap-unit-xs shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-on-surface uppercase">SIGNAL INTEGRITY</span>
+<span class="font-telemetry-sm text-telemetry-sm text-secondary">SNR: +38.4 dB</span>
+</div>
+<!-- Segmented frequency bar chart -->
+<div class="flex items-end gap-1 h-14 w-full bg-surface-container-lowest p-unit-xs">
+<div class="w-full bg-primary-container h-[40%]"></div>
+<div class="w-full bg-primary-container h-[65%]"></div>
+<div class="w-full bg-primary-container h-[90%]"></div>
+<div class="w-full bg-primary-container h-[55%]"></div>
+<div class="w-full bg-secondary h-[80%]"></div>
+<div class="w-full bg-secondary h-[95%]"></div>
+<div class="w-full bg-secondary h-[70%]"></div>
+<div class="w-full bg-tertiary-container h-[45%]"></div>
+<div class="w-full bg-tertiary-container h-[60%]"></div>
+<div class="w-full bg-error h-[85%] animate-pulse"></div>
+<div class="w-full bg-primary-container h-[50%]"></div>
+<div class="w-full bg-primary-container h-[30%]"></div>
+</div>
+<div class="flex justify-between font-classification-tag text-classification-tag text-outline pt-unit-2xs">
+<span>2.4 GHz</span>
+<span>5.8 GHz</span>
+<span>12.0 GHz [INTERFERENCE]</span>
+</div>
+</div>
+</div>
+<!-- CENTER COLUMN: Incident Log & Command Feed (6 cols) -->
+<div class="lg:col-span-6 flex flex-col gap-unit-md">
+<!-- Real-Time Cyber Incident Feed -->
+<div class="bg-surface-container-low p-unit-md flex flex-col shadow-sm flex-1">
+<div class="flex items-center justify-between pb-unit-sm">
+<div class="flex items-center gap-unit-sm">
+<span class="material-symbols-outlined text-primary-container">terminal</span>
+<span class="font-headline-sm text-headline-sm text-on-surface uppercase">REAL-TIME CYBER INCIDENT FEED</span>
+</div>
+<div class="flex items-center gap-unit-xs">
+<span class="px-unit-xs py-unit-2xs bg-surface-container text-primary font-classification-tag text-classification-tag uppercase">LIVE STREAM</span>
+<button class="px-unit-xs py-unit-2xs bg-surface-container text-on-surface-variant hover:text-on-surface font-telemetry-sm text-telemetry-sm" type="button">CLEAR</button>
+</div>
+</div>
+<!-- Filter tabs -->
+<div class="flex items-center gap-unit-xs pb-unit-sm">
+<button class="px-unit-sm py-unit-2xs bg-surface-container-highest text-primary font-classification-tag text-classification-tag uppercase" type="button">ALL EVENTS [24]</button>
+<button class="px-unit-sm py-unit-2xs bg-surface-container text-error font-classification-tag text-classification-tag uppercase" type="button">CRITICAL [3]</button>
+<button class="px-unit-sm py-unit-2xs bg-surface-container text-tertiary-container font-classification-tag text-classification-tag uppercase" type="button">ELEVATED [7]</button>
+<button class="px-unit-sm py-unit-2xs bg-surface-container text-secondary font-classification-tag text-classification-tag uppercase" type="button">MITIGATED [14]</button>
+</div>
+<!-- Incident Items Table / Stream -->
+<div class="flex flex-col gap-unit-xs overflow-y-auto max-h-[500px]">
+<!-- Item 1: Critical Hostile Penetration -->
+<div class="p-unit-sm bg-surface-container flex flex-col sm:flex-row items-start sm:items-center justify-between gap-unit-xs group hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-unit-sm min-w-0">
+<span class="px-unit-xs py-unit-2xs bg-error-container text-on-error-container font-classification-tag text-classification-tag uppercase shrink-0">CRITICAL</span>
+<div class="flex flex-col min-w-0">
+<div class="font-headline-sm text-headline-sm text-on-surface truncate">DDOS AMPLIFICATION DETECTED • ORBITAL GATEWAY 4</div>
+<div class="font-telemetry-sm text-telemetry-sm text-outline flex items-center gap-unit-xs">
+<span>SRC: 194.165.22.84</span>
+<span>•</span>
+<span class="text-primary">TARGET: SAT-GW-04</span>
+<span>•</span>
+<span>VOL: 420 Gbps</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-unit-xs shrink-0 self-end sm:self-center">
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">14:42:04.12</span>
+<button class="px-unit-sm py-unit-2xs bg-surface-container-highest text-primary font-classification-tag text-classification-tag uppercase hover:bg-primary hover:text-on-primary transition-colors" type="button">
+                EXEC OVERRIDE
+              </button>
+</div>
+</div>
+<!-- Item 2: Quantum Key Renegotiation -->
+<div class="p-unit-sm bg-surface-container flex flex-col sm:flex-row items-start sm:items-center justify-between gap-unit-xs group hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-unit-sm min-w-0">
+<span class="px-unit-xs py-unit-2xs bg-secondary-container text-on-secondary-container font-classification-tag text-classification-tag uppercase shrink-0">SECURE</span>
+<div class="flex flex-col min-w-0">
+<div class="font-headline-sm text-headline-sm text-on-surface truncate">QUANTUM KEY RE-EXCHANGE COMPLETE</div>
+<div class="font-telemetry-sm text-telemetry-sm text-outline flex items-center gap-unit-xs">
+<span>LATTICE-CRYPTO: KYBER-1024</span>
+<span>•</span>
+<span class="text-secondary">ENTROPY: 99.98%</span>
+<span>•</span>
+<span>NODE: US-WEST-09</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-unit-xs shrink-0 self-end sm:self-center">
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">14:41:59.08</span>
+<span class="text-secondary font-telemetry-sm text-telemetry-sm font-semibold">[VERIFIED]</span>
+</div>
+</div>
+<!-- Item 3: Elevated Intrusion Probe -->
+<div class="p-unit-sm bg-surface-container flex flex-col sm:flex-row items-start sm:items-center justify-between gap-unit-xs group hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-unit-sm min-w-0">
+<span class="px-unit-xs py-unit-2xs bg-surface-container-highest text-tertiary-container font-classification-tag text-classification-tag uppercase shrink-0">ELEVATED</span>
+<div class="flex flex-col min-w-0">
+<div class="font-headline-sm text-headline-sm text-on-surface truncate">BRUTE-FORCE RECONNAISSANCE SCAN • PORT 8443</div>
+<div class="font-telemetry-sm text-telemetry-sm text-outline flex items-center gap-unit-xs">
+<span>VECTOR: SYN-FLOOD / PROBE</span>
+<span>•</span>
+<span class="text-tertiary">ISOLATED VIA HONEYPOT</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-unit-xs shrink-0 self-end sm:self-center">
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">14:41:42.55</span>
+<button class="px-unit-sm py-unit-2xs bg-surface-container-highest text-tertiary font-classification-tag text-classification-tag uppercase hover:bg-tertiary-container hover:text-on-tertiary-container transition-colors" type="button">
+                SINKHOLE IP
+              </button>
+</div>
+</div>
+<!-- Item 4: Autonomous Countermeasure Deployed -->
+<div class="p-unit-sm bg-surface-container flex flex-col sm:flex-row items-start sm:items-center justify-between gap-unit-xs group hover:bg-surface-container-high transition-colors">
+<div class="flex items-center gap-unit-sm min-w-0">
+<span class="px-unit-xs py-unit-2xs bg-surface-container-highest text-primary font-classification-tag text-classification-tag uppercase shrink-0">INTERCEPTED</span>
+<div class="flex flex-col min-w-0">
+<div class="font-headline-sm text-headline-sm text-on-surface truncate">MALICIOUS PAYLOAD CONTAINED IN VIRTUAL SANDBOX</div>
+<div class="font-telemetry-sm text-telemetry-sm text-outline flex items-center gap-unit-xs">
+<span>HASH: SHA-256 [0x8f4b...38c]</span>
+<span>•</span>
+<span class="text-primary">ZERO TRUST ENFORCED</span>
+</div>
+</div>
+</div>
+<div class="flex items-center gap-unit-xs shrink-0 self-end sm:self-center">
+<span class="font-telemetry-sm text-telemetry-sm text-on-surface-variant">14:40:12.91</span>
+<span class="text-primary font-telemetry-sm text-telemetry-sm font-semibold">[QUARANTINED]</span>
+</div>
+</div>
+</div>
+<!-- Terminal Command Injection Line -->
+<div class="mt-unit-sm pt-unit-sm bg-surface-container-lowest p-unit-xs flex items-center gap-unit-xs">
+<span class="font-telemetry-sm text-telemetry-sm text-primary">aegis@cmd-09:~$</span>
+<input class="w-full bg-transparent text-primary font-telemetry-sm text-telemetry-sm outline-none placeholder:text-outline-variant" placeholder="Type command (e.g., /isolate-node, /engage-mesh, /sync-fleet)..." type="text"/>
+<button class="px-unit-md py-unit-2xs bg-primary text-on-primary font-classification-tag text-classification-tag uppercase tracking-wider shrink-0" type="button">
+            TRANSMIT
+          </button>
+</div>
+</div>
+</div>
+<!-- RIGHT COLUMN: Fleet & Drone Deployment Ready (3 cols) -->
+<div class="lg:col-span-3 flex flex-col gap-unit-md">
+<div class="bg-surface-container-low p-unit-md flex flex-col gap-unit-sm shadow-sm">
+<div class="flex items-center justify-between pb-unit-xs">
+<div class="flex items-center gap-unit-xs">
+<span class="material-symbols-outlined text-primary">flight_takeoff</span>
+<span class="font-headline-sm text-headline-sm text-on-surface uppercase">FLEET READINESS</span>
+</div>
+<span class="font-classification-tag text-classification-tag text-secondary uppercase">3 READY</span>
+</div>
+<!-- Unit 1: ASV-412 (Active in Hero) -->
+<div class="p-unit-sm bg-surface-container flex flex-col gap-unit-2xs">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-primary">ASV-412 • SPECTRE</span>
+<span class="px-unit-xs py-unit-2xs bg-secondary-container text-on-secondary-container font-classification-tag text-classification-tag uppercase">DEPLOYED</span>
+</div>
+<div class="font-telemetry-sm text-telemetry-sm text-outline">
+            PAYLOAD: ELECTRONIC ATTACK POD // 88% FUEL
+          </div>
+<div class="w-full bg-surface-container-highest h-1.5 mt-unit-2xs">
+<div class="bg-primary-container h-full w-[88%]"></div>
+</div>
+</div>
+<!-- Unit 2: UCAV-09 Stealth Interceptor -->
+<div class="p-unit-sm bg-surface-container flex flex-col gap-unit-2xs">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-on-surface">UCAV-09 • PHANTOM</span>
+<span class="px-unit-xs py-unit-2xs bg-surface-container-highest text-primary font-classification-tag text-classification-tag uppercase">ARMED</span>
+</div>
+<div class="font-telemetry-sm text-telemetry-sm text-outline">
+            PAYLOAD: KINETIC INTERCEPTORS // 100% FUEL
+          </div>
+<div class="w-full bg-surface-container-highest h-1.5 mt-unit-2xs">
+<div class="bg-secondary h-full w-[100%]"></div>
+</div>
+</div>
+<!-- Unit 3: DRONE SQUAD B-12 -->
+<div class="p-unit-sm bg-surface-container flex flex-col gap-unit-2xs">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-on-surface">DRONE SWARM B-12</span>
+<span class="px-unit-xs py-unit-2xs bg-surface-container-highest text-tertiary-container font-classification-tag text-classification-tag uppercase">PRE-FLIGHT</span>
+</div>
+<div class="font-telemetry-sm text-telemetry-sm text-outline">
+            PAYLOAD: DISTRIBUTED RF JAMMERS // SYNCING
+          </div>
+<div class="w-full bg-surface-container-highest h-1.5 mt-unit-2xs">
+<div class="bg-tertiary-container h-full w-[64%]"></div>
+</div>
+</div>
+<!-- Rapid Action Triggers -->
+<div class="pt-unit-xs flex flex-col gap-unit-xs">
+<button class="w-full py-unit-sm px-unit-md bg-surface-container-high text-primary font-classification-tag text-classification-tag uppercase tracking-wider hover:bg-surface-bright transition-all text-center" type="button">
+            [ ENGAGE PROTOCOL EPSILON ]
+          </button>
+<button class="w-full py-unit-sm px-unit-md bg-surface-container-high text-on-surface font-classification-tag text-classification-tag uppercase tracking-wider hover:bg-surface-bright transition-all text-center" type="button">
+            [ LOCK COMMS CHANNELS ]
+          </button>
+<button class="w-full py-unit-sm px-unit-md bg-error-container text-on-error-container font-classification-tag text-classification-tag uppercase tracking-widest hover:bg-error hover:text-on-error transition-all text-center" type="button">
+            [ AUTONOMOUS SCRAMBLE ALL ]
+          </button>
+</div>
+</div>
+<!-- Station Operator Roster -->
+<div class="bg-surface-container-low p-unit-md flex flex-col gap-unit-xs shadow-sm">
+<div class="flex items-center justify-between">
+<span class="font-headline-sm text-headline-sm text-on-surface uppercase">ACTIVE WATCH OFFICERS</span>
+<span class="font-classification-tag text-classification-tag text-secondary">3 ONLINE</span>
+</div>
+<div class="flex flex-col gap-unit-2xs font-telemetry-sm text-telemetry-sm pt-unit-xs">
+<div class="flex items-center justify-between">
+<span class="text-on-surface">CMDR. MARC VANCE</span>
+<span class="text-primary font-classification-tag text-classification-tag">PRIMARY LEAD</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-on-surface">LT. SARAH CHEN</span>
+<span class="text-secondary font-classification-tag text-classification-tag">CYBER OPS</span>
+</div>
+<div class="flex items-center justify-between">
+<span class="text-on-surface">ENS. T. HOLLOWAY</span>
+<span class="text-on-surface-variant font-classification-tag text-classification-tag">EW SUITE</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div></main><footer class="w-full bg-surface-container-lowest/80 backdrop-blur-sm py-unit-sm px-margin-screen relative z-10"><div class="w-full flex items-center justify-between text-outline font-telemetry-sm text-telemetry-sm"><div>AEGIS NET CORE // HARDENED DEFENSE INTERFACE // NODE 09</div><div class="flex items-center gap-unit-lg"><span>ENCRYPTION: QUANTUM RESISTANT</span><span>AUTH: BIOMETRIC VERIFIED</span><span>© 2025 AEROSPACE COMMAND</span></div></div></footer></body></html>
