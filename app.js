@@ -472,68 +472,66 @@ function calculateTrimix() {
 // ==========================================
 // LOGIKA PENYIMPANAN DATA FORM KRITIK & ADUAN
 // ==========================================
-async function saveFeedback() {
+// Ganti URL di bawah dengan Endpoint Formspree milik Anda
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/YOUR_FORM_ID';
+
+async function sendToFormspree() {
     const form = document.getElementById('feedbackForm');
     const submitBtn = document.getElementById('fbSubmitBtn');
-    
-    const nama = document.getElementById('fbNama').value.trim();
-    const email = document.getElementById('fbEmail').value.trim();
-    const kategori = document.getElementById('fbKategori').value;
-    const phone = document.getElementById('fbPhone').value.trim();
-    const pesan = document.getElementById('fbPesan').value.trim();
+    const alertEl = document.getElementById('fbAlert');
+    const formData = new FormData(form);
 
-    if (!nama || !email || !pesan) {
-        alert('Mohon isi semua bidang utama yang bertanda asterisk (*)!');
-        return;
-    }
-
-    // Nonaktifkan tombol saat proses pengiriman berlangsung
     submitBtn.disabled = true;
-    submitBtn.innerText = 'Mengirim...';
-
-    const feedbackData = {
-        id: Date.now(),
-        nama: nama,
-        email: email,
-        kategori: kategori,
-        phone: phone || '-',
-        pesan: pesan,
-        waktu: new Date().toLocaleString('id-ID')
-    };
+    submitBtn.innerText = 'Sending...';
 
     try {
-        // Kirim data ke Formspree via Fetch (AJAX)
-        const response = await fetch('https://formspree.io/f/mdeoqbqw', {
+        const response = await fetch(FORMSPREE_ENDPOINT, {
             method: 'POST',
-            body: new FormData(form),
+            body: formData,
             headers: {
                 'Accept': 'application/json'
             }
         });
 
         if (response.ok) {
-            // Simpan ke localStorage browser jika berhasil
-            let stored = JSON.parse(localStorage.getItem('bpsb8_feedback_messages') || '[]');
-            stored.push(feedbackData);
-            localStorage.setItem('bpsb8_feedback_messages', JSON.stringify(stored));
+            // Simpan salinan lokal di browser
+            saveLocalFeedback({
+                nama: formData.get('nama'),
+                email: formData.get('email'),
+                kategori: formData.get('kategori'),
+                phone: formData.get('phone') || '-',
+                pesan: formData.get('pesan')
+            });
 
-            // Reset form dan tampilkan pesan sukses
-            form.reset();
-            const alertEl = document.getElementById('fbAlert');
+            // Tampilkan notifikasi sukses
             alertEl.style.display = 'block';
-            setTimeout(() => {
-                alertEl.style.display = 'none';
-            }, 4000);
+            alertEl.className = 'result-box safe';
+            alertEl.innerHTML = '✅ Terima kasih! Pesan Anda telah terkirim ke email admin dan tersimpan di database lokal.';
+            form.reset();
 
-            updateFeedbackCount();
-            renderFeedbackList();
+            setTimeout(() => { alertEl.style.display = 'none'; }, 5000);
         } else {
-            alert('Gagal mengirim pesan ke Formspree. Silakan coba lagi.');
+            throw new Error('Gagal mengirim formulir.');
         }
     } catch (error) {
-        alert('Terjadi kesalahan koneksi saat mengirim pesan.');
+        alertEl.style.display = 'block';
+        alertEl.className = 'result-box danger';
+        alertEl.innerHTML = '🚨 Terjadi kesalahan saat mengirim pesan. Periksa koneksi atau coba lagi.';
     } finally {
         submitBtn.disabled = false;
         submitBtn.innerText = 'Kirim Pesan / Aduan';
     }
+}
+
+function saveLocalFeedback(data) {
+    const feedbackData = {
+        id: Date.now(),
+        ...data,
+        waktu: new Date().toLocaleString('id-ID')
+    };
+    let stored = JSON.parse(localStorage.getItem('bpsb8_feedback_messages') || '[]');
+    stored.push(feedbackData);
+    localStorage.setItem('bpsb8_feedback_messages', JSON.stringify(stored));
+    updateFeedbackCount();
+    renderFeedbackList();
 }
