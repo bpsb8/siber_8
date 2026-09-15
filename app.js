@@ -472,7 +472,10 @@ function calculateTrimix() {
 // ==========================================
 // LOGIKA PENYIMPANAN DATA FORM KRITIK & ADUAN
 // ==========================================
-function saveFeedback() {
+async function saveFeedback() {
+    const form = document.getElementById('feedbackForm');
+    const submitBtn = document.getElementById('fbSubmitBtn');
+    
     const nama = document.getElementById('fbNama').value.trim();
     const email = document.getElementById('fbEmail').value.trim();
     const kategori = document.getElementById('fbKategori').value;
@@ -484,6 +487,10 @@ function saveFeedback() {
         return;
     }
 
+    // Nonaktifkan tombol saat proses pengiriman berlangsung
+    submitBtn.disabled = true;
+    submitBtn.innerText = 'Mengirim...';
+
     const feedbackData = {
         id: Date.now(),
         nama: nama,
@@ -494,73 +501,39 @@ function saveFeedback() {
         waktu: new Date().toLocaleString('id-ID')
     };
 
-    // Simpan ke localStorage browser
-    let stored = JSON.parse(localStorage.getItem('bpsb8_feedback_messages') || '[]');
-    stored.push(feedbackData);
-    localStorage.setItem('bpsb8_feedback_messages', JSON.stringify(stored));
+    try {
+        // Kirim data ke Formspree via Fetch (AJAX)
+        const response = await fetch('https://formspree.io/f/mdeoqbqw', {
+            method: 'POST',
+            body: new FormData(form),
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
 
-    // Reset form dan tampilkan pemberitahuan
-    document.getElementById('feedbackForm').reset();
-    const alertEl = document.getElementById('fbAlert');
-    alertEl.style.display = 'block';
-    setTimeout(() => {
-        alertEl.style.display = 'none';
-    }, 4000);
+        if (response.ok) {
+            // Simpan ke localStorage browser jika berhasil
+            let stored = JSON.parse(localStorage.getItem('bpsb8_feedback_messages') || '[]');
+            stored.push(feedbackData);
+            localStorage.setItem('bpsb8_feedback_messages', JSON.stringify(stored));
 
-    updateFeedbackCount();
-    renderFeedbackList();
-}
+            // Reset form dan tampilkan pesan sukses
+            form.reset();
+            const alertEl = document.getElementById('fbAlert');
+            alertEl.style.display = 'block';
+            setTimeout(() => {
+                alertEl.style.display = 'none';
+            }, 4000);
 
-function updateFeedbackCount() {
-    let stored = JSON.parse(localStorage.getItem('bpsb8_feedback_messages') || '[]');
-    const countEl = document.getElementById('fbCount');
-    if (countEl) countEl.innerText = stored.length;
-}
-
-function toggleFeedbackList() {
-    const container = document.getElementById('fbListContainer');
-    if (container.style.display === 'none' || container.style.display === '') {
-        container.style.display = 'block';
-        renderFeedbackList();
-    } else {
-        container.style.display = 'none';
+            updateFeedbackCount();
+            renderFeedbackList();
+        } else {
+            alert('Gagal mengirim pesan ke Formspree. Silakan coba lagi.');
+        }
+    } catch (error) {
+        alert('Terjadi kesalahan koneksi saat mengirim pesan.');
+    } finally {
+        submitBtn.disabled = false;
+        submitBtn.innerText = 'Kirim Pesan / Aduan';
     }
-}
-
-function renderFeedbackList() {
-    let stored = JSON.parse(localStorage.getItem('bpsb8_feedback_messages') || '[]');
-    const listItems = document.getElementById('fbListItems');
-    if (!listItems) return;
-
-    if (stored.length === 0) {
-        listItems.innerHTML = '<p style="color: #94a3b8; font-style: italic;">Belum ada aduan atau pesan tersimpan.</p>';
-        return;
-    }
-
-    listItems.innerHTML = stored.map(item => `
-        <div style="background: #152238; border: 1px solid #334155; border-radius: 8px; padding: 12px; font-size: 0.9rem;">
-            <div style="display: flex; justify-content: space-between; margin-bottom: 6px; border-bottom: 1px solid #2d3e58; padding-bottom: 4px;">
-                <strong style="color: var(--accent-cyan);">${escapeHtml(item.nama)} <span style="color: #cbd5e1; font-weight: normal;">(${escapeHtml(item.kategori)})</span></strong>
-                <span style="color: #94a3b8; font-size: 0.8rem;">${item.waktu}</span>
-            </div>
-            <div style="color: #cbd5e1; font-size: 0.85rem; margin-bottom: 6px;">
-                📧 ${escapeHtml(item.email)} | 📱 ${escapeHtml(item.phone)}
-            </div>
-            <p style="color: #f8fafc; margin-top: 6px; white-space: pre-line; background: #0b1320; padding: 8px; border-radius: 6px;">"${escapeHtml(item.pesan)}"</p>
-        </div>
-    `).reverse().join('');
-}
-
-function clearAllFeedback() {
-    if (confirm('Apakah Anda yakin ingin menghapus semua daftar pesan tersimpan?')) {
-        localStorage.removeItem('bpsb8_feedback_messages');
-        updateFeedbackCount();
-        renderFeedbackList();
-    }
-}
-
-function escapeHtml(text) {
-    return String(text).replace(/[&<>"']/g, function(m) {
-        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m];
-    });
 }

@@ -456,42 +456,41 @@
             </section>
 
             <!-- SECTION TERBARU: FORM KRITIK & SARAN / ADUAN -->
-            <section class="feedback-section">
-                <h3 class="feedback-title">Kirim Pesan atau Aduan</h3>
-                <form id="feedbackForm" onsubmit="event.preventDefault(); saveFeedback();">
-                    <div class="feedback-grid">
-                        <div class="form-group">
-                            <label for="fbNama">Nama Lengkap *</label>
-                            <input type="text" id="fbNama" class="feedback-input" placeholder="Contoh: Budi Santoso" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="fbEmail">Alamat Email *</label>
-                            <input type="email" id="fbEmail" class="feedback-input" placeholder="nama@email.com" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="fbKategori">Kategori Keperluan</label>
-                            <select id="fbKategori" class="feedback-input feedback-select">
-                                <option value="Sertifikasi & Mutu" selected>Sertifikasi & Mutu</option>
-                                <option value="Operasional Penyelaman">Operasional Penyelaman</option>
-                                <option value="Evaluasi Keselamatan">Evaluasi Keselamatan</option>
-                                <option value="Kritik & Saran Umum">Kritik & Saran Umum</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="fbPhone">Nomor Telepon / WhatsApp</label>
-                            <input type="tel" id="fbPhone" class="feedback-input" placeholder="081234567890">
-                        </div>
-                    </div>
-                    <div class="form-group" style="margin-top: 1rem;">
-                        <label for="fbPesan">Pesan / Detail Pertanyaan *</label>
-                        <textarea id="fbPesan" class="feedback-input feedback-textarea" placeholder="Tuliskan pesan Anda secara jelas..." required></textarea>
-                    </div>
+            <!-- Perbarui bagian form pada index.html -->
+<form id="feedbackForm" onsubmit="event.preventDefault(); saveFeedback();">
+    <div class="feedback-grid">
+        <div class="form-group">
+            <label for="fbNama">Nama Lengkap *</label>
+            <input type="text" id="fbNama" name="nama" class="feedback-input" placeholder="Contoh: Budi Santoso" required>
+        </div>
+        <div class="form-group">
+            <label for="fbEmail">Alamat Email *</label>
+            <input type="email" id="fbEmail" name="email" class="feedback-input" placeholder="nama@email.com" required>
+        </div>
+        <div class="form-group">
+            <label for="fbKategori">Kategori Keperluan</label>
+            <select id="fbKategori" name="kategori" class="feedback-input feedback-select">
+                <option value="Sertifikasi & Mutu" selected>Sertifikasi & Mutu</option>
+                <option value="Operasional Penyelaman">Operasional Penyelaman</option>
+                <option value="Evaluasi Keselamatan">Evaluasi Keselamatan</option>
+                <option value="Kritik & Saran Umum">Kritik & Saran Umum</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="fbPhone">Nomor Telepon / WhatsApp</label>
+            <input type="tel" id="fbPhone" name="phone" class="feedback-input" placeholder="081234567890">
+        </div>
+    </div>
+    <div class="form-group" style="margin-top: 1rem;">
+        <label for="fbPesan">Pesan / Detail Pertanyaan *</label>
+        <textarea id="fbPesan" name="pesan" class="feedback-input feedback-textarea" placeholder="Tuliskan pesan Anda secara jelas..." required></textarea>
+    </div>
 
-                    <div style="margin-top: 1.2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
-                        <button type="submit" class="btn-calc" style="background: var(--success); color: #030b1e; max-width: 260px; font-weight: bold; border-radius: 8px;">Kirim Pesan / Aduan</button>
-                        <button type="button" class="btn-action" onclick="toggleFeedbackList()" style="background: transparent; border: 1px solid var(--accent-cyan); color: var(--accent-cyan);">📋 Pesan Tersimpan (<span id="fbCount">0</span>)</button>
-                    </div>
-                </form>
+    <div style="margin-top: 1.2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+        <button type="submit" id="fbSubmitBtn" class="btn-calc" style="background: var(--success); color: #030b1e; max-width: 260px; font-weight: bold; border-radius: 8px;">Kirim Pesan / Aduan</button>
+        <button type="button" class="btn-action" onclick="toggleFeedbackList()" style="background: transparent; border: 1px solid var(--accent-cyan); color: var(--accent-cyan);">📋 Pesan Tersimpan (<span id="fbCount">0</span>)</button>
+    </div>
+</form>
 
                 <!-- ALERT SUKSES SAMPAIAN PESAN -->
                 <div id="fbAlert" class="result-box safe" style="display:none; margin-top: 1rem;">
