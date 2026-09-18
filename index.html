@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sistem Operasional & Kalkulator Penyelaman Spektrum Luas US Navy</title>
+    <!-- Font Google Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <!-- Pemanggilan File CSS Eksternal -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body class="logged-out">
@@ -12,14 +17,14 @@
     <div id="loginOverlay" class="login-overlay">
         <div class="login-card">
             <h2>Autentikasi Operasional</h2>
-            <p style="color: var(--light-cyan); font-size: 0.9rem; margin-bottom: 1.5rem;">Masukkan kredensial untuk mengakses Sistem Penyelaman US Navy.</p>
+            <p>Masukkan kredensial untuk mengakses Sistem Penyelaman US Navy.</p>
             <form onsubmit="event.preventDefault(); checkLogin();">
                 <div class="form-group" style="text-align: left;">
-                    <label for="loginUser" style="color: var(--light-cyan);">Username</label>
+                    <label for="loginUser">Username</label>
                     <input type="text" id="loginUser" class="form-control" placeholder="Masukkan username" required autocomplete="off">
                 </div>
                 <div class="form-group" style="text-align: left; margin-top: 1rem;">
-                    <label for="loginPass" style="color: var(--light-cyan);">Password</label>
+                    <label for="loginPass">Password</label>
                     <div class="password-wrapper">
                         <input type="password" id="loginPass" class="form-control" placeholder="Masukkan password" required style="padding-right: 40px;">
                         <span id="togglePassIcon" class="password-toggle-btn" onclick="togglePasswordVisibility()" title="Lihat/Sembunyikan Password">👁️</span>
@@ -126,20 +131,20 @@
                     <div class="card">
                         <h3>Perencanaan Selam (Dive Plan)</h3>
                         <ul>
-                            <li><strong>Menentukan Limitasi:</strong> Menetapkan *Maximum Depth* dan *Bottom Time* sesuai batas tabel dekompresi/dive computer.</li>
-                            <li><strong>Analisis Cuaca & Arus:</strong> Memantau pasang surut, jarak pandang (*visibility*), serta arah arus di titik penyelaman.</li>
-                            <li><strong>Buddy System Assignment:</strong> Menentukan pasangan penyelam dan menyepakati skenario *Role & Responsibility*.</li>
+                            <li><strong>Menentukan Limitasi:</strong> Menetapkan <em>Maximum Depth</em> dan <em>Bottom Time</em> sesuai batas tabel dekompresi/dive computer.</li>
+                            <li><strong>Analisis Cuaca & Arus:</strong> Memantau pasang surut, jarak pandang (<em>visibility</em>), serta arah arus di titik penyelaman.</li>
+                            <li><strong>Buddy System Assignment:</strong> Menentukan pasangan penyelam dan menyepakati skenario <em>Role & Responsibility</em>.</li>
                         </ul>
                     </div>
                     <div class="card">
                         <h3>Pengecekan Peralatan (BWRAF)</h3>
-                        <p>Pemeriksaan wajib bersama *buddy* tepat sebelum masuk ke air:</p>
+                        <p>Pemeriksaan wajib bersama <em>buddy</em> tepat sebelum masuk ke air:</p>
                         <ul>
-                            <li><strong>B - BCD:</strong> Cek fungsi *inflator*, *deflator*, dan *dump valve*.</li>
-                            <li><strong>W - Weights:</strong> Pastikan sabuk/kantong pemberat terpasang kuat & siap lepas darurat (*quick release*).</li>
-                            <li><strong>R - Releases:</strong> Memeriksa seluruh gesper BCD dan *tank band* terkunci kencang.</li>
+                            <li><strong>B - BCD:</strong> Cek fungsi <em>inflator</em>, <em>deflator</em>, dan <em>dump valve</em>.</li>
+                            <li><strong>W - Weights:</strong> Pastikan sabuk/kantong pemberat terpasang kuat & siap lepas darurat (<em>quick release</em>).</li>
+                            <li><strong>R - Releases:</strong> Memeriksa seluruh gesper BCD dan <em>tank band</em> terkunci kencang.</li>
                             <li><strong>A - Air:</strong> Cek tekanan tabung (min. 200 bar/3000 psi) & hirup dari regulator utama serta octopus.</li>
-                            <li><strong>F - Final Check:</strong> Memastikan masker, fin, *dive computer*, dan aksesoris siap pakai.</li>
+                            <li><strong>F - Final Check:</strong> Memastikan masker, fin, <em>dive computer</em>, dan aksesoris siap pakai.</li>
                         </ul>
                     </div>
                 </div>
@@ -152,17 +157,17 @@
                     <div class="card">
                         <h3>Prosedur Turun (Descent)</h3>
                         <ul>
-                            <li><strong>Ekualisasi Dini & Berkala:</strong> Lakukan teknik *Valsalva* atau *Frenzel* setiap turun 1 meter untuk mencegah barotrauma telinga.</li>
-                            <li><strong>Kontrol Apung (Buoyancy):</strong> Menjaga apung netral dan posisi tubuh horizontal (*trim*) untuk menghemat energi & udara.</li>
-                            <li><strong>Disiplin Bernapas:</strong> Bernapas secara tenang dan teratur. **DILARANG KERAS MENAHAN NAPAS** untuk mencegah *lung over-expansion*.</li>
+                            <li><strong>Ekualisasi Dini & Berkala:</strong> Lakukan teknik <em>Valsalva</em> atau <em>Frenzel</em> setiap turun 1 meter untuk mencegah barotrauma telinga.</li>
+                            <li><strong>Kontrol Apung (Buoyancy):</strong> Menjaga apung netral dan posisi tubuh horizontal (<em>trim</em>) untuk menghemat energi & udara.</li>
+                            <li><strong>Disiplin Bernapas:</strong> Bernapas secara tenang dan teratur. <strong>DILARANG KERAS MENAHAN NAPAS</strong> untuk mencegah <em>lung over-expansion</em>.</li>
                         </ul>
                     </div>
                     <div class="card">
                         <h3>Prosedur Naik (Ascent)</h3>
                         <ul>
-                            <li><strong>Kecepatan Naik Aman:</strong> Batasi kecepatan naik maksimal **9–12 meter per menit** (lebih lambat dari gelembung udara terkecil).</li>
-                            <li><strong>Pemberhentian Keselamatan (Safety Stop):</strong> Wajib berhenti di kedalaman **5 meter selama 3 menit** sebelum naik ke permukaan.</li>
-                            <li><strong>Kesadaran Luar:</strong> Tangan kanan terangkat melindungi kepala, tangan kiri memegang *deflator hose*, dan berputar 360° memantau permukaan.</li>
+                            <li><strong>Kecepatan Naik Aman:</strong> Batasi kecepatan naik maksimal <strong>9–12 meter per menit</strong> (lebih lambat dari gelembung udara terkecil).</li>
+                            <li><strong>Pemberhentian Keselamatan (Safety Stop):</strong> Wajib berhenti di kedalaman <strong>5 meter selama 3 menit</strong> sebelum naik ke permukaan.</li>
+                            <li><strong>Kesadaran Luar:</strong> Tangan kanan terangkat melindungi kepala, tangan kiri memegang <em>deflator hose</em>, dan berputar 360° memantau permukaan.</li>
                         </ul>
                     </div>
                 </div>
@@ -183,8 +188,8 @@
                         <h3>Interval Permukaan & Logbook</h3>
                         <ul>
                             <li><strong>Surface Interval (SIT):</strong> Menunggu jeda waktu aman sebelum penyelaman berikutnya guna membuang residu nitrogen.</li>
-                            <li><strong>Penulisan Logbook:</strong> Mencatat kedalaman maks, *bottom time*, sisa tekanan udara, dan berat pemberat.</li>
-                            <li><strong>Aturan Penerbangan (No-Fly Window):</strong> Dilarang terbang minimal **12–18 jam** (selam tunggal) atau **24 jam** (selam repetitif/multi-hari).</li>
+                            <li><strong>Penulisan Logbook:</strong> Mencatat kedalaman maks, <em>bottom time</em>, sisa tekanan udara, dan berat pemberat.</li>
+                            <li><strong>Aturan Penerbangan (No-Fly Window):</strong> Dilarang terbang minimal <strong>12–18 jam</strong> (selam tunggal) atau <strong>24 jam</strong> (selam repetitif/multi-hari).</li>
                         </ul>
                     </div>
                 </div>
@@ -197,19 +202,19 @@
                     <div class="card warning">
                         <h3>Kehabisan Udara (Out of Air - OOA)</h3>
                         <ol>
-                            <li>Beri isyarat tangan "Habis Udara" kepada *buddy*.</li>
-                            <li>Ambil dan gunakan Octopus (*alternate air source*) milik *buddy*.</li>
-                            <li>Lakukan kontak fisik (pegang BCD *buddy*) lalu mulai prosedur naik terkontrol bersama.</li>
-                            <li>Jika *buddy* jauh: Lakukan *Controlled Emergency Swimming Ascent (CESA)* sambil menghembuskan suara (*aaaa...*) secara terus-menerus saat naik.</li>
+                            <li>Beri isyarat tangan "Habis Udara" kepada <em>buddy</em>.</li>
+                            <li>Ambil dan gunakan Octopus (<em>alternate air source</em>) milik <em>buddy</em>.</li>
+                            <li>Lakukan kontak fisik (pegang BCD <em>buddy</em>) lalu mulai prosedur naik terkontrol bersama.</li>
+                            <li>Jika <em>buddy</em> jauh: Lakukan <em>Controlled Emergency Swimming Ascent (CESA)</em> sambil menghembuskan suara (<em>aaaa...</em>) secara terus-menerus saat naik.</li>
                         </ol>
                     </div>
                     <div class="card warning">
                         <h3>Pertolongan Penyakit Dekompresi (DCS)</h3>
                         <ul>
                             <li><strong>Gejala DCS:</strong> Nyeri sendi, pusing, ruam kulit, mati rasa, atau sesak napas.</li>
-                            <li><strong>Pertolongan Pertama:</strong> Berikan **Oksigen Murni 100%** menggunakan *non-rebreather mask*.</li>
-                            <li><strong>Posisi Korban:</strong> Baringkan terlentang (*supine*), beri hidrasi jika sadar, dan jaga suhu tubuh.</li>
-                            <li><strong>Evakuasi:</strong> Segera bawa korban ke fasilitas **Chamber Recompresi (Hyperbaric)** terdekat.</li>
+                            <li><strong>Pertolongan Pertama:</strong> Berikan <strong>Oksigen Murni 100%</strong> menggunakan <em>non-rebreather mask</em>.</li>
+                            <li><strong>Posisi Korban:</strong> Baringkan terlentang (<em>supine</em>), beri hidrasi jika sadar, dan jaga suhu tubuh.</li>
+                            <li><strong>Evakuasi:</strong> Segera bawa korban ke fasilitas <strong>Chamber Recompresi (Hyperbaric)</strong> terdekat.</li>
                         </ul>
                     </div>
                 </div>
@@ -241,9 +246,9 @@
                 <div class="progress-bar-container">
                     <div class="progress-bar" id="progressBar"></div>
                 </div>
-                <p id="progressText" style="text-align: center; font-weight: bold; color: var(--secondary-blue);">0% Terverifikasi</p>
+                <p id="progressText" style="text-align: center; font-weight: bold; color: var(--accent-cyan);">0% Terverifikasi</p>
 
-                <hr style="margin: 2rem 0; border: 0; border-top: 1px solid #cbd5e1;">
+                <hr style="margin: 2rem 0; border: 0; border-top: 1px solid rgba(255, 255, 255, 0.1);">
 
                 <h3>Simulasi Safety Stop (Kedalaman 5m / 3 Menit)</h3>
                 <div class="timer-box">
@@ -264,9 +269,9 @@
                             <li><strong>Alat Selam Klasik (Heavy Gear / Mark V):</strong> Helm tembaga bersegel dengan pasokan udara dari permukaan untuk konstruksi/salvage era historis.</li>
                             <li><strong>SCUBA Open Circuit:</strong> Tabung mandiri dengan katup regulator pembuangan udara langsung ke air untuk rekreasi & survei dangkal.</li>
                             <li><strong>Semi-Closed Rebreather (SCR):</strong> Mendaur ulang sebagian gas sisa dengan pasokan campuran gas kontinu (cocok untuk operasi taktis militer).</li>
-                            <li><strong>Closed Circuit Rebreather (CCR):</strong> Mendaur ulang 100% gas pernapasan dengan pengontrol elektro-kimia PO<sub>2</sub> tanpa gelembung udara (*stealth* & *deep diving*).</li>
-                            <li><strong>SSBA (Surface-Supplied Breathing Apparatus):</strong> Pasokan udara/gas komersial via selang *umbilical* lengkap dengan komunikasi suara dan lampu helm.</li>
-                            <li><strong>Saturasi Diver (Sat Bell & Habitat):</strong> Penyelaman kedalaman ekstrem (>100m) menggunakan lonceng selam (*bell*) di mana jaringan tubuh penyelam telah jenuh gas campuran Heliox.</li>
+                            <li><strong>Closed Circuit Rebreather (CCR):</strong> Mendaur ulang 100% gas pernapasan dengan pengontrol elektro-kimia PO<sub>2</sub> tanpa gelembung udara (<em>stealth</em> & <em>deep diving</em>).</li>
+                            <li><strong>SSBA (Surface-Supplied Breathing Apparatus):</strong> Pasokan udara/gas komersial via selang <em>umbilical</em> lengkap dengan komunikasi suara dan lampu helm.</li>
+                            <li><strong>Saturasi Diver (Sat Bell & Habitat):</strong> Penyelaman kedalaman ekstrem (>100m) menggunakan lonceng selam (<em>bell</em>) di mana jaringan tubuh penyelam telah jenuh gas campuran Heliox.</li>
                         </ul>
                     </div>
                     <div class="card">
@@ -277,10 +282,10 @@
                             <li><strong>Pengelasan Bawah Air (Underwater Welding):</strong>
                                 <ul>
                                     <li><em>Wet Welding:</em> Pengelasan basah dengan elektroda khusus berlapis busur terpelindung.</li>
-                                    <li><em>Dry Hyperbaric Welding:</em> Pengelasan kering di dalam ruang kedap air (*habitat*) untuk kualitas pipa gas/minyak utama.</li>
+                                    <li><em>Dry Hyperbaric Welding:</em> Pengelasan kering di dalam ruang kedap air (<em>habitat</em>) untuk kualitas pipa gas/minyak utama.</li>
                                 </ul>
                             </li>
-                            <li><strong>Pekerjaan Salvage & Refloating:</strong> Pemotongan kerangka kapal (*underwater burning/broco torch*), rig balon pemindah beban (*air lifting bags*), dan pembersihan alur pelayaran.</li>
+                            <li><strong>Pekerjaan Salvage & Refloating:</strong> Pemotongan kerangka kapal (<em>underwater burning/broco torch</em>), rig balon pemindah beban (<em>air lifting bags</em>), dan pembersihan alur pelayaran.</li>
                         </ul>
                     </div>
                 </div>
@@ -289,7 +294,7 @@
             <!-- TAB 7: KALKULATOR NDL AIR SINGLE DIVE -->
             <section id="calc-ndl" class="tab-content">
                 <h2>1. Batas Waktu Selam Aman (US Navy Air NDL Table)</h2>
-                <p style="margin-bottom: 1.5rem;">Hitung **No-Decompression Limit (NDL)** atau waktu maksimal di dasar air tanpa memerlukan stop dekompresi wajib (Standar US Navy Rev 7).</p>
+                <p style="margin-bottom: 1.5rem;">Hitung <strong>No-Decompression Limit (NDL)</strong> atau waktu maksimal di dasar air tanpa memerlukan stop dekompresi wajib (Standar US Navy Rev 7).</p>
 
                 <div class="calc-box">
                     <div class="grid-2">
@@ -311,35 +316,35 @@
             <!-- TAB 8: KALKULATOR REPETITIVE DIVE -->
             <section id="calc-repetitive" class="tab-content">
                 <h2>2. Penyelaman Repetitif (Surface Interval & RNT)</h2>
-                <p style="margin-bottom: 1.5rem;">Menghitung **Group Repetitif**, penyerapan residu nitrogen (*Residual Nitrogen Time / RNT*), serta Total Waktu Tunggal Ekivalen (*ESDT*) untuk penyelaman kedua berdasarkan Tabel US Navy 9-7 & 9-8.</p>
+                <p style="margin-bottom: 1.5rem;">Menghitung <strong>Group Repetitif</strong>, penyerapan residu nitrogen (<em>Residual Nitrogen Time / RNT</em>), serta Total Waktu Tunggal Ekivalen (<em>ESDT</em>) untuk penyelaman kedua berdasarkan Tabel US Navy Rev 7 (Tabel 9-7 & 9-8).</p>
 
                 <div class="calc-box">
-                    <h3 style="margin-bottom: 1rem; color: var(--primary-navy);">Penyelaman Pertama (Dive 1)</h3>
+                    <h3 style="margin-bottom: 1rem; color: var(--accent-cyan);">Penyelaman Pertama (Dive 1)</h3>
                     <div class="grid-2">
                         <div class="form-group">
-                            <label>Kedalaman Dive 1 (Meter):</label>
+                            <label for="repD1Depth">Kedalaman Dive 1 (Meter):</label>
                             <input type="number" id="repD1Depth" class="form-control" value="20">
                         </div>
                         <div class="form-group">
-                            <label>Waktu Dasar / Bottom Time Dive 1 (Menit):</label>
+                            <label for="repD1Time">Waktu Dasar / Bottom Time Dive 1 (Menit):</label>
                             <input type="number" id="repD1Time" class="form-control" value="30">
                         </div>
                     </div>
 
-                    <h3 style="margin: 1rem 0; color: var(--primary-navy);">Jeda Permukaan (Surface Interval / SIT)</h3>
+                    <h3 style="margin: 1.2rem 0 1rem 0; color: var(--accent-cyan);">Jeda Permukaan (Surface Interval / SIT)</h3>
                     <div class="form-group">
-                        <label>Durasi Permukaan (Menit):</label>
+                        <label for="repSIT">Durasi Permukaan (Menit):</label>
                         <input type="number" id="repSIT" class="form-control" value="60">
                     </div>
 
-                    <h3 style="margin: 1rem 0; color: var(--primary-navy);">Penyelaman Kedua (Dive 2)</h3>
+                    <h3 style="margin: 1.2rem 0 1rem 0; color: var(--accent-cyan);">Penyelaman Kedua (Dive 2)</h3>
                     <div class="grid-2">
                         <div class="form-group">
-                            <label>Kedalaman Rencana Dive 2 (Meter):</label>
+                            <label for="repD2Depth">Kedalaman Rencana Dive 2 (Meter):</label>
                             <input type="number" id="repD2Depth" class="form-control" value="16">
                         </div>
                         <div class="form-group">
-                            <label>Rencana Waktu Dasar Dive 2 (Menit):</label>
+                            <label for="repD2Time">Rencana Waktu Dasar Dive 2 (Menit):</label>
                             <input type="number" id="repD2Time" class="form-control" value="30">
                         </div>
                     </div>
@@ -358,11 +363,11 @@
                 <div class="calc-box">
                     <div class="grid-2">
                         <div class="form-group">
-                            <label>Kedalaman Penyelaman (Meter):</label>
+                            <label for="decDepth">Kedalaman Penyelaman (Meter):</label>
                             <input type="number" id="decDepth" class="form-control" value="30">
                         </div>
                         <div class="form-group">
-                            <label>Total Waktu di Dasar / Bottom Time (Menit):</label>
+                            <label for="decTime">Total Waktu di Dasar / Bottom Time (Menit):</label>
                             <input type="number" id="decTime" class="form-control" value="40">
                         </div>
                     </div>
@@ -375,21 +380,21 @@
             <!-- TAB 10: KALKULATOR NITROX -->
             <section id="calc-nitrox" class="tab-content">
                 <h2>4. Penyelaman Nitrox (EAD & MOD)</h2>
-                <p style="margin-bottom: 1.5rem;">Menghitung **Equivalent Air Depth (EAD)**, **Maximum Operating Depth (MOD)**, dan tekanan parsial oksigen (PO<sub>2</sub>) untuk campuran Nitrox (EAN<sub>x</sub>).</p>
+                <p style="margin-bottom: 1.5rem;">Menghitung <strong>Equivalent Air Depth (EAD)</strong>, <strong>Maximum Operating Depth (MOD)</strong>, dan tekanan parsial oksigen (PO<sub>2</sub>) untuk campuran Nitrox (EAN<sub>x</sub>).</p>
 
                 <div class="calc-box">
                     <div class="grid-2">
                         <div class="form-group">
-                            <label>Persentase Oksigen / FO2 (%):</label>
+                            <label for="nxO2">Persentase Oksigen / FO2 (%):</label>
                             <input type="number" id="nxO2" class="form-control" value="32" placeholder="32 untuk EAN32">
                         </div>
                         <div class="form-group">
-                            <label>Kedalaman Rencana (Meter):</label>
+                            <label for="nxDepth">Kedalaman Rencana (Meter):</label>
                             <input type="number" id="nxDepth" class="form-control" value="22">
                         </div>
                     </div>
                     <div class="form-group">
-                        <label>Batas Maksimal PO2 (Bar):</label>
+                        <label for="nxPO2Limit">Batas Maksimal PO2 (Bar):</label>
                         <select id="nxPO2Limit" class="form-control">
                             <option value="1.4" selected>1.4 Bar (Standar Operasional Aman Working)</option>
                             <option value="1.6">1.6 Bar (Batas Maksimal Contingency / Deco)</option>
@@ -409,11 +414,11 @@
                 <div class="calc-box">
                     <div class="grid-2">
                         <div class="form-group">
-                            <label>Persentase Oksigen / FO2 (%):</label>
+                            <label for="hxO2">Persentase Oksigen / FO2 (%):</label>
                             <input type="number" id="hxO2" class="form-control" value="16" placeholder="Contoh: 16%">
                         </div>
                         <div class="form-group">
-                            <label>Kedalaman Penyelaman (Meter):</label>
+                            <label for="hxDepth">Kedalaman Penyelaman (Meter):</label>
                             <input type="number" id="hxDepth" class="form-control" value="60">
                         </div>
                     </div>
@@ -426,26 +431,26 @@
             <!-- TAB 12: KALKULATOR TRIMIX -->
             <section id="calc-trimix" class="tab-content">
                 <h2>6. Penyelaman Trimix (O2 / He / N2)</h2>
-                <p style="margin-bottom: 1.5rem;">Menghitung **Equivalent Narcotic Depth (END)**, **EAD**, **MOD**, serta tekanan parsial ketiga gas (PO<sub>2</sub>, PN<sub>2</sub>, P<sub>He</sub>) untuk campuran teknis Trimix.</p>
+                <p style="margin-bottom: 1.5rem;">Menghitung <strong>Equivalent Narcotic Depth (END)</strong>, <strong>EAD</strong>, <strong>MOD</strong>, serta tekanan parsial ketiga gas (PO<sub>2</sub>, PN<sub>2</sub>, P<sub>He</sub>) untuk campuran teknis Trimix.</p>
 
                 <div class="calc-box">
                     <div class="grid-2">
                         <div class="form-group">
-                            <label>Persentase Oksigen / FO2 (%):</label>
+                            <label for="tmxO2">Persentase Oksigen / FO2 (%):</label>
                             <input type="number" id="tmxO2" class="form-control" value="18" placeholder="Contoh: 18">
                         </div>
                         <div class="form-group">
-                            <label>Persentase Helium / FHe (%):</label>
+                            <label for="tmxHe">Persentase Helium / FHe (%):</label>
                             <input type="number" id="tmxHe" class="form-control" value="45" placeholder="Contoh: 45">
                         </div>
                     </div>
                     <div class="grid-2">
                         <div class="form-group">
-                            <label>Kedalaman Penyelaman (Meter):</label>
+                            <label for="tmxDepth">Kedalaman Penyelaman (Meter):</label>
                             <input type="number" id="tmxDepth" class="form-control" value="65">
                         </div>
                         <div class="form-group">
-                            <label>Batas Maksimal PO2 Working (Bar):</label>
+                            <label for="tmxPO2Limit">Batas Maksimal PO2 Working (Bar):</label>
                             <input type="number" id="tmxPO2Limit" class="form-control" value="1.4" step="0.1">
                         </div>
                     </div>
@@ -455,53 +460,54 @@
                 <div id="resultTrimixBox" class="result-box"></div>
             </section>
 
-            <!-- SECTION TERBARU: FORM KRITIK & SARAN / ADUAN -->
-            <!-- Perbarui bagian form pada index.html -->
-<form id="feedbackForm" onsubmit="event.preventDefault(); saveFeedback();">
-    <div class="feedback-grid">
-        <div class="form-group">
-            <label for="fbNama">Nama Lengkap *</label>
-            <input type="text" id="fbNama" name="nama" class="feedback-input" placeholder="Contoh: Budi Santoso" required>
-        </div>
-        <div class="form-group">
-            <label for="fbEmail">Alamat Email *</label>
-            <input type="email" id="fbEmail" name="email" class="feedback-input" placeholder="nama@email.com" required>
-        </div>
-        <div class="form-group">
-            <label for="fbKategori">Kategori Keperluan</label>
-            <select id="fbKategori" name="kategori" class="feedback-input feedback-select">
-                <option value="Sertifikasi & Mutu" selected>Sertifikasi & Mutu</option>
-                <option value="Operasional Penyelaman">Operasional Penyelaman</option>
-                <option value="Evaluasi Keselamatan">Evaluasi Keselamatan</option>
-                <option value="Kritik & Saran Umum">Kritik & Saran Umum</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="fbPhone">Nomor Telepon / WhatsApp</label>
-            <input type="tel" id="fbPhone" name="phone" class="feedback-input" placeholder="081234567890">
-        </div>
-    </div>
-    <div class="form-group" style="margin-top: 1rem;">
-        <label for="fbPesan">Pesan / Detail Pertanyaan *</label>
-        <textarea id="fbPesan" name="pesan" class="feedback-input feedback-textarea" placeholder="Tuliskan pesan Anda secara jelas..." required></textarea>
-    </div>
+            <!-- SECTION FORM KRITIK & SARAN / ADUAN -->
+            <section class="feedback-section">
+                <h3 class="feedback-title">Kirim Pesan atau Aduan</h3>
+                <form id="feedbackForm" onsubmit="event.preventDefault(); saveFeedback();">
+                    <div class="feedback-grid">
+                        <div class="form-group">
+                            <label for="fbNama">Nama Lengkap *</label>
+                            <input type="text" id="fbNama" class="feedback-input" placeholder="Contoh: Budi Santoso" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="fbEmail">Alamat Email *</label>
+                            <input type="email" id="fbEmail" class="feedback-input" placeholder="nama@email.com" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="fbKategori">Kategori Keperluan</label>
+                            <select id="fbKategori" class="feedback-input feedback-select">
+                                <option value="Sertifikasi & Mutu" selected>Sertifikasi & Mutu</option>
+                                <option value="Operasional Penyelaman">Operasional Penyelaman</option>
+                                <option value="Evaluasi Keselamatan">Evaluasi Keselamatan</option>
+                                <option value="Kritik & Saran Umum">Kritik & Saran Umum</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="fbPhone">Nomor Telepon / WhatsApp</label>
+                            <input type="tel" id="fbPhone" class="feedback-input" placeholder="081234567890">
+                        </div>
+                    </div>
+                    <div class="form-group" style="margin-top: 1rem;">
+                        <label for="fbPesan">Pesan / Detail Pertanyaan *</label>
+                        <textarea id="fbPesan" class="feedback-input feedback-textarea" placeholder="Tuliskan pesan Anda secara jelas..." required></textarea>
+                    </div>
 
-    <div style="margin-top: 1.2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
-        <button type="submit" id="fbSubmitBtn" class="btn-calc" style="background: var(--success); color: #030b1e; max-width: 260px; font-weight: bold; border-radius: 8px;">Kirim Pesan / Aduan</button>
-        <button type="button" class="btn-action" onclick="toggleFeedbackList()" style="background: transparent; border: 1px solid var(--accent-cyan); color: var(--accent-cyan);">📋 Pesan Tersimpan (<span id="fbCount">0</span>)</button>
-    </div>
-</form>
+                    <div style="margin-top: 1.2rem; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+                        <button type="submit" class="btn-calc" style="background: var(--accent-green); color: #030b1e; max-width: 260px; font-weight: bold; border-radius: 8px;">Kirim Pesan / Aduan</button>
+                        <button type="button" class="btn-action" onclick="toggleFeedbackList()" style="background: transparent; border: 1px solid var(--accent-cyan); color: var(--accent-cyan);">📋 Pesan Tersimpan (<span id="fbCount">0</span>)</button>
+                    </div>
+                </form>
 
                 <!-- ALERT SUKSES SAMPAIAN PESAN -->
                 <div id="fbAlert" class="result-box safe" style="display:none; margin-top: 1rem;">
                     ✅ Terima kasih! Pesan/Aduan Anda telah berhasil dikirim dan tersimpan di database lokal.
                 </div>
 
-                <!-- DAFTAR PESAN TERSIMPAN (DATABASE LOKAL) -->
+                <!-- DAFTAR PESAN TERSIMPAN -->
                 <div id="fbListContainer" style="display:none; margin-top: 1.5rem; background: #0a1322; border: 1px solid var(--accent-cyan); border-radius: 10px; padding: 1.2rem; color: #fff;">
                     <h4 style="color: var(--accent-cyan); margin-bottom: 1rem; display: flex; justify-content: space-between; align-items: center;">
                         Daftar Pesan & Aduan Terdaftar
-                        <button onclick="clearAllFeedback()" style="background: var(--warning); color: #fff; border:none; padding: 4px 10px; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">Hapus Semua</button>
+                        <button onclick="clearAllFeedback()" style="background: var(--accent-red); color: #fff; border:none; padding: 4px 10px; border-radius: 4px; cursor: pointer; font-size: 0.8rem;">Hapus Semua</button>
                     </h4>
                     <div id="fbListItems" style="display: flex; flex-direction: column; gap: 10px; max-height: 300px; overflow-y: auto;"></div>
                 </div>
@@ -513,6 +519,7 @@
         </footer>
     </div>
 
+    <!-- Pemanggilan File JavaScript Eksternal -->
     <script src="app.js"></script>
 </body>
 </html>
