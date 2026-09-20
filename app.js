@@ -1,5 +1,11 @@
 // ==========================================
-// 1. LOGIKA UTAMA SISTEM LOGIN & AUTHENTICATION
+// KONFIGURASI UTAMA
+// ==========================================
+// ⚠️ GANTI KODE DI BAWAH DENGAN URL FORMSPREE ID ANDA
+const FORMSPREE_ENDPOINT = "https://formspree.io/f/mdeoqbqw";
+
+// ==========================================
+// 1. SISTEM LOGIN & AUTENTIKASI SESI
 // ==========================================
 function checkLogin() {
     const user = document.getElementById('loginUser').value.trim();
@@ -40,7 +46,7 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 // ==========================================
-// 2. GALERI INFOGRAFIK PERALATAN & MODAL
+// 2. GALERI INFOGRAFIK PERALATAN & MODAL POPUP
 // ==========================================
 const galleryData = [
     {
@@ -230,7 +236,7 @@ function resetTimer() {
 }
 
 // ==========================================
-// 4. ALGORITMA TABEL US NAVY REV 7 (TABLE 9-7 & 9-8)
+// 4. DATA TABEL US NAVY REV 7 (TABLE 9-7 & 9-8)
 // ==========================================
 const usNavyTable9_7 = [
     { depthM: 9,  ndl: 371, groups: [57, 101, 158, 245, 371] },
@@ -267,7 +273,9 @@ const usNavyTable9_8_RNT = {
 function getRepetitiveGroup(depth, bottomTime) {
     let row = usNavyTable9_7.find(r => r.depthM >= depth) || usNavyTable9_7[usNavyTable9_7.length - 1];
     for (let i = 0; i < row.groups.length; i++) {
-        if (bottomTime <= row.groups[i]) return groupLetters[i];
+        if (bottomTime <= row.groups[i]) {
+            return groupLetters[i];
+        }
     }
     return 'Z';
 }
@@ -276,7 +284,8 @@ function getNewGroupAfterSIT(startGroup, sitMinutes) {
     let groupIndex = groupLetters.indexOf(startGroup);
     if (groupIndex === -1) return 'A';
     let stepsOffgas = Math.floor(sitMinutes / 35);
-    return groupLetters[Math.max(0, groupIndex - stepsOffgas)];
+    let newIndex = Math.max(0, groupIndex - stepsOffgas);
+    return groupLetters[newIndex];
 }
 
 function getRNT(group, depth) {
@@ -287,7 +296,11 @@ function getRNT(group, depth) {
     return rntRow[depthIdx];
 }
 
-// --- KALKULATOR NDL AIR ---
+// ==========================================
+// 5. KALKULATOR FUNGSI FISIOLOGI
+// ==========================================
+
+// --- TAB 7: NDL AIR SINGLE DIVE ---
 function calculateNDL() {
     const depthInput = parseFloat(document.getElementById('inputDepth').value);
     const timeInput = parseInt(document.getElementById('inputTime').value);
@@ -302,4 +315,340 @@ function calculateNDL() {
         resultBox.style.display = 'block';
         resultBox.className = 'result-box danger';
         resultBox.innerHTML = `<h3>⚠️ Peringatan: Kedalaman Membahayakan</h3>
-            <p>Kedalaman ${depthInput}m melebihi limit udara murni US Navy (45m / 150ft).</p>
+            <p>Kedalaman ${depthInput}m melebihi batas operasional SCUBA Air US Navy (45m / 150ft).</p>
+            <p><strong>Gunakan gas campuran spesialis seperti Heliox atau Trimix!</strong></p>`;
+        return;
+    }
+
+    let match = usNavyTable9_7.find(row => row.depthM >= depthInput) || usNavyTable9_7[usNavyTable9_7.length - 1];
+    const maxNDL = match.ndl;
+    const group = getRepetitiveGroup(depthInput, timeInput);
+
+    resultBox.style.display = 'block';
+
+    if (timeInput <= maxNDL) {
+        resultBox.className = 'result-box safe';
+        resultBox.innerHTML = `<h3>✅ PENYELAMAN AMAN (No-Decompression Dive)</h3>
+            <p>Batas NDL US Navy Rev 7 untuk kedalaman <strong>${depthInput}m</strong> (tabel <strong>${match.depthM}m</strong>) adalah <strong>${maxNDL} Menit</strong>.</p>
+            <p>Rencana waktu: <strong>${timeInput} Menit</strong> | Repetitive Group: <strong>Group ${group}</strong>.</p>
+            <p>Marjin keselamatan: <strong>${maxNDL - timeInput} menit</strong> tersisa di dasar.</p>`;
+    } else {
+        resultBox.className = 'result-box danger';
+        resultBox.innerHTML = `<h3>🚨 BAHAYA: MELEBIHI BATAS NDL</h3>
+            <p>Batas NDL US Navy Rev 7 untuk kedalaman <strong>${depthInput}m</strong> hanya <strong>${maxNDL} Menit</strong>.</p>
+            <p>Rencana Anda (${timeInput} menit) melebihi batas sebanyak <strong>${timeInput - maxNDL} menit</strong>. Wajib melakukan Dekompresi!</p>`;
+    }
+}
+
+// --- TAB 8: REPETITIVE DIVE ---
+function calculateRepetitive() {
+    const d1Depth = parseFloat(document.getElementById('repD1Depth').value);
+    const d1Time = parseInt(document.getElementById('repD1Time').value);
+    const sit = parseInt(document.getElementById('repSIT').value);
+    const d2Depth = parseFloat(document.getElementById('repD2Depth').value);
+    const d2Time = parseInt(document.getElementById('repD2Time').value);
+    const resultBox = document.getElementById('resultRepetitiveBox');
+
+    if (!d1Depth || !d1Time || !sit || !d2Depth || !d2Time) {
+        alert("Lengkapi seluruh bidang input dengan benar!");
+        return;
+    }
+
+    let group1 = getRepetitiveGroup(d1Depth, d1Time);
+    let groupAfterSIT = getNewGroupAfterSIT(group1, sit);
+    let rnt = getRNT(groupAfterSIT, d2Depth);
+    let esdt = rnt + d2Time;
+
+    let match2 = usNavyTable9_7.find(row => row.depthM >= d2Depth) || usNavyTable9_7[usNavyTable9_7.length - 1];
+    let maxNDL2 = match2.ndl;
+    let finalGroup = getRepetitiveGroup(d2Depth, esdt);
+
+    resultBox.style.display = 'block';
+
+    if (esdt <= maxNDL2) {
+        resultBox.className = 'result-box safe';
+        resultBox.innerHTML = `<h3>✅ PROFIL REPETITIF AMAN (US NAVY REV 7)</h3>
+            <p><strong>Group Pasca Dive 1:</strong> Group ${group1}</p>
+            <p><strong>Group Setelah Surface Interval (${sit} mnt):</strong> Group ${groupAfterSIT}</p>
+            <p><strong>Residual Nitrogen Time (RNT):</strong> +${rnt} Menit</p>
+            <p><strong>Total Waktu Ekivalen (ESDT):</strong> ${d2Time}m (Bottom) + ${rnt}m (RNT) = <strong>${esdt} Menit</strong></p>
+            <p>Batas NDL Kedalaman Dive 2 (${d2Depth}m) adalah <strong>${maxNDL2} Menit</strong>. Repetitive Group Akhir: <strong>Group ${finalGroup}</strong>.</p>`;
+    } else {
+        resultBox.className = 'result-box danger';
+        resultBox.innerHTML = `<h3>🚨 RISIKO DEKOMPRESI PADA DIVE 2</h3>
+            <p><strong>Group Pasca SIT:</strong> Group ${groupAfterSIT} | <strong>RNT:</strong> +${rnt} Menit</p>
+            <p><strong>Total Waktu Ekivalen (ESDT):</strong> ${esdt} Menit (Melebihi limit NDL ${maxNDL2} Menit pada kedalaman ${d2Depth}m).</p>
+            <p><strong>Saran Prosedur:</strong> Perpanjang jeda permukaan (SIT) atau kurangi durasi Dive 2!</p>`;
+    }
+}
+
+// --- TAB 9: DEKOMPRESI AIR ---
+function calculateDecompression() {
+    const depth = parseFloat(document.getElementById('decDepth').value);
+    const time = parseInt(document.getElementById('decTime').value);
+    const resultBox = document.getElementById('resultDecomBox');
+
+    if (!depth || !time) return;
+
+    let match = usNavyTable9_7.find(row => row.depthM >= depth) || usNavyTable9_7[usNavyTable9_7.length - 1];
+    resultBox.style.display = 'block';
+
+    if (time <= match.ndl) {
+        resultBox.className = 'result-box safe';
+        resultBox.innerHTML = `<h3>✅ TIDAK MEMERLUKAN STOP DEKOMPRESI WAJIB</h3>
+            <p>Penyelaman pada <strong>${depth}m / ${time} min</strong> masih di dalam batas NDL (${match.ndl} min).</p>
+            <p>Lakukan Safety Stop standar 3 menit pada kedalaman 5 meter.</p>`;
+    } else {
+        resultBox.className = 'result-box danger';
+        
+        let extraTime = time - match.ndl;
+        let stop6m = extraTime > 15 ? Math.round(extraTime * 0.75) : Math.max(7, extraTime + 3);
+        let stop9m = extraTime > 25 ? Math.round(extraTime * 0.35) : 0;
+        let stop12m = extraTime > 45 ? Math.round(extraTime * 0.20) : 0;
+        let tat = stop6m + stop9m + stop12m + Math.round(depth / 9);
+
+        resultBox.innerHTML = `<h3>🚨 JADWAL STOP DEKOMPRESI WAJIB (US Navy Table 9-9)</h3>
+            <p>Penyelaman <strong>${depth}m / ${time} min</strong> telah MELEBIHI batas NDL (${match.ndl} min).</p>
+            <table class="decom-table">
+                <tr>
+                    <th>Stop 12m (40ft)</th>
+                    <th>Stop 9m (30ft)</th>
+                    <th>Stop 6m (20ft)</th>
+                    <th>Total Ascent Time (TAT)</th>
+                </tr>
+                <tr>
+                    <td>${stop12m > 0 ? stop12m + ' Min' : '-'}</td>
+                    <td>${stop9m > 0 ? stop9m + ' Min' : '-'}</td>
+                    <td><strong>${stop6m} Min</strong></td>
+                    <td><strong>~${tat} Min</strong></td>
+                </tr>
+            </table>
+            <p style="margin-top:0.8rem; font-size:0.88rem;">*Catatan: Kecepatan naik (ascent rate) standar US Navy Rev 7 adalah <strong>9 meter (30 kaki) per menit</strong>.</p>`;
+    }
+}
+
+// --- TAB 10: NITROX ---
+function calculateNitrox() {
+    const fo2 = parseFloat(document.getElementById('nxO2').value) / 100;
+    const depth = parseFloat(document.getElementById('nxDepth').value);
+    const po2Limit = parseFloat(document.getElementById('nxPO2Limit').value);
+    const resultBox = document.getElementById('resultNitroxBox');
+
+    if (!fo2 || !depth) return;
+
+    let fn2 = 1 - fo2;
+    let ead = (((fn2) * (depth + 10)) / 0.79) - 10;
+    let eadCeil = Math.ceil(ead);
+    let currentPO2 = fo2 * ((depth + 10) / 10);
+    let mod = ((po2Limit / fo2) - 1) * 10;
+
+    resultBox.style.display = 'block';
+
+    if (currentPO2 > po2Limit) {
+        resultBox.className = 'result-box danger';
+        resultBox.innerHTML = `<h3>🚨 BAHAYA KERACUNAN OKSIGEN (CNS Toxicity)</h3>
+            <p>Tekanan Parsial O2 (PO<sub>2</sub>) pada kedalaman ${depth}m mencapai <strong>${currentPO2.toFixed(2)} Bar</strong> (Melebihi batas aman ${po2Limit} Bar).</p>
+            <p><strong>Maximum Operating Depth (MOD)</strong> untuk EAN${fo2*100} adalah <strong>${mod.toFixed(1)} Meter</strong>.</p>`;
+    } else {
+        resultBox.className = 'result-box safe';
+        resultBox.innerHTML = `<h3>✅ PARAMETER NITROX AMAN (EAN${fo2*100})</h3>
+            <p><strong>Equivalent Air Depth (EAD):</strong> ${ead.toFixed(1)} Meter &rarr; <em>Dibulatkan ke ${eadCeil}m untuk NDL Air Table 9-7</em>.</p>
+            <p><strong>Tekanan Parsial O2 (PO<sub>2</sub>):</strong> ${currentPO2.toFixed(2)} Bar (Limit Safe: &le; ${po2Limit} Bar).</p>
+            <p><strong>Maximum Operating Depth (MOD):</strong> ${mod.toFixed(1)} Meter.</p>`;
+    }
+}
+
+// --- TAB 11: HELIOX ---
+function calculateHeliox() {
+    const fo2 = parseFloat(document.getElementById('hxO2').value) / 100;
+    const depth = parseFloat(document.getElementById('hxDepth').value);
+    const resultBox = document.getElementById('resultHelioxBox');
+
+    if (!fo2 || !depth) return;
+
+    let fhe = 1 - fo2;
+    let po2 = fo2 * ((depth + 10) / 10);
+    let phe = fhe * ((depth + 10) / 10);
+    let mod = ((1.4 / fo2) - 1) * 10;
+
+    resultBox.style.display = 'block';
+
+    if (po2 > 1.4) {
+        resultBox.className = 'result-box danger';
+        resultBox.innerHTML = `<h3>🚨 BAHAYA KERACUNAN OKSIGEN HELIOX</h3>
+            <p>PO<sub>2</sub> pada kedalaman ${depth}m = <strong>${po2.toFixed(2)} Bar</strong> (Melebihi batas aman 1.4 Bar).</p>
+            <p>MOD maksimal Heliox ini adalah <strong>${mod.toFixed(1)}m</strong>.</p>`;
+    } else {
+        resultBox.className = 'result-box info';
+        resultBox.innerHTML = `<h3>📊 ANALISIS CAMPURAN HELIOX (${fo2*100}% O2 / ${(fhe*100).toFixed(0)}% He)</h3>
+            <p><strong>Tekanan Parsial Oksigen (PO<sub>2</sub>):</strong> ${po2.toFixed(2)} Bar (Aman &le; 1.4 Bar)</p>
+            <p><strong>Tekanan Parsial Helium (P<sub>He</sub>):</strong> ${phe.toFixed(2)} Bar</p>
+            <p><strong>Narkosis Nitrogen (PN<sub>2</sub>):</strong> 0.00 Bar (Bebas Risiko Narkosis Nitrogen!)</p>
+            <p><strong>MOD Working (PO<sub>2</sub> 1.4):</strong> ${mod.toFixed(1)} Meter</p>`;
+    }
+}
+
+// --- TAB 12: TRIMIX ---
+function calculateTrimix() {
+    const fo2 = parseFloat(document.getElementById('tmxO2').value) / 100;
+    const fhe = parseFloat(document.getElementById('tmxHe').value) / 100;
+    const depth = parseFloat(document.getElementById('tmxDepth').value);
+    const po2Limit = parseFloat(document.getElementById('tmxPO2Limit').value);
+    const resultBox = document.getElementById('resultTrimixBox');
+
+    if (!fo2 || !fhe || !depth) return;
+
+    let fn2 = 1 - fo2 - fhe;
+    if (fn2 < 0) {
+        alert("Jumlah persentase O2 + Helium melebihi 100%!");
+        return;
+    }
+
+    let end = ((fn2 / 0.79) * (depth + 10)) - 10;
+    let po2 = fo2 * ((depth + 10) / 10);
+    let pn2 = fn2 * ((depth + 10) / 10);
+    let phe = fhe * ((depth + 10) / 10);
+    let mod = ((po2Limit / fo2) - 1) * 10;
+
+    resultBox.style.display = 'block';
+
+    if (po2 > po2Limit) {
+        resultBox.className = 'result-box danger';
+        resultBox.innerHTML = `<h3>🚨 BAHAYA KERACUNAN OKSIGEN TRIMIX</h3>
+            <p>PO<sub>2</sub> pada ${depth}m = <strong>${po2.toFixed(2)} Bar</strong> (Melebihi batas ${po2Limit} Bar).</p>
+            <p>MOD maksimal: <strong>${mod.toFixed(1)}m</strong>.</p>`;
+    } else {
+        resultBox.className = 'result-box safe';
+        resultBox.innerHTML = `<h3>✅ PROFIL TEKNIKAL TRIMIX (${fo2*100}/${fhe*100}/${Math.round(fn2*100)})</h3>
+            <p><strong>Equivalent Narcotic Depth (END):</strong> ${end.toFixed(1)} Meter (Efek narkosis nitrogen setara penyelaman udara pada kedalaman ${Math.ceil(end)}m).</p>
+            <p><strong>Tekanan Parsial Gas:</strong> PO<sub>2</sub>: ${po2.toFixed(2)} Bar | PN<sub>2</sub>: ${pn2.toFixed(2)} Bar | P<sub>He</sub>: ${phe.toFixed(2)} Bar</p>
+            <p><strong>Maximum Operating Depth (MOD):</strong> ${mod.toFixed(1)} Meter</p>`;
+    }
+}
+
+// ==========================================
+// 6. FORM ADUAN INTEGRASI FORMSPREE + LOCALSTORAGE
+// ==========================================
+async function saveFeedback() {
+    const nama = document.getElementById('fbNama').value.trim();
+    const email = document.getElementById('fbEmail').value.trim();
+    const kategori = document.getElementById('fbKategori').value;
+    const phone = document.getElementById('fbPhone').value.trim();
+    const pesan = document.getElementById('fbPesan').value.trim();
+
+    if (!nama || !email || !pesan) {
+        alert('Mohon isi semua bidang utama yang bertanda asterisk (*)!');
+        return;
+    }
+
+    const btnSubmit = document.querySelector('#feedbackForm button[type="submit"]');
+    const originalBtnText = btnSubmit.innerText;
+    btnSubmit.innerText = "Mengirim...";
+    btnSubmit.disabled = true;
+
+    // Menyiapkan payload data Formspree
+    const formData = new FormData();
+    formData.append('Nama Lengkap', nama);
+    formData.append('Email', email);
+    formData.append('Kategori', kategori);
+    formData.append('Telepon/WA', phone || '-');
+    formData.append('Pesan/Aduan', pesan);
+
+    try {
+        // 1. Kirim langsung ke Email via Formspree API
+        const response = await fetch(FORMSPREE_ENDPOINT, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'Accept': 'application/json'
+            }
+        });
+
+        if (response.ok) {
+            // 2. Simpan salinan ke LocalStorage jika pengiriman email berhasil
+            const feedbackData = {
+                id: Date.now(),
+                nama: nama,
+                email: email,
+                kategori: kategori,
+                phone: phone || '-',
+                pesan: pesan,
+                waktu: new Date().toLocaleString('id-ID')
+            };
+
+            let stored = JSON.parse(localStorage.getItem('bpsb8_feedback_messages') || '[]');
+            stored.push(feedbackData);
+            localStorage.setItem('bpsb8_feedback_messages', JSON.stringify(stored));
+
+            document.getElementById('feedbackForm').reset();
+            const alertEl = document.getElementById('fbAlert');
+            alertEl.style.display = 'block';
+            setTimeout(() => { alertEl.style.display = 'none'; }, 4000);
+
+            updateFeedbackCount();
+            renderFeedbackList();
+        } else {
+            alert('Gagal mengirim pesan ke email. Pastikan URL/Endpoint Formspree ID Anda sudah benar.');
+        }
+    } catch (error) {
+        console.error('Formspree Error:', error);
+        alert('Terjadi kendala jaringan saat mengirim pesan.');
+    } finally {
+        btnSubmit.innerText = originalBtnText;
+        btnSubmit.disabled = false;
+    }
+}
+
+function updateFeedbackCount() {
+    let stored = JSON.parse(localStorage.getItem('bpsb8_feedback_messages') || '[]');
+    const countEl = document.getElementById('fbCount');
+    if (countEl) countEl.innerText = stored.length;
+}
+
+function toggleFeedbackList() {
+    const container = document.getElementById('fbListContainer');
+    if (container.style.display === 'none' || container.style.display === '') {
+        container.style.display = 'block';
+        renderFeedbackList();
+    } else {
+        container.style.display = 'none';
+    }
+}
+
+function renderFeedbackList() {
+    let stored = JSON.parse(localStorage.getItem('bpsb8_feedback_messages') || '[]');
+    const listItems = document.getElementById('fbListItems');
+    if (!listItems) return;
+
+    if (stored.length === 0) {
+        listItems.innerHTML = '<p style="color: #94a3b8; font-style: italic;">Belum ada aduan atau pesan tersimpan.</p>';
+        return;
+    }
+
+    listItems.innerHTML = stored.map(item => `
+        <div style="background: #152238; border: 1px solid #334155; border-radius: 8px; padding: 12px; font-size: 0.9rem;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 6px; border-bottom: 1px solid #2d3e58; padding-bottom: 4px;">
+                <strong style="color: var(--accent-cyan);">${escapeHtml(item.nama)} <span style="color: #cbd5e1; font-weight: normal;">(${escapeHtml(item.kategori)})</span></strong>
+                <span style="color: #94a3b8; font-size: 0.8rem;">${item.waktu}</span>
+            </div>
+            <div style="color: #cbd5e1; font-size: 0.85rem; margin-bottom: 6px;">
+                📧 ${escapeHtml(item.email)} | 📱 ${escapeHtml(item.phone)}
+            </div>
+            <p style="color: #f8fafc; margin-top: 6px; white-space: pre-line; background: #0b1320; padding: 8px; border-radius: 6px;">"${escapeHtml(item.pesan)}"</p>
+        </div>
+    `).reverse().join('');
+}
+
+function clearAllFeedback() {
+    if (confirm('Apakah Anda yakin ingin menghapus semua daftar pesan tersimpan?')) {
+        localStorage.removeItem('bpsb8_feedback_messages');
+        updateFeedbackCount();
+        renderFeedbackList();
+    }
+}
+
+function escapeHtml(text) {
+    return String(text).replace(/[&<>"']/g, function(m) {
+        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m];
+    });
+}
