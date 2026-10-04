@@ -1,8 +1,8 @@
 // ==========================================
-// KONFIGURASI UTAMA
+// KONFIGURASI FORMSPREE
+// Ganti URL di bawah dengan Endpoint Formspree Anda
 // ==========================================
-// ⚠️ GANTI KODE DI BAWAH DENGAN URL FORMSPREE ID ANDA
-const FORMSPREE_ENDPOINT = "https://formspree.io/f/mdeoqbqw";
+const FORMSPREE_ENDPOINT = 'https://formspree.io/f/mdeoqbqw';
 
 // ==========================================
 // 1. SISTEM LOGIN & AUTENTIKASI SESI
@@ -300,7 +300,6 @@ function getRNT(group, depth) {
 // 5. KALKULATOR FUNGSI FISIOLOGI
 // ==========================================
 
-// --- TAB 7: NDL AIR SINGLE DIVE ---
 function calculateNDL() {
     const depthInput = parseFloat(document.getElementById('inputDepth').value);
     const timeInput = parseInt(document.getElementById('inputTime').value);
@@ -340,7 +339,6 @@ function calculateNDL() {
     }
 }
 
-// --- TAB 8: REPETITIVE DIVE ---
 function calculateRepetitive() {
     const d1Depth = parseFloat(document.getElementById('repD1Depth').value);
     const d1Time = parseInt(document.getElementById('repD1Time').value);
@@ -382,7 +380,6 @@ function calculateRepetitive() {
     }
 }
 
-// --- TAB 9: DEKOMPRESI AIR ---
 function calculateDecompression() {
     const depth = parseFloat(document.getElementById('decDepth').value);
     const time = parseInt(document.getElementById('decTime').value);
@@ -427,7 +424,6 @@ function calculateDecompression() {
     }
 }
 
-// --- TAB 10: NITROX ---
 function calculateNitrox() {
     const fo2 = parseFloat(document.getElementById('nxO2').value) / 100;
     const depth = parseFloat(document.getElementById('nxDepth').value);
@@ -458,7 +454,6 @@ function calculateNitrox() {
     }
 }
 
-// --- TAB 11: HELIOX ---
 function calculateHeliox() {
     const fo2 = parseFloat(document.getElementById('hxO2').value) / 100;
     const depth = parseFloat(document.getElementById('hxDepth').value);
@@ -488,7 +483,6 @@ function calculateHeliox() {
     }
 }
 
-// --- TAB 12: TRIMIX ---
 function calculateTrimix() {
     const fo2 = parseFloat(document.getElementById('tmxO2').value) / 100;
     const fhe = parseFloat(document.getElementById('tmxHe').value) / 100;
@@ -527,8 +521,19 @@ function calculateTrimix() {
 }
 
 // ==========================================
-// 6. FORM ADUAN INTEGRASI FORMSPREE + LOCALSTORAGE
+// 6. FORM ADUAN INTEGRASI FORMSPREE
 // ==========================================
+
+function escapeHtml(text) {
+    if (!text) return '';
+    return text
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+}
+
 async function saveFeedback() {
     const nama = document.getElementById('fbNama').value.trim();
     const email = document.getElementById('fbEmail').value.trim();
@@ -546,16 +551,15 @@ async function saveFeedback() {
     btnSubmit.innerText = "Mengirim...";
     btnSubmit.disabled = true;
 
-    // Menyiapkan payload data Formspree
+    // Menyiapkan Form Data untuk dikirim ke Formspree
     const formData = new FormData();
-    formData.append('Nama Lengkap', nama);
+    formData.append('Nama', nama);
     formData.append('Email', email);
     formData.append('Kategori', kategori);
-    formData.append('Telepon/WA', phone || '-');
-    formData.append('Pesan/Aduan', pesan);
+    formData.append('Telepon', phone || '-');
+    formData.append('Pesan', pesan);
 
     try {
-        // 1. Kirim langsung ke Email via Formspree API
         const response = await fetch(FORMSPREE_ENDPOINT, {
             method: 'POST',
             body: formData,
@@ -565,14 +569,14 @@ async function saveFeedback() {
         });
 
         if (response.ok) {
-            // 2. Simpan salinan ke LocalStorage jika pengiriman email berhasil
+            // Simpan salinan lokal di browser
             const feedbackData = {
                 id: Date.now(),
-                nama: nama,
-                email: email,
-                kategori: kategori,
+                nama,
+                email,
+                kategori,
                 phone: phone || '-',
-                pesan: pesan,
+                pesan,
                 waktu: new Date().toLocaleString('id-ID')
             };
 
@@ -582,17 +586,20 @@ async function saveFeedback() {
 
             document.getElementById('feedbackForm').reset();
             const alertEl = document.getElementById('fbAlert');
-            alertEl.style.display = 'block';
-            setTimeout(() => { alertEl.style.display = 'none'; }, 4000);
+            if (alertEl) {
+                alertEl.style.display = 'block';
+                setTimeout(() => { alertEl.style.display = 'none'; }, 4000);
+            }
 
             updateFeedbackCount();
             renderFeedbackList();
         } else {
-            alert('Gagal mengirim pesan ke email. Pastikan URL/Endpoint Formspree ID Anda sudah benar.');
+            const data = await response.json();
+            alert('Gagal mengirim aduan: ' + (data.error || 'Terjadi kesalahan pada layanan Formspree.'));
         }
     } catch (error) {
-        console.error('Formspree Error:', error);
-        alert('Terjadi kendala jaringan saat mengirim pesan.');
+        console.error('Formspree Submission Error:', error);
+        alert('Gagal terhubung ke Formspree. Pastikan Anda terhubung ke internet.');
     } finally {
         btnSubmit.innerText = originalBtnText;
         btnSubmit.disabled = false;
@@ -600,9 +607,10 @@ async function saveFeedback() {
 }
 
 function updateFeedbackCount() {
-    let stored = JSON.parse(localStorage.getItem('bpsb8_feedback_messages') || '[]');
     const countEl = document.getElementById('fbCount');
-    if (countEl) countEl.innerText = stored.length;
+    if (!countEl) return;
+    const stored = JSON.parse(localStorage.getItem('bpsb8_feedback_messages') || '[]');
+    countEl.innerText = stored.length;
 }
 
 function toggleFeedbackList() {
@@ -616,17 +624,18 @@ function toggleFeedbackList() {
 }
 
 function renderFeedbackList() {
-    let stored = JSON.parse(localStorage.getItem('bpsb8_feedback_messages') || '[]');
     const listItems = document.getElementById('fbListItems');
     if (!listItems) return;
 
+    const stored = JSON.parse(localStorage.getItem('bpsb8_feedback_messages') || '[]');
+
     if (stored.length === 0) {
-        listItems.innerHTML = '<p style="color: #94a3b8; font-style: italic;">Belum ada aduan atau pesan tersimpan.</p>';
+        listItems.innerHTML = '<p style="color: #94a3b8; font-style: italic;">Belum ada riwayat aduan yang terkirim dari browser ini.</p>';
         return;
     }
 
     listItems.innerHTML = stored.map(item => `
-        <div style="background: #152238; border: 1px solid #334155; border-radius: 8px; padding: 12px; font-size: 0.9rem;">
+        <div style="background: #152238; border: 1px solid #334155; border-radius: 8px; padding: 12px; font-size: 0.9rem; margin-bottom: 10px;">
             <div style="display: flex; justify-content: space-between; margin-bottom: 6px; border-bottom: 1px solid #2d3e58; padding-bottom: 4px;">
                 <strong style="color: var(--accent-cyan);">${escapeHtml(item.nama)} <span style="color: #cbd5e1; font-weight: normal;">(${escapeHtml(item.kategori)})</span></strong>
                 <span style="color: #94a3b8; font-size: 0.8rem;">${item.waktu}</span>
@@ -634,21 +643,7 @@ function renderFeedbackList() {
             <div style="color: #cbd5e1; font-size: 0.85rem; margin-bottom: 6px;">
                 📧 ${escapeHtml(item.email)} | 📱 ${escapeHtml(item.phone)}
             </div>
-            <p style="color: #f8fafc; margin-top: 6px; white-space: pre-line; background: #0b1320; padding: 8px; border-radius: 6px;">"${escapeHtml(item.pesan)}"</p>
+            <p style="color: #f8fafc; margin: 0;">${escapeHtml(item.pesan)}</p>
         </div>
-    `).reverse().join('');
-}
-
-function clearAllFeedback() {
-    if (confirm('Apakah Anda yakin ingin menghapus semua daftar pesan tersimpan?')) {
-        localStorage.removeItem('bpsb8_feedback_messages');
-        updateFeedbackCount();
-        renderFeedbackList();
-    }
-}
-
-function escapeHtml(text) {
-    return String(text).replace(/[&<>"']/g, function(m) {
-        return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#039;' }[m];
-    });
+    `).join('');
 }
