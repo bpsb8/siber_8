@@ -576,25 +576,41 @@ function checkLogin() {
   const user = document.getElementById('loginUser').value.trim();
   const pass = document.getElementById('loginPass').value.trim();
   const errorEl = document.getElementById('loginError');
+  const btn = document.querySelector('button[type="submit"]');
 
-  // Sederhana obfuscasi agar tidak plain-text mentah di source
-  const okUser = atob('YmFyYXByYXRhbWE=');
-  const okPass = atob('YmFyYWt1ZGE0Ng==');
+  // Kredensial (ubah sesuai kebutuhan)
+  const okUser = 'barapratama';
+  const okPass = 'barakuda46';
+
+  // Sembunyikan error dulu
+  errorEl.style.display = 'none';
+
+  if (user === '' || pass === '') {
+    errorEl.style.display = 'block';
+    errorEl.innerText = 'Username dan Password wajib diisi!';
+    return;
+  }
 
   if (user === okUser && pass === okPass) {
+    // Berhasil login
     document.getElementById('loginOverlay').style.display = 'none';
     document.body.classList.remove('logged-out');
     document.body.classList.add('logged-in');
-    sessionStorage.setItem('isLoggedIn', 'true');
+    try { sessionStorage.setItem('isLoggedIn', 'true'); } catch(e) {}
+    if (btn) btn.innerText = 'Masuk...';
+    setTimeout(() => { if (btn) btn.innerText = 'Masuk Sistem'; }, 1000);
   } else {
+    // Gagal login
     errorEl.style.display = 'block';
     errorEl.innerText = 'Username atau Password salah!';
+    if (btn) btn.innerText = 'Masuk Sistem';
   }
 }
 
 function togglePasswordVisibility() {
   const passInput = document.getElementById('loginPass');
   const toggleIcon = document.getElementById('togglePassIcon');
+  if (!passInput || !toggleIcon) return;
   if (passInput.type === 'password') {
     passInput.type = 'text';
     toggleIcon.innerText = '🙈';
@@ -605,11 +621,14 @@ function togglePasswordVisibility() {
 }
 
 window.addEventListener('DOMContentLoaded', () => {
-  if (sessionStorage.getItem('isLoggedIn') === 'true') {
-    document.getElementById('loginOverlay').style.display = 'none';
-    document.body.classList.remove('logged-out');
-    document.body.classList.add('logged-in');
-  }
+  try {
+    const loggedIn = sessionStorage.getItem('isLoggedIn');
+    if (loggedIn === 'true') {
+      document.getElementById('loginOverlay').style.display = 'none';
+      document.body.classList.remove('logged-out');
+      document.body.classList.add('logged-in');
+    }
+  } catch(e) {}
   updateFeedbackCount();
 });
 
